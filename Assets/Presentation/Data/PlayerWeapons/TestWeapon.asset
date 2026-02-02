@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd0596f4f261104d9389d62be671842, type: 3}
+  m_Name: TestWeapon
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponSO
+  model: {fileID: 6885272340107514962, guid: 3b7d2e622de041b41bb8b8010873b20f, type: 3}
+  animator: {fileID: 9100000, guid: 0f31c34b593fcce47873df9cd1d3b2ef, type: 2}
+  ComboDuration: 4
+  AttackCombos:
+  - Pattern:
+    - AttackAnimationName: Attack1
+      HitboxOffset: {x: 0, y: 0, z: 0.7}
+      HitboxSize: {x: 1.5, y: 2, z: 2}
+      Damage: 1
+      AttackWindupTime: 0.8
+      Duration: 1.1
+      Cooldown: 1
