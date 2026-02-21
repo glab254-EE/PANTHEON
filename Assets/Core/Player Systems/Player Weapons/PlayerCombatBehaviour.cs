@@ -12,6 +12,8 @@ public class PlayerCombatBehaviour : MonoBehaviour
     private PlayerInputListener InputListener;
     [field:SerializeField]
     private AnimatorHandler PlayerAnimatorHandler;
+    [field: SerializeField]
+    private PlayerMovementController movementController;
     [field:SerializeField]
     private PlayerHealthHandler HealthHandler;
     [field:SerializeField]
@@ -49,15 +51,20 @@ public class PlayerCombatBehaviour : MonoBehaviour
     {
         if (HealthHandler.Health <= 0) return;
         HandleToolVisual();
+        if (Cooldown > 0)
+        {
+            Cooldown -= Time.deltaTime;
+        }
         if (CanAttack && CurrentTool != null)
         {
-            if (Cooldown > 0)
-            {
-                Cooldown -= Time.deltaTime;
-            }
             if (Cooldown <= 0 && IsLMBHeld)
             {
-                StartCoroutine(HandleAttack());
+                List<AttackPattern> patternToPick = CurrentTool.AttackCombos;
+                if (InputListener.EnpowerButtonHeld)
+                {
+                    patternToPick = CurrentTool.HeavyAttackCombos;
+                }
+                StartCoroutine(HandleAttacks(patternToPick, CurrentTool.ComboDuration));
             }
         }
         if (ComboTimer > 0)
@@ -69,26 +76,29 @@ public class PlayerCombatBehaviour : MonoBehaviour
             currentComboIndex = 0;
         }
     }
-    IEnumerator HandleAttack()
+    IEnumerator HandleAttacks(List<AttackPattern> patterns, float comboTimerValue)
     {
-        if (CurrentTool != null && CurrentTool.AttackCombos.Count > 0)
+        if (patterns.Count > 0 && patterns.Count > currentComboIndex)
         {
-            ComboTimer = CurrentTool.ComboDuration;
-            AttackPattern pattern = CurrentTool.AttackCombos[currentComboIndex];
+            ComboTimer = comboTimerValue;
+            AttackPattern pattern = patterns[currentComboIndex];
             if (pattern != null)
             {
+                movementController.OverrideTargetSpeed = Vector3.zero;
                 CanAttack = false;
                 foreach (AttackSettings attack in pattern.Pattern)
                 {
-                    PlayerAnimatorHandler.SetAnimatorTrigger(attack.AttackAnimationName);
+                    PlayerAnimatorHandler.SetAnimatorIntFrame(attack.AttackAnimationPropertyName,attack.AttackAnimationPropertyIndex);
                     Cooldown = attack.AttackWindupTime + attack.Duration + attack.Cooldown + 0.1f; // 'failsafe' for cooldown.
                     yield return new WaitForSeconds(attack.AttackWindupTime);
+                    PlayerAnimatorHandler.SetAnimatorIntFrame(attack.AttackAnimationPropertyName, 0);
                     HandleHit(attack);
                     yield return new WaitForSeconds(attack.Duration);
                     Cooldown = attack.Cooldown;
                 }
                 CanAttack = true;
-                currentComboIndex = Mathf.Clamp(currentComboIndex + 1, 0, CurrentTool.AttackCombos.Count-1);
+                currentComboIndex = Mathf.Clamp(currentComboIndex + 1, 0, patterns.Count - 1);
+                movementController.OverrideTargetSpeed = null;
             }
         }
     }

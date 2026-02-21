@@ -7,53 +7,64 @@ using UnityEngine.InputSystem;
 public class PlayerMovementController : MonoBehaviour
 {
     [Header("Set-Up")]
-    [field:SerializeField]
+    [SerializeField]
     private AnimatorHandler animator;
-    [field:SerializeField]
+    [SerializeField]
     private PlayerInputListener listener;
-    [field:SerializeField]
+    [SerializeField]
     private CameraBehaviour cameraBehaviour;
-    [field:SerializeField]
+    [SerializeField]
     private PlayerHealthHandler playerHealth;
     [Header("Input")]
-    [field:SerializeField]
+    [SerializeField]
     private InputActionReference ToggleLookForwardBind;
-    [field:SerializeField]
+    [SerializeField]
     private InputActionReference RollKey;
-    [field:SerializeField]
+    [SerializeField]
     private bool DefaultEnabledState = true;
     [Header("Animations")]
-    [field:SerializeField]
+    [SerializeField]
     private float MoveAnimationThreshold = 0.1f;
+    [SerializeField]
+    private string RunAnimationBoolName = "Walking";
+    [SerializeField]
+    private string WalkingBoolName = "Running";
+    [SerializeField]
+    private string RollTriggerName = "Roll";
     [Header("Stats")]
-    [field:SerializeField]
+    [SerializeField]
     private float PlayerMaxSpeed;
-    [field:SerializeField]
+    [SerializeField]
+    private float PlayerRunningMaxSpeed;
+    [SerializeField]
     private float PlayerAcceloration = 2;
-    [field:SerializeField]
+    [SerializeField]
     private float PlayerTurnSpeed = 10;
-    [field:SerializeField]
+    [SerializeField]
     private float PlayerRollSpeed = 4;
-    [field:SerializeField]
+    [SerializeField]
     private float PlayerRollDuration = 1f;
-    [field:SerializeField]
+    [SerializeField]
     private float PlayerRollForceDuration = 1f;
-    [field:SerializeField]
+    [SerializeField]
     private float PlayerRollCooldown = 1f;
     internal bool LookForward = false;
     internal bool CanMove {get;private set;} = true;
     internal bool CanRoll {get;private set;} = true;
+    internal Vector3? OverrideTargetSpeed = null;
     private bool IsAlive = true;
     private Vector3 CurrentSpeed = new();
-    private Vector3 OverrideTargetSpeed = new();
     private Rigidbody rb;
+    private float PlayerCurrentMaxSpeed;
     void Start()
     {
+        PlayerCurrentMaxSpeed = PlayerMaxSpeed;
         listener.MouseLocked = DefaultEnabledState;
         playerHealth.OnDamaged += OnPlayerDamaged;
         rb = GetComponent<Rigidbody>();
         listener.ConnectEventToKeybind(ToggleLookForwardBind,ToggleLookForward);
         listener.ConnectEventToKeybind(RollKey,OnRollButtonPress);
+        listener.ConnectEventToKeybind(RollKey, OnRunPresses,true);
     }
     void Update()
     {
@@ -75,9 +86,9 @@ public class PlayerMovementController : MonoBehaviour
     {
         CurrentSpeed = rb.linearVelocity;
 
-        Vector3 targetSpeed = listener.MovementVector3 * PlayerMaxSpeed;
+        Vector3 targetSpeed = listener.MovementVector3 * PlayerCurrentMaxSpeed;
 
-        if (OverrideTargetSpeed != Vector3.zero) targetSpeed = OverrideTargetSpeed;
+        if (OverrideTargetSpeed != null) targetSpeed = (Vector3)OverrideTargetSpeed;
 
         targetSpeed.y = CurrentSpeed.y;
 
@@ -87,6 +98,7 @@ public class PlayerMovementController : MonoBehaviour
     }
     void HandleLook()
     {
+        if (OverrideTargetSpeed != null && LookForward == false) return;
         Vector3 NoYVector = rb.linearVelocity;
 
         if (LookForward)
@@ -107,13 +119,19 @@ public class PlayerMovementController : MonoBehaviour
     }
     void HandleAnimations()
     {
-        if (rb.linearVelocity.magnitude > MoveAnimationThreshold)
+        Vector3 velocity = rb.linearVelocity;
+
+        velocity.y = 0;
+
+        velocity.Normalize();
+
+        if (velocity.magnitude > MoveAnimationThreshold)
         {
-            animator.SetAnimatorBool("Walking",true);
+            animator.SetAnimatorBool(WalkingBoolName, true);
         }
         else
         {
-            animator.SetAnimatorBool("Walking",false);
+            animator.SetAnimatorBool(WalkingBoolName, false);
         }
     }
     void ToggleLookForward(InputAction.CallbackContext _)
@@ -124,8 +142,20 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (CanMove && CanRoll && callbackContext.ReadValueAsButton() && listener.MovementVector3.magnitude > 0)
         {
-            animator.SetAnimatorTrigger("Roll");
+            animator.SetAnimatorTrigger(RollTriggerName);
             Task.Run(RollTask);
+        }
+    }
+    void OnRunPresses(InputAction.CallbackContext callbackContext)
+    {
+        if (listener.MovementVector3.magnitude > 0 && CanMove && callbackContext.ReadValueAsButton())
+        {
+            animator.SetAnimatorBool(RunAnimationBoolName, true);
+            PlayerCurrentMaxSpeed = PlayerRunningMaxSpeed;
+        } else
+        {
+            animator.SetAnimatorBool(RunAnimationBoolName, false);
+            PlayerCurrentMaxSpeed = PlayerMaxSpeed;
         }
     }
     Task RollTask()
@@ -137,20 +167,20 @@ public class PlayerMovementController : MonoBehaviour
         Vector3 _targetSpeed = listener.MovementVector3.normalized * PlayerRollSpeed;
 
         CanRoll = false;
-        
+
         LookForward = false;
 
         OverrideTargetSpeed = _targetSpeed;
 
-        Task.Delay(Mathf.RoundToInt(PlayerRollForceDuration*1000)).Wait();
+        Task.Delay(Mathf.RoundToInt(PlayerRollForceDuration * 1000)).Wait();
 
-        OverrideTargetSpeed = Vector3.zero;
+        OverrideTargetSpeed = null;
 
-        Task.Delay(Mathf.RoundToInt(PlayerRollDuration*1000)).Wait();
+        Task.Delay(Mathf.RoundToInt(PlayerRollDuration * 1000)).Wait();
 
         LookForward = _oldlook;
 
-        Task.Delay(Mathf.RoundToInt(PlayerRollCooldown*1000)).Wait();
+        Task.Delay(Mathf.RoundToInt(PlayerRollCooldown * 1000)).Wait();
 
         CanRoll = true;
 

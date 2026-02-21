@@ -4,7 +4,9 @@ using UnityEngine;
 public class AttackSettings
 {
     [field:SerializeField]
-    public string AttackAnimationName = "Attack1";
+    public string AttackAnimationPropertyName = "Attack1";
+    [field: SerializeField]
+    public int AttackAnimationPropertyIndex = 1;
     [field:SerializeField]
     public Vector3 HitboxOffset;
     [field:SerializeField]
@@ -17,4 +19,6 @@ public class AttackSettings
     public float Duration = 1f;
     [field:SerializeField]
     public float Cooldown = 1f;
+    [field: SerializeField]
+    public ADamageEffect effect = null;
 }

@@ -14,13 +14,65 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponSO
   model: {fileID: 6885272340107514962, guid: 3b7d2e622de041b41bb8b8010873b20f, type: 3}
   animator: {fileID: 9100000, guid: 0f31c34b593fcce47873df9cd1d3b2ef, type: 2}
-  ComboDuration: 4
+  ComboDuration: 6
   AttackCombos:
   - Pattern:
-    - AttackAnimationName: Attack1
+    - AttackAnimationPropertyName: Attack1
+      AttackAnimationPropertyIndex: 1
       HitboxOffset: {x: 0, y: 0, z: 0.7}
       HitboxSize: {x: 1.5, y: 2, z: 2}
       Damage: 1
       AttackWindupTime: 0.8
-      Duration: 1.1
-      Cooldown: 1
+      Duration: 1.2
+      Cooldown: 0.3
+      effect: {fileID: 0}
+  - Pattern:
+    - AttackAnimationPropertyName: Attack1
+      AttackAnimationPropertyIndex: 2
+      HitboxOffset: {x: 0, y: 0, z: 0.7}
+      HitboxSize: {x: 1.5, y: 2, z: 2}
+      Damage: 1
+      AttackWindupTime: 1
+      Duration: 0.1
+      Cooldown: 0.27
+      effect: {fileID: 0}
+  - Pattern:
+    - AttackAnimationPropertyName: Attack1
+      AttackAnimationPropertyIndex: 3
+      HitboxOffset: {x: 0, y: 0, z: 0.7}
+      HitboxSize: {x: 1.5, y: 2, z: 2}
+      Damage: 1
+      AttackWindupTime: 0.5
+      Duration: 0.5
+      Cooldown: 0.5
+      effect: {fileID: 0}
+    - AttackAnimationPropertyName: Attack1
+      AttackAnimationPropertyIndex: 4
+      HitboxOffset: {x: 0, y: 0, z: 0.7}
+      HitboxSize: {x: 1.5, y: 2, z: 2}
+      Damage: 3
+      AttackWindupTime: 0.52
+      Duration: 1.5
+      Cooldown: 4
+      effect: {fileID: 0}
+  HeavyAttackCombos:
+  - Pattern:
+    - AttackAnimationPropertyName: Attack2
+      AttackAnimationPropertyIndex: 1
+      HitboxOffset: {x: 0, y: 0, z: 0}
+      HitboxSize: {x: 2.5, y: 2, z: 2.5}
+      Damage: 2
+      AttackWindupTime: 1.2
+      Duration: 2.4
+      Cooldown: 0.3
+      effect: {fileID: 0}
+  - Pattern:
+    - AttackAnimationPropertyName: Attack2
+      AttackAnimationPropertyIndex: 2
+      HitboxOffset: {x: 0, y: 0, z: 0.7}
+      HitboxSize: {x: 1.5, y: 2, z: 2}
+      Damage: 2
+      AttackWindupTime: 0.75
+      Duration: 0.5
+      Cooldown: 0.3
+      effect: {fileID: 0}

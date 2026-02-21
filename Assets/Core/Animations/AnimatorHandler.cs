@@ -18,10 +18,17 @@ public class AnimatorHandler : MonoBehaviour
     }
     internal void SetAnimatorTrigger(string TriggerName)
     {
+        if (animator == null) return;
         animator.SetTrigger(TriggerName);
     }
-    internal void SetAnimatorBool(string BoolName,bool Value)
-    {
+    internal void SetAnimatorBool(string BoolName,bool Value) 
+    { 
+        if (animator == null) return;
         animator.SetBool(BoolName,Value);
+    }
+    internal void SetAnimatorIntFrame(string IntName, int Value)
+    {
+        if (animator == null) return;
+        animator.SetInteger(IntName, Value);
     }
 }

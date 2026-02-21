@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,13 +17,18 @@ public class EnemyHealth : MonoBehaviour, IDamagable
 
         HealthImage.fillAmount = (float)(Health / MaxHealth); //Edited
     }
-    public bool TryDamage(double damage)
+    public bool TryDamage(double damage, ADamageEffect effect)
     {
         if (Health <= 0)
         {
             return false;
         }
         Health -= damage;
+
+        if (effect != null) 
+        {
+            effect.DamageEffect(this, damage);
+        }
 
         HealthImage.fillAmount = (float)(Health / MaxHealth); //Edited
 

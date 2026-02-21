@@ -4,9 +4,9 @@ public class HurtBox : MonoBehaviour
 {
     [field:SerializeField]
     private DamagableContainer damagable;
-    public bool OnHit(double damage)
+    public bool OnHit(double damage,ADamageEffect effect = null)
     {
-        return damagable.damagable.TryDamage(damage);
+        return damagable.damagable.TryDamage(damage,effect);
     }
 }
 [System.Serializable]

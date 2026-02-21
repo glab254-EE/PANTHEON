@@ -12,4 +12,6 @@ public class PlayerWeaponSO : ScriptableObject
     public float ComboDuration = 4f;
     [field:SerializeField]
     public List<AttackPattern> AttackCombos;
+    [field: SerializeField]
+    public List<AttackPattern> HeavyAttackCombos;
 }
