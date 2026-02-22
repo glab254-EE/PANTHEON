@@ -24,8 +24,6 @@ public class PlayerMovementController : MonoBehaviour
     private bool DefaultEnabledState = true;
     [Header("Animations")]
     [SerializeField]
-    private float MoveAnimationThreshold = 0.1f;
-    [SerializeField]
     private string RunAnimationBoolName = "Walking";
     [SerializeField]
     private string WalkingBoolName = "Running";
@@ -48,6 +46,13 @@ public class PlayerMovementController : MonoBehaviour
     private float PlayerRollForceDuration = 1f;
     [SerializeField]
     private float PlayerRollCooldown = 1f;
+    [Header("Other Settings")]
+    [SerializeField]
+    private float MoveAnimationThreshold = 0.1f;
+    [SerializeField]
+    private float AdditionalGroundCheckingRayDistance = 0.1f;
+    [SerializeField]
+    private float MaxSlopeAngle = 15f;
     internal bool LookForward = false;
     internal bool CanMove {get;private set;} = true;
     internal bool CanRoll {get;private set;} = true;
@@ -68,9 +73,9 @@ public class PlayerMovementController : MonoBehaviour
     }
     void Update()
     {
-        if (CanMove)
+        if (CanMove && IsOnGround(out RaycastHit hit))
         {
-            HandleMovement();
+            HandleMovement(hit);
             HandleLook();
         }
         HandleAnimations();
@@ -82,10 +87,9 @@ public class PlayerMovementController : MonoBehaviour
         CanMove = CanMove && IsAlive;
         CanRoll = IsAlive;
     }
-    void HandleMovement()
+    void HandleMovement(RaycastHit groundHit)
     {
-        CurrentSpeed = rb.linearVelocity;
-
+        if (Vector3.Angle(groundHit.normal, Vector3.up) > MaxSlopeAngle && OverrideTargetSpeed == null) return;
         Vector3 targetSpeed = listener.MovementVector3 * PlayerCurrentMaxSpeed;
 
         if (OverrideTargetSpeed != null) targetSpeed = (Vector3)OverrideTargetSpeed;
@@ -93,8 +97,26 @@ public class PlayerMovementController : MonoBehaviour
         targetSpeed.y = CurrentSpeed.y;
 
         Vector3 slerpedSpeed = Vector3.Slerp(CurrentSpeed,targetSpeed,PlayerAcceloration*Time.deltaTime);
+        CurrentSpeed = slerpedSpeed;
 
-        rb.linearVelocity = slerpedSpeed;
+        Vector3 planarVector3 = Vector3.ProjectOnPlane(slerpedSpeed, groundHit.normal);
+
+        if (OverrideTargetSpeed != null)
+        {
+            rb.linearVelocity = slerpedSpeed;
+        } else
+        {
+            rb.linearVelocity = planarVector3;
+        }
+
+    }
+    bool IsOnGround(out RaycastHit hit)
+    {
+        if (Physics.Raycast(new(transform.position+Vector3.up * .1f,Vector3.down),out hit,transform.localScale.y/2+AdditionalGroundCheckingRayDistance))
+        {
+            return true;
+        }
+        return false;
     }
     void HandleLook()
     {
@@ -119,13 +141,7 @@ public class PlayerMovementController : MonoBehaviour
     }
     void HandleAnimations()
     {
-        Vector3 velocity = rb.linearVelocity;
-
-        velocity.y = 0;
-
-        velocity.Normalize();
-
-        if (velocity.magnitude > MoveAnimationThreshold)
+        if (CurrentSpeed.magnitude > MoveAnimationThreshold)
         {
             animator.SetAnimatorBool(WalkingBoolName, true);
         }

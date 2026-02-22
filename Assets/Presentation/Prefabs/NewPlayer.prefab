@@ -522,7 +522,7 @@ MonoBehaviour:
   HealingPower: 1
   HealingStayDurationSeconds: 1
   HealingCooldownSeconds: 1
-  HealAnimationTriggerName: Block
+  HealAnimationTriggerName: Heal
 --- !u!114 &5007046306049012931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,7 +561,6 @@ MonoBehaviour:
   ToggleLookForwardBind: {fileID: -343172962489284940, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   RollKey: {fileID: -7471211009204490832, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   DefaultEnabledState: 1
-  MoveAnimationThreshold: 0.3
   RunAnimationBoolName: Walking
   WalkingBoolName: Running
   RollTriggerName: Roll
@@ -573,6 +572,9 @@ MonoBehaviour:
   PlayerRollDuration: 0.1
   PlayerRollForceDuration: 0.25
   PlayerRollCooldown: 2
+  MoveAnimationThreshold: 0.3
+  AdditionalGroundCheckingRayDistance: 0.1
+  MaxSlop: 15
 --- !u!114 &1836501431964758546
 MonoBehaviour:
   m_ObjectHideFlags: 0

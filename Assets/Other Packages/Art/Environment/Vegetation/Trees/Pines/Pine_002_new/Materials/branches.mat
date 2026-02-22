@@ -23,8 +23,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: branches
-  m_Shader: {fileID: -6465566751694194690, guid: b3e259512f9b34b428b085e7e7b89ada,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: b3e259512f9b34b428b085e7e7b89ada, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -571,14 +570,12 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BackfaceBaseColorScale: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColor: {r: 0.8235294, g: 0.905071, b: 1, a: 1}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColorRandomize: {r: 0, g: 0, b: 0, a: 0.05}
-    - _Color: {r: 0.8235294, g: 0.905071, b: 1, a: 1}
-    - _DiffusionProfileAsset: {r: -8.695931e+30, g: -5.0949594e+31, b: -0.010710085,
-        a: -0.0000000055696536}
-    - _DiffusionProfile_Asset: {r: 8.373602e+11, g: 0.00000038962725, b: 4.0925955e-14,
-        a: 0.00047734557}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DiffusionProfileAsset: {r: -8.695931e+30, g: -5.0949594e+31, b: -0.010710085, a: -0.0000000055696536}
+    - _DiffusionProfile_Asset: {r: 8.373602e+11, g: 0.00000038962725, b: 4.0925955e-14, a: 0.00047734557}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}

@@ -32,7 +32,7 @@ public class PlayerHealingBehaviour : MonoBehaviour
         if (!onCooldown && context.ReadValueAsButton())
         {
             onCooldown = true;
-            Animation_Handler.SetAnimatorBool(HealAnimationTriggerName, true);
+            Animation_Handler.SetAnimatorTrigger(HealAnimationTriggerName);
             Player_Health.TryDamage(-HealingPower,null);
             Player_MovementController.OverrideTargetSpeed = Vector3.zero;
             StartCoroutine(StayStillEnumerator());

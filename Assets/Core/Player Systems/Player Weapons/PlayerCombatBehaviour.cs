@@ -55,7 +55,7 @@ public class PlayerCombatBehaviour : MonoBehaviour
         {
             Cooldown -= Time.deltaTime;
         }
-        if (CanAttack && CurrentTool != null)
+        if (CurrentTool != null && CanAttack)
         {
             if (Cooldown <= 0 && IsLMBHeld)
             {
@@ -89,16 +89,16 @@ public class PlayerCombatBehaviour : MonoBehaviour
                 foreach (AttackSettings attack in pattern.Pattern)
                 {
                     PlayerAnimatorHandler.SetAnimatorIntFrame(attack.AttackAnimationPropertyName,attack.AttackAnimationPropertyIndex);
-                    Cooldown = attack.AttackWindupTime + attack.Duration + attack.Cooldown + 0.1f; // 'failsafe' for cooldown.
+                    Cooldown = attack.AttackWindupTime + attack.Duration + attack.Cooldown + 1.75f; // 'failsafe' for cooldown.
                     yield return new WaitForSeconds(attack.AttackWindupTime);
                     PlayerAnimatorHandler.SetAnimatorIntFrame(attack.AttackAnimationPropertyName, 0);
                     HandleHit(attack);
                     yield return new WaitForSeconds(attack.Duration);
                     Cooldown = attack.Cooldown;
                 }
-                CanAttack = true;
                 currentComboIndex = Mathf.Clamp(currentComboIndex + 1, 0, patterns.Count - 1);
                 movementController.OverrideTargetSpeed = null;
+                CanAttack = true;
             }
         }
     }
