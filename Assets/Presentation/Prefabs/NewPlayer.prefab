@@ -467,6 +467,9 @@ PrefabInstance:
       addedObject: {fileID: 5007046306049012931}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a37e61393cf59b34c8d275cd6fd530a5, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 7000095977203316759}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a37e61393cf59b34c8d275cd6fd530a5, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 6046924685804896624}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a37e61393cf59b34c8d275cd6fd530a5, type: 3}
       insertIndex: -1
@@ -542,6 +545,23 @@ MonoBehaviour:
   BlockAction: {fileID: 2365118210677756248, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   BlockingDamageMultiSetter: 0.75
   BlockBoolName: Block
+--- !u!114 &7000095977203316759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817552950725341589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1d0362fac0d8440b2cd7eedfe0b629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StaminaBehaviour
+  StaminaBarImage: {fileID: 0}
+  MaxStamina: 100
+  StaminaGainingStartDelay: 100
+  StaminaGainPerDelay: 1
+  StaminaDelay: 0.1
 --- !u!114 &6046924685804896624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,11 +574,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c89c507f907f1404383e95ba4a1b25eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovementController
-  animator: {fileID: 3497526882548188106}
-  listener: {fileID: 0}
-  cameraBehaviour: {fileID: 0}
-  playerHealth: {fileID: 1836501431964758546}
-  ToggleLookForwardBind: {fileID: -343172962489284940, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+  Animator: {fileID: 3497526882548188106}
+  Listener: {fileID: 0}
+  CameraBehaviour: {fileID: 0}
+  PlayerHealth: {fileID: 1836501431964758546}
+  PlayerStaminaBehaviour: {fileID: 7000095977203316759}
   RollKey: {fileID: -7471211009204490832, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   DefaultEnabledState: 1
   RunAnimationBoolName: Walking
@@ -572,9 +592,11 @@ MonoBehaviour:
   PlayerRollDuration: 0.1
   PlayerRollForceDuration: 0.25
   PlayerRollCooldown: 2
+  PlayerRollStaminaCost: 15
+  PlayerRunStaminaCostPerUpdate: 5
   MoveAnimationThreshold: 0.3
-  AdditionalGroundCheckingRayDistance: 0.1
-  MaxSlop: 15
+  AdditionalGroundCheckingRayDistance: 0.2
+  MaxSlopeAngle: 55
 --- !u!114 &1836501431964758546
 MonoBehaviour:
   m_ObjectHideFlags: 0
