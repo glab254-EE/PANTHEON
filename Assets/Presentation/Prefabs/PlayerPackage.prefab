@@ -778,9 +778,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6650777507546396727}
     - target: {fileID: 6046924685804896624, guid: 741327bb8772c624388ad5f372ac0b50, type: 3}
+      propertyPath: Listener
+      value: 
+      objectReference: {fileID: 6650777507546396727}
+    - target: {fileID: 6046924685804896624, guid: 741327bb8772c624388ad5f372ac0b50, type: 3}
       propertyPath: listener
       value: 
       objectReference: {fileID: 6650777507546396727}
+    - target: {fileID: 6046924685804896624, guid: 741327bb8772c624388ad5f372ac0b50, type: 3}
+      propertyPath: CameraBehaviour
+      value: 
+      objectReference: {fileID: 7738200787825847534}
     - target: {fileID: 6046924685804896624, guid: 741327bb8772c624388ad5f372ac0b50, type: 3}
       propertyPath: WalkingBoolName
       value: Walking

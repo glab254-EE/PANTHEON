@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HurtBox
   damagable:
-    Object: {fileID: 0}
+    Object: {fileID: 1836501431964758546}
 --- !u!1 &8899044843781611201
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,9 +559,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StaminaBehaviour
   StaminaBarImage: {fileID: 0}
   MaxStamina: 100
-  StaminaGainingStartDelay: 100
+  StaminaGainingStartDelay: 1
   StaminaGainPerDelay: 1
-  StaminaDelay: 0.1
+  StaminaDelay: 0.5
 --- !u!114 &6046924685804896624
 MonoBehaviour:
   m_ObjectHideFlags: 0
