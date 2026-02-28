@@ -85,7 +85,7 @@ public class EnemyAI : MonoBehaviour
 
         _agent.updateRotation = false;
 
-        if (_atackCount <= hardAtackNum)
+        /*if (_atackCount <= hardAtackNum)
         {
             _animator.SetTrigger("EnemyAtack");
             yield return new WaitForSeconds(attackSetting.AttackWindupTime);
@@ -94,10 +94,10 @@ public class EnemyAI : MonoBehaviour
         {
             _animator.SetTrigger("HardEnemyAtack");
             yield return new WaitForSeconds(attackSetting.AttackWindupTime);
-        }
+        }*/
 
-        //_animator.SetTrigger("EnemyAtack");
-        //yield return new WaitForSeconds(attackSetting.AttackWindupTime);
+        _animator.SetTrigger("EnemyAtack");
+        yield return new WaitForSeconds(attackSetting.AttackWindupTime);
 
         Vector3 hitboxOrigin = transform.position;
 
