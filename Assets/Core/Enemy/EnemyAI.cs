@@ -13,6 +13,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private LayerMask playerMask;
     [SerializeField] private float updateInterval = 0.3f;
     [SerializeField] private float rotationSpeed = 8f;
+    [SerializeField] private float hardAtackNum = 3f;
 
     private NavMeshAgent _agent;
     private Transform _player;
@@ -20,6 +21,8 @@ public class EnemyAI : MonoBehaviour
     private bool _isActive = false;
     private bool _isAttacking = false;
     private bool _isPlayerInTrigger = false;
+    private float _atackCount = 0f;
+
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -82,8 +85,19 @@ public class EnemyAI : MonoBehaviour
 
         _agent.updateRotation = false;
 
-        _animator.SetTrigger("EnemyAtack");
-        yield return new WaitForSeconds(attackSetting.AttackWindupTime);
+        if (_atackCount <= hardAtackNum)
+        {
+            _animator.SetTrigger("EnemyAtack");
+            yield return new WaitForSeconds(attackSetting.AttackWindupTime);
+        }
+        else
+        {
+            _animator.SetTrigger("HardEnemyAtack");
+            yield return new WaitForSeconds(attackSetting.AttackWindupTime);
+        }
+
+        //_animator.SetTrigger("EnemyAtack");
+        //yield return new WaitForSeconds(attackSetting.AttackWindupTime);
 
         Vector3 hitboxOrigin = transform.position;
 
