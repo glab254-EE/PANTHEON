@@ -1411,6 +1411,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &673149559 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6650777507546396727, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
+  m_PrefabInstance: {fileID: 863139664}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88dcf89c8d2915e479409682e4505acb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputListener
 --- !u!1001 &682394678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2056,6 +2067,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 2.2031598
       objectReference: {fileID: 0}
+    - target: {fileID: 5438921904514281662, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
+      propertyPath: StaminaDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5438921904514281662, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
+      propertyPath: StaminaGainingStartDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5799436430223233733, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 37.896717
@@ -2141,13 +2160,13 @@ PrefabInstance:
       value: -46.21648
       objectReference: {fileID: 0}
     - target: {fileID: 8769992151439444441, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
-      propertyPath: MaxSlopeAngle
-      value: 55
-      objectReference: {fileID: 0}
+      propertyPath: Listener
+      value: 
+      objectReference: {fileID: 673149559}
     - target: {fileID: 8769992151439444441, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
-      propertyPath: AdditionalGroundCheckingRayDistance
-      value: 0.2
-      objectReference: {fileID: 0}
+      propertyPath: CameraBehaviour
+      value: 
+      objectReference: {fileID: 1409966687}
     - target: {fileID: 9013650551404303362, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.45266968
@@ -3270,6 +3289,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8eb649dce7c58024f9aad2851d329bac, type: 3}
+--- !u!114 &1409966687 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7738200787825847534, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
+  m_PrefabInstance: {fileID: 863139664}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ca7e2f1083d8134289d07f52c59760c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraBehaviour
 --- !u!1001 &1430271788
 PrefabInstance:
   m_ObjectHideFlags: 0
