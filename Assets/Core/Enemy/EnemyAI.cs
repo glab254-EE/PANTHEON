@@ -7,46 +7,48 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     [Header("Set-up")]
-    [SerializeField] private EnemyHealth enemyHealth;
+    [SerializeField] public EnemyHealth EnemyHealth;
+    [SerializeField] private EnemyAtack enemyAtack;
     [Header("Settings")]
-    [field: SerializeField] private AttackSettings attackSetting;
-    [SerializeField] private LayerMask playerMask;
+    [field: SerializeField] public AttackSettings AttackSetting;
+    [SerializeField] public LayerMask PlayerMask;
+    [SerializeField] public float RotationSpeed = 8f;
+    [SerializeField] public float HardAtackNum = 3f;
     [SerializeField] private float updateInterval = 0.3f;
-    [SerializeField] private float rotationSpeed = 8f;
-    [SerializeField] private float hardAtackNum = 3f;
 
-    private NavMeshAgent _agent;
-    private Transform _player;
-    private Animator _animator;
+    public bool IsAttacking = false;
+    public NavMeshAgent Agent;
+    public Animator Animator;
+    public Transform Player;
+    public bool IsPlayerInTrigger = false;
+    public float AtackCount = 0f;
+
     private bool _isActive = false;
-    private bool _isAttacking = false;
-    private bool _isPlayerInTrigger = false;
-    private float _atackCount = 0f;
 
     void Start()
     {
-        _agent = GetComponent<NavMeshAgent>();
-        _animator = GetComponent<Animator>();
+        Agent = GetComponent<NavMeshAgent>();
+        Animator = GetComponent<Animator>();
         StartCoroutine(MainCoroutine());
     }
     public void Activate(Transform target)
     {
-        _player = target;
+        Player = target;
         _isActive = true;
     }
     IEnumerator MainCoroutine()
     {
         while (true)
         {
-            if (enemyHealth.Health <= 0)
+            if (EnemyHealth.Health <= 0)
             {
                 Destroy(gameObject);
                 yield break;
             }
-            if (_isActive && _player != null && !_isPlayerInTrigger && !_isAttacking && _agent.isActiveAndEnabled)
+            if (_isActive && Player != null && !IsPlayerInTrigger && !IsAttacking && Agent.isActiveAndEnabled)
             {
-                _animator.SetBool("EnemyWalk", true);
-                _agent.SetDestination(_player.position);
+                Animator.SetBool("EnemyWalk", true);
+                Agent.SetDestination(Player.position);
             }
             yield return new WaitForSeconds(updateInterval);
         }
@@ -55,13 +57,13 @@ public class EnemyAI : MonoBehaviour
     {
         if (other.CompareTag("Player") && _isActive)
         {
-            _isPlayerInTrigger = true;
+            IsPlayerInTrigger = true;
 
-            if (!_isAttacking)
+            if (!IsAttacking)
             {
-                _animator.SetBool("EnemyWalk", false);
-                _animator.SetTrigger("StayAnimForEnemy");
-                StartCoroutine(AttackSequence());
+                Animator.SetBool("EnemyWalk", false);
+                Animator.SetTrigger("StayAnimForEnemy");
+                StartCoroutine(enemyAtack.AttackSequence());
             }
         }
     }
@@ -70,54 +72,54 @@ public class EnemyAI : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _isPlayerInTrigger = false;
+            IsPlayerInTrigger = false;
         }
     }
 
-    IEnumerator AttackSequence()
+    /*IEnumerator AttackSequence()
     {
-        _isAttacking = true;
-        _agent.isStopped = true;
+        IsAttacking = true;
+        Agent.isStopped = true;
 
-        bool originalUpdateRotation = _agent.updateRotation;
+        bool originalUpdateRotation = Agent.updateRotation;
 
-        if (enemyHealth.Health <= 0) yield break;
+        if (EnemyHealth.Health <= 0) yield break;
 
-        _agent.updateRotation = false;
+        Agent.updateRotation = false;
 
-        /*if (_atackCount <= hardAtackNum)
+        if (_atackCount <= hardAtackNum)
         {
-            _animator.SetTrigger("EnemyAtack");
-            yield return new WaitForSeconds(attackSetting.AttackWindupTime);
+            Animator.SetTrigger("EnemyAtack");
+            yield return new WaitForSeconds(AttackSetting.AttackWindupTime);
         }
         else
         {
-            _animator.SetTrigger("HardEnemyAtack");
-            yield return new WaitForSeconds(attackSetting.AttackWindupTime);
-        }*/
+            Animator.SetTrigger("HardEnemyAtack");
+            yield return new WaitForSeconds(AttackSetting.AttackWindupTime);
+        }
 
-        _animator.SetTrigger("EnemyAtack");
-        yield return new WaitForSeconds(attackSetting.AttackWindupTime);
+        Animator.SetTrigger("EnemyAtack");
+        yield return new WaitForSeconds(AttackSetting.AttackWindupTime);
 
         Vector3 hitboxOrigin = transform.position;
 
-        hitboxOrigin += transform.forward * attackSetting.HitboxOffset.z;
-        hitboxOrigin += transform.right * attackSetting.HitboxOffset.x;
-        hitboxOrigin += transform.up * attackSetting.HitboxOffset.y;
+        hitboxOrigin += transform.forward * AttackSetting.HitboxOffset.z;
+        hitboxOrigin += transform.right * AttackSetting.HitboxOffset.x;
+        hitboxOrigin += transform.up * AttackSetting.HitboxOffset.y;
 
-        bool haveHitPlayer = StatcHitboxCreator.TryHitWithBoxHitbox(hitboxOrigin, attackSetting.HitboxSize, playerMask, attackSetting.Damage, true, transform.rotation);
+        bool haveHitPlayer = StatcHitboxCreator.TryHitWithBoxHitbox(hitboxOrigin, AttackSetting.HitboxSize, PlayerMask, AttackSetting.Damage, true, transform.rotation);
 
         if (haveHitPlayer)
         {
             Debug.Log("Hit");
         }
 
-        yield return new WaitForSeconds(attackSetting.Duration);
-        _animator.SetTrigger("StayAnimForEnemy");
+        yield return new WaitForSeconds(AttackSetting.Duration);
+        Animator.SetTrigger("StayAnimForEnemy");
 
-        if (_player != null)
+        if (Player != null)
         {
-            Vector3 direction = (_player.position - transform.position).normalized;
+            Vector3 direction = (Player.position - transform.position).normalized;
             direction.y = 0;
 
             if (direction != Vector3.zero)
@@ -126,24 +128,24 @@ public class EnemyAI : MonoBehaviour
 
                 while (Quaternion.Angle(transform.rotation, targetRotation) > 5f)
                 {
-                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, RotationSpeed * Time.deltaTime);
                     yield return null;
                 }
                 transform.rotation = targetRotation;
             }
         }
 
-        if (_isPlayerInTrigger && _player != null)
+        if (IsPlayerInTrigger && Player != null)
         {
-            yield return new WaitForSeconds(attackSetting.Cooldown);
-            _isAttacking = false;
+            yield return new WaitForSeconds(AttackSetting.Cooldown);
+            IsAttacking = false;
             StartCoroutine(AttackSequence());
         }
         else
         {
-            _isAttacking = false;
-            _agent.updateRotation = true;
-            _agent.isStopped = false;
+            IsAttacking = false;
+            Agent.updateRotation = true;
+            Agent.isStopped = false;
         }
-    }
+    }*/
 }
