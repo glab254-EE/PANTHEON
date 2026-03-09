@@ -4,6 +4,12 @@ using System.Collections.Generic;
 public class RoomTrigger : MonoBehaviour
 {
     [SerializeField] private List<EnemyAI> enemiesInRoom;
+    [SerializeField] private Transform enemy;
+
+    private void Update()
+    {
+        gameObject.transform.position = enemy.position;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,11 +27,11 @@ public class RoomTrigger : MonoBehaviour
         }
     }
 
-    /*private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         foreach (var enemy in enemiesInRoom)
         {
             enemy.DeActivate(other.transform);
         }
-    }*/
+    }
 }

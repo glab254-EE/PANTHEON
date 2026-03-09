@@ -31,11 +31,21 @@ public class EnemyAI : MonoBehaviour
         Animator = GetComponent<Animator>();
         StartCoroutine(MainCoroutine());
     }
+
     public void Activate(Transform target)
     {
         Player = target;
         _isActive = true;
     }
+
+    public void DeActivate(Transform target)
+    {
+        _isActive = false;
+        Animator.SetBool("EnemyWalk", false);
+        Animator.SetTrigger("StayAnimForEnemy");
+        Agent.SetDestination(transform.position);
+    }
+
     IEnumerator MainCoroutine()
     {
         while (true)

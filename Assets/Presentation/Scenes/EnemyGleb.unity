@@ -166,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomTrigger
   enemiesInRoom:
   - {fileID: 9016615570611402423}
+  enemy: {fileID: 8532813564794907662}
 --- !u!135 &27140551
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -185,7 +186,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 7.5
+  m_Radius: 12
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &31837100
 PrefabInstance:
@@ -3872,6 +3873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomTrigger
   enemiesInRoom:
   - {fileID: 4168151584533872267}
+  enemy: {fileID: 0}
 --- !u!135 &1291011620
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3940,6 +3942,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoomTrigger
   enemiesInRoom:
   - {fileID: 5645222569677842889}
+  enemy: {fileID: 3524731145339881966}
 --- !u!135 &1305042645
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3959,7 +3962,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 7.5
+  m_Radius: 12
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1347846104
 PrefabInstance:
@@ -10750,7 +10753,7 @@ MonoBehaviour:
     HitboxSize: {x: 0, y: 0, z: 0}
     Damage: 1
     AttackWindupTime: 0
-    Duration: 1
+    Duration: 2.5
     Cooldown: 1
     effect: {fileID: 0}
   PlayerMask:
