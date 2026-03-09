@@ -19,7 +19,11 @@ public class PlayerMovementController : MonoBehaviour
     private StaminaBehaviour PlayerStaminaBehaviour;
     [Header("Input")]
     [SerializeField]
+    private float MaxRollKeyHoldDuration = 0.199f;
+    [SerializeField]
     private InputActionReference RollKey;
+    [SerializeField]
+    private InputActionReference RunKey;
     [SerializeField]
     private bool DefaultEnabledState = true;
     [Header("Animations")]
@@ -58,7 +62,8 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField]
     private float MaxSlopeAngle = 15f;
     internal bool LookForward = false;
-    internal bool CanMove {get;private set;} = true;
+    internal bool CanMove = true;
+    internal bool IsActing = false;
     internal bool CanRoll {get;private set;} = true;
     internal Vector3? OverrideTargetSpeed = null;
     private bool IsAlive = true;
@@ -73,8 +78,8 @@ public class PlayerMovementController : MonoBehaviour
         PlayerHealth.OnDamaged += OnPlayerDamaged;
         rb = GetComponent<Rigidbody>();
         //Listener.ConnectEventToKeybind(ToggleLookForwardBind,ToggleLookForward);
-        Listener.ConnectEventToKeybind(RollKey,OnRollButtonPress);
-        Listener.ConnectEventToKeybind(RollKey, OnRunPresses,true);
+        Listener.ConnectEventToKeybind(RollKey,OnRollButtonPress,true,false,MaxRollKeyHoldDuration);
+        Listener.ConnectEventToKeybind(RunKey, OnRunPresses,true);
     }
     void Update()
     {
@@ -90,8 +95,8 @@ public class PlayerMovementController : MonoBehaviour
     void OnPlayerDamaged(double currentHealth)
     {
         IsAlive = currentHealth>0;
-        CanMove = CanMove && IsAlive;
-        CanRoll = IsAlive;
+        CanMove = IsAlive;
+        CanRoll = CanMove && IsAlive;
     }
     void HandlePlayerRunningChecks()
     {
@@ -119,19 +124,21 @@ public class PlayerMovementController : MonoBehaviour
 
         targetSpeed.y = CurrentSpeed.y;
 
-        Vector3 slerpedSpeed = Vector3.Slerp(CurrentSpeed,targetSpeed,PlayerAcceloration*Time.deltaTime);
+        if (IsActing && OverrideTargetSpeed == null)
+        {
+            targetSpeed = Vector3.zero;
+        }
+        Vector3 slerpedSpeed = Vector3.Slerp(CurrentSpeed, targetSpeed, PlayerAcceloration * Time.deltaTime);
         CurrentSpeed = slerpedSpeed;
-
         Vector3 planarVector3 = Vector3.ProjectOnPlane(slerpedSpeed, groundHit.normal);
-
         if (OverrideTargetSpeed != null)
         {
             rb.linearVelocity = slerpedSpeed;
-        } else
+        }
+        else
         {
             rb.linearVelocity = planarVector3;
         }
-
     }
     bool IsOnGround(out RaycastHit hit)
     {
@@ -179,7 +186,8 @@ public class PlayerMovementController : MonoBehaviour
     }
     void OnRollButtonPress(InputAction.CallbackContext callbackContext)
     {
-        if (CanMove && CanRoll && callbackContext.ReadValueAsButton() && Listener.MovementVector3.magnitude > 0 && PlayerStaminaBehaviour.TryTakeStamina(PlayerRollStaminaCost))
+        Debug.Log("Starting roll");
+        if (CanMove && !IsActing && CanRoll && Listener.MovementVector3.magnitude > 0 && PlayerStaminaBehaviour.TryTakeStamina(PlayerRollStaminaCost))
         {
             Animator.SetAnimatorTrigger(RollTriggerName);
             Task.Run(RollTask);
@@ -206,9 +214,9 @@ public class PlayerMovementController : MonoBehaviour
     }
     Task RollTask()
     {
+        IsActing = true;
 
         bool _oldlook = LookForward;
-
 
         Vector3 _targetSpeed = Listener.MovementVector3.normalized * PlayerRollSpeed;
 
@@ -221,6 +229,8 @@ public class PlayerMovementController : MonoBehaviour
         Task.Delay(Mathf.RoundToInt(PlayerRollForceDuration * 1000)).Wait();
 
         OverrideTargetSpeed = null;
+
+        IsActing = false;
 
         Task.Delay(Mathf.RoundToInt(PlayerRollDuration * 1000)).Wait();
 

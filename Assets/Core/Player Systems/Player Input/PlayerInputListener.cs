@@ -45,13 +45,13 @@ public class PlayerInputListener : MonoBehaviour
 
         MovementVector3 = _movementVector.normalized;
     }
-    public void ConnectEventToKeybind(InputActionReference keybind, UnityAction<InputAction.CallbackContext> action, bool activateOnCancel = false, bool once = false)
+    public void ConnectEventToKeybind(InputActionReference keybind, UnityAction<InputAction.CallbackContext> action, bool activateOnCancel = false, bool once = false, float MaxHoldDuration = float.MaxValue)
     {
         if (!connections.ContainsKey(keybind))
         {
             connections.Add(keybind, new());
         }
-        connections[keybind].Add(new(action, DisableAction, keybind, activateOnCancel, once));
+        connections[keybind].Add(new(action, DisableAction, keybind, activateOnCancel, once,MaxHoldDuration));
     }
     public void DisableAction(CustomInputListenerConnection connection)
     {
