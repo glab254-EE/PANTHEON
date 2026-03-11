@@ -20,5 +20,7 @@ public class AttackSettings
     [field:SerializeField]
     public float Cooldown = 1f;
     [field: SerializeField]
+    public AudioClip clip;
+    [field: SerializeField]
     public ADamageEffect effect = null;
 }

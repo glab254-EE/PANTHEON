@@ -61,6 +61,10 @@ public class PlayerMovementController : MonoBehaviour
     private float AdditionalGroundCheckingRayDistance = 0.1f;
     [SerializeField]
     private float MaxSlopeAngle = 15f;
+    [SerializeField]
+    private AudioSource WalkingSoundSource;
+    [SerializeField]
+    private AudioClip WalkingClip;
     internal bool LookForward = false;
     internal bool CanMove = true;
     internal bool IsActing = false;
@@ -73,6 +77,7 @@ public class PlayerMovementController : MonoBehaviour
     private float PlayerCurrentMaxSpeed;
     void Start()
     {
+
         PlayerCurrentMaxSpeed = PlayerMaxSpeed;
         Listener.MouseLocked = DefaultEnabledState;
         PlayerHealth.OnDamaged += OnPlayerDamaged;
@@ -80,6 +85,10 @@ public class PlayerMovementController : MonoBehaviour
         //Listener.ConnectEventToKeybind(ToggleLookForwardBind,ToggleLookForward);
         Listener.ConnectEventToKeybind(RollKey,OnRollButtonPress,true,false,MaxRollKeyHoldDuration);
         Listener.ConnectEventToKeybind(RunKey, OnRunPresses,true);
+        if (WalkingSoundSource != null)
+        {
+            WalkingSoundSource.clip = WalkingClip;
+        }
     }
     void Update()
     {
@@ -174,10 +183,18 @@ public class PlayerMovementController : MonoBehaviour
         if (CurrentSpeed.magnitude > MoveAnimationThreshold)
         {
             Animator.SetAnimatorBool(WalkingBoolName, true);
+            if (WalkingSoundSource != null && !WalkingSoundSource.isPlaying)
+            {
+                WalkingSoundSource.Play();
+            }
         }
         else
         {
             Animator.SetAnimatorBool(WalkingBoolName, false);
+            if (WalkingSoundSource != null && WalkingSoundSource.isPlaying)
+            {
+                WalkingSoundSource.Pause();
+            }
         }
     }
     void ToggleLookForward(InputAction.CallbackContext _)

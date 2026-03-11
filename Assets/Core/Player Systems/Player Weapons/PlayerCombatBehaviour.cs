@@ -24,6 +24,8 @@ public class PlayerCombatBehaviour : MonoBehaviour
     private LayerMask EnemyMask;
     [field:SerializeField]
     private InputActionReference AttackActionReference;
+    [field: SerializeField]
+    private AudioSource CombatSource;
     [Header("Animations")]
     [field:SerializeField]
     private string HurtAnimationTriggerName;
@@ -88,6 +90,10 @@ public class PlayerCombatBehaviour : MonoBehaviour
                 CanAttack = false;
                 foreach (AttackSettings attack in pattern.Pattern)
                 {
+                    if (attack.clip != null)
+                    {
+                        PlaySound(attack.clip);
+                    }
                     PlayerAnimatorHandler.SetAnimatorIntFrame(attack.AttackAnimationPropertyName,attack.AttackAnimationPropertyIndex);
                     Cooldown = attack.AttackWindupTime + attack.Duration + attack.Cooldown + 1.75f; // 'failsafe' for cooldown.
                     yield return new WaitForSeconds(attack.AttackWindupTime);
@@ -100,6 +106,13 @@ public class PlayerCombatBehaviour : MonoBehaviour
                 movementController.OverrideTargetSpeed = null;
                 CanAttack = true;
             }
+        }
+    }
+    void PlaySound(AudioClip clip)
+    {
+        if (CombatSource != null)
+        {
+            CombatSource.PlayOneShot(clip, 1);
         }
     }
     void HandleHit(AttackSettings attack)
