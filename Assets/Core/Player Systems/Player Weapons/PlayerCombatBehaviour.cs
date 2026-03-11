@@ -78,7 +78,7 @@ public class PlayerCombatBehaviour : MonoBehaviour
     }
     IEnumerator HandleAttacks(List<AttackPattern> patterns, float comboTimerValue)
     {
-        if (patterns.Count > 0 && patterns.Count > currentComboIndex)
+        if (patterns.Count > 0 && patterns.Count > currentComboIndex && movementController.CanMove)
         {
             ComboTimer = comboTimerValue;
             AttackPattern pattern = patterns[currentComboIndex];

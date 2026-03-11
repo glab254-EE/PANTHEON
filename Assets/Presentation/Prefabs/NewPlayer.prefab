@@ -521,7 +521,7 @@ MonoBehaviour:
   Player_Health: {fileID: 1836501431964758546}
   Player_MovementController: {fileID: 6046924685804896624}
   Listener: {fileID: 0}
-  BlockAction: {fileID: -8043949568545141630, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+  HealAction: {fileID: -8043949568545141630, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   HealingPower: 1
   HealingStayDurationSeconds: 1
   HealingCooldownSeconds: 1
@@ -579,7 +579,9 @@ MonoBehaviour:
   CameraBehaviour: {fileID: 0}
   PlayerHealth: {fileID: 1836501431964758546}
   PlayerStaminaBehaviour: {fileID: 7000095977203316759}
+  MaxRollKeyHoldDuration: 0.15
   RollKey: {fileID: -7471211009204490832, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+  RunKey: {fileID: -5725962155711561128, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   DefaultEnabledState: 1
   RunAnimationBoolName: Walking
   WalkingBoolName: Running

@@ -13,7 +13,7 @@ public class PlayerHealingBehaviour : MonoBehaviour
     [SerializeField]
     private PlayerInputListener Listener;
     [SerializeField]
-    private InputActionReference BlockAction;
+    private InputActionReference HealAction;
     [SerializeField]
     private double HealingPower = 1;
     [SerializeField]
@@ -25,12 +25,13 @@ public class PlayerHealingBehaviour : MonoBehaviour
     private bool onCooldown = false;
     private void Start()
     {
-        Listener.ConnectEventToKeybind(BlockAction, OnBlockToggle, true, false);
+        Listener.ConnectEventToKeybind(HealAction, OnHealAction, true, false);
     }
-    private void OnBlockToggle(InputAction.CallbackContext context)
+    void OnHealAction(InputAction.CallbackContext context)
     {
-        if (!onCooldown && context.ReadValueAsButton())
+        if (!Player_MovementController.IsActing && !onCooldown && context.ReadValueAsButton())
         {
+            Player_MovementController.IsActing = true;
             onCooldown = true;
             Animation_Handler.SetAnimatorTrigger(HealAnimationTriggerName);
             Player_Health.TryDamage(-HealingPower,null);
@@ -42,6 +43,7 @@ public class PlayerHealingBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(HealingStayDurationSeconds);
         Player_MovementController.OverrideTargetSpeed = null;
+        Player_MovementController.IsActing = false;
         yield return new WaitForSeconds(HealingCooldownSeconds);
         onCooldown = false;
     }

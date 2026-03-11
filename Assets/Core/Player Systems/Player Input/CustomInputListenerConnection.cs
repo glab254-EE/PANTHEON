@@ -11,13 +11,15 @@ public class CustomInputListenerConnection
     internal InputActionReference Keybind {  get; private set; }
     internal bool ActivateOnCancel { get; private set; }
     internal bool DeactivateOnFirstInvoke { get; private set; }
-    public CustomInputListenerConnection(UnityAction<InputAction.CallbackContext> callback,Action<CustomInputListenerConnection> onDisableAction, InputActionReference keybind, bool activateOnCancel = false, bool deactivateOnFirstInvoke = false)
+    internal float MaxHoldDuration { get; private set; }
+    public CustomInputListenerConnection(UnityAction<InputAction.CallbackContext> callback,Action<CustomInputListenerConnection> onDisableAction, InputActionReference keybind, bool activateOnCancel = false, bool deactivateOnFirstInvoke = false, float maxDuration = float.MaxValue)
     {
         OnDisableAction = onDisableAction;
         Keybind = keybind;
         ActivateOnCancel = activateOnCancel;
         DeactivateOnFirstInvoke = deactivateOnFirstInvoke;
         Callback = callback;
+        MaxHoldDuration = maxDuration;
 
         OnActivate();
     }
@@ -29,6 +31,7 @@ public class CustomInputListenerConnection
     }
     private void OnKeybindPress(InputAction.CallbackContext context)
     {
+        if (context.duration >= MaxHoldDuration) return;
         if (context.ReadValueAsButton() || ActivateOnCancel)
         {
             Callback(context);
