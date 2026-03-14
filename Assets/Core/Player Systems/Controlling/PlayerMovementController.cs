@@ -65,6 +65,11 @@ public class PlayerMovementController : MonoBehaviour
     private AudioSource WalkingSoundSource;
     [SerializeField]
     private AudioClip WalkingClip;
+    [Header("Analytics")]
+    [SerializeField]
+    private GameAnalyticsHandler gameAnalyticsHandler;
+    [SerializeField]
+    private float RequiredTimeOfalkingToSendData = 60;
     internal bool LookForward = false;
     internal bool CanMove = true;
     internal bool IsActing = false;
@@ -75,6 +80,7 @@ public class PlayerMovementController : MonoBehaviour
     private Vector3 CurrentSpeed = new();
     private Rigidbody rb;
     private float PlayerCurrentMaxSpeed;
+    private float WalkedTime = 0;
     void Start()
     {
 
@@ -106,6 +112,12 @@ public class PlayerMovementController : MonoBehaviour
         IsAlive = currentHealth>0;
         CanMove = IsAlive;
         CanRoll = CanMove && IsAlive;
+
+        if (!IsAlive && WalkedTime != -1)
+        {
+            WalkedTime = -1;
+            gameAnalyticsHandler.OnAction("death");
+        }
     }
     void HandlePlayerRunningChecks()
     {
@@ -147,6 +159,13 @@ public class PlayerMovementController : MonoBehaviour
         else
         {
             rb.linearVelocity = planarVector3;
+        }
+
+        WalkedTime += Time.deltaTime;
+        if (WalkedTime >= RequiredTimeOfalkingToSendData)
+        {
+            gameAnalyticsHandler.SendMessage($"Walked for {RequiredTimeOfalkingToSendData} seconds.");
+            WalkedTime = 0;
         }
     }
     bool IsOnGround(out RaycastHit hit)
@@ -206,6 +225,7 @@ public class PlayerMovementController : MonoBehaviour
         Debug.Log("Starting roll");
         if (CanMove && !IsActing && CanRoll && Listener.MovementVector3.magnitude > 0 && PlayerStaminaBehaviour.TryTakeStamina(PlayerRollStaminaCost))
         {
+            gameAnalyticsHandler.OnAction("roll");
             Animator.SetAnimatorTrigger(RollTriggerName);
             Task.Run(RollTask);
         }
