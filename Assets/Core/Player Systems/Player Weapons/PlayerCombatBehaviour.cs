@@ -24,6 +24,8 @@ public class PlayerCombatBehaviour : MonoBehaviour
     private LayerMask EnemyMask;
     [field:SerializeField]
     private InputActionReference AttackActionReference;
+    [field: SerializeField]
+    private AudioSource CombatSource;
     [Header("Animations")]
     [field:SerializeField]
     private string HurtAnimationTriggerName;
@@ -36,6 +38,9 @@ public class PlayerCombatBehaviour : MonoBehaviour
     private List<PlayerWeaponSO> AvailableTools;
     [field:SerializeField]
     private PlayerWeaponSO CurrentTool = null;
+    [Header("Analytics")]
+    [SerializeField]
+    private GameAnalyticsHandler gameAnalyticsHandler;
     private GameObject CurrentToolVisual;
     private float Cooldown = 0;
     private float ComboTimer = 0;
@@ -59,12 +64,13 @@ public class PlayerCombatBehaviour : MonoBehaviour
         {
             if (Cooldown <= 0 && IsLMBHeld)
             {
+                bool enpowered = InputListener.EnpowerButtonHeld;
                 List<AttackPattern> patternToPick = CurrentTool.AttackCombos;
-                if (InputListener.EnpowerButtonHeld)
+                if (enpowered)
                 {
                     patternToPick = CurrentTool.HeavyAttackCombos;
                 }
-                StartCoroutine(HandleAttacks(patternToPick, CurrentTool.ComboDuration));
+                StartCoroutine(HandleAttacks(patternToPick, CurrentTool.ComboDuration, !enpowered));
             }
         }
         if (ComboTimer > 0)
@@ -76,10 +82,17 @@ public class PlayerCombatBehaviour : MonoBehaviour
             currentComboIndex = 0;
         }
     }
-    IEnumerator HandleAttacks(List<AttackPattern> patterns, float comboTimerValue)
+    IEnumerator HandleAttacks(List<AttackPattern> patterns, float comboTimerValue, bool IsLight = true)
     {
         if (patterns.Count > 0 && patterns.Count > currentComboIndex && movementController.CanMove)
         {
+            if (IsLight)
+            {
+                gameAnalyticsHandler.OnAction("light attack");
+            } else
+            {
+                gameAnalyticsHandler.OnAction("heavy attack");
+            }
             ComboTimer = comboTimerValue;
             AttackPattern pattern = patterns[currentComboIndex];
             if (pattern != null)
@@ -88,6 +101,10 @@ public class PlayerCombatBehaviour : MonoBehaviour
                 CanAttack = false;
                 foreach (AttackSettings attack in pattern.Pattern)
                 {
+                    if (attack.clip != null)
+                    {
+                        PlaySound(attack.clip);
+                    }
                     PlayerAnimatorHandler.SetAnimatorIntFrame(attack.AttackAnimationPropertyName,attack.AttackAnimationPropertyIndex);
                     Cooldown = attack.AttackWindupTime + attack.Duration + attack.Cooldown + 1.75f; // 'failsafe' for cooldown.
                     yield return new WaitForSeconds(attack.AttackWindupTime);
@@ -100,6 +117,13 @@ public class PlayerCombatBehaviour : MonoBehaviour
                 movementController.OverrideTargetSpeed = null;
                 CanAttack = true;
             }
+        }
+    }
+    void PlaySound(AudioClip clip)
+    {
+        if (CombatSource != null)
+        {
+            CombatSource.PlayOneShot(clip, 1);
         }
     }
     void HandleHit(AttackSettings attack)
