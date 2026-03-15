@@ -6,6 +6,11 @@ public class EnemyAtack : MonoBehaviour
 {
     [SerializeField] private EnemyAI enemyAI;
 
+    private void Start()
+    {
+        enemyAI.AtackCount = 1;
+    }
+
     public IEnumerator AttackSequence()
     {
         enemyAI.IsAttacking = true;
@@ -17,19 +22,21 @@ public class EnemyAtack : MonoBehaviour
 
         enemyAI.Agent.updateRotation = false;
 
-        /*if (enemyAI.AtackCount <= enemyAI.HardAtackNum)
+        if (enemyAI.AtackCount < enemyAI.HardAtackNum)
         {
             enemyAI.Animator.SetTrigger("EnemyAtack");
             yield return new WaitForSeconds(enemyAI.AttackSetting.AttackWindupTime);
+            enemyAI.AtackCount++;
         }
         else
         {
             enemyAI.Animator.SetTrigger("HardEnemyAtack");
             yield return new WaitForSeconds(enemyAI.AttackSetting.AttackWindupTime);
-        }*/
+            enemyAI.AtackCount = 1;
+        }
 
-        enemyAI.Animator.SetTrigger("EnemyAtack");
-        yield return new WaitForSeconds(enemyAI.AttackSetting.AttackWindupTime);
+        //enemyAI.Animator.SetTrigger("EnemyAtack");
+        //yield return new WaitForSeconds(enemyAI.AttackSetting.AttackWindupTime);
 
         Vector3 hitboxOrigin = transform.position;
 

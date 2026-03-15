@@ -311,6 +311,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HurtBox
   damagable:
     Object: {fileID: 4168151584533872266}
+  HitClip: {fileID: 0}
+  SpecialClipsOvveride: []
 --- !u!136 &86427864
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3622,6 +3624,7 @@ MonoBehaviour:
   enemiesInRoom:
   - {fileID: 4168151584533872267}
   enemy: {fileID: 0}
+  isEnemy: 1
 --- !u!135 &1291011620
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3804,7 +3807,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: e6bc97cb05fb8e34f9d718c3bf67f7fd, type: 2}
+  m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
 --- !u!4 &1389872029
 Transform:
@@ -6623,6 +6626,7 @@ MonoBehaviour:
     AttackWindupTime: 0
     Duration: 1
     Cooldown: 1
+    clip: {fileID: 0}
     effect: {fileID: 0}
   PlayerMask:
     serializedVersion: 2

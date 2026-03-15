@@ -23,22 +23,20 @@ public class RoomTrigger : MonoBehaviour
             foreach (var enemy in enemiesInRoom)
             {
                 enemy.Activate(other.transform);
-
-                /*if (!enemy.gameObject.activeInHierarchy)      //Edited
-                {                                               //Edited
-                    enemy.gameObject.SetActive(true);           //Edited
-                }*/                                             //Edited
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (isEnemy)
+        if (other.CompareTag("Player"))
         {
-            foreach (var enemy in enemiesInRoom)
+            if (isEnemy)
             {
-                enemy.DeActivate(other.transform);
+                foreach (var enemy in enemiesInRoom)
+                {
+                    enemy.DeActivate(other.transform);
+                }
             }
         }
     }
