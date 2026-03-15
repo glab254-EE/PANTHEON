@@ -5,10 +5,15 @@ public class RoomTrigger : MonoBehaviour
 {
     [SerializeField] private List<EnemyAI> enemiesInRoom;
     [SerializeField] private Transform enemy;
+    [SerializeField] private bool isEnemy = true;
 
     private void Update()
     {
-        gameObject.transform.position = enemy.position;
+        if (isEnemy)
+        {
+            gameObject.transform.position = enemy.position;
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,9 +34,12 @@ public class RoomTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        foreach (var enemy in enemiesInRoom)
+        if (isEnemy)
         {
-            enemy.DeActivate(other.transform);
+            foreach (var enemy in enemiesInRoom)
+            {
+                enemy.DeActivate(other.transform);
+            }
         }
     }
 }
