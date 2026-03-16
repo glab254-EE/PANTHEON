@@ -5,14 +5,31 @@ using UnityEngine.AI;
 public class EnemyAtack : MonoBehaviour
 {
     [SerializeField] private EnemyAI enemyAI;
+    [field: SerializeField] private AttackSettings NormalAttackSetting;
+    [field: SerializeField] private AttackSettings HardAttackSetting;
 
     private void Start()
     {
         enemyAI.AtackCount = 1;
     }
 
-    public IEnumerator AttackSequence()
+    public void AttackSequence()
     {
+        if (enemyAI.AtackCount < enemyAI.HardAtackNum)
+        {
+            enemyAI.AtackCount++;
+            StartCoroutine(AttackEnumerator(NormalAttackSetting));
+        }
+        else
+        {
+            enemyAI.AtackCount = 1;
+            StartCoroutine(AttackEnumerator(HardAttackSetting));
+        }
+    }
+
+    public IEnumerator AttackEnumerator(AttackSettings attackSettings)
+    {
+        
         enemyAI.IsAttacking = true;
         enemyAI.Agent.isStopped = true;
 
@@ -22,36 +39,23 @@ public class EnemyAtack : MonoBehaviour
 
         enemyAI.Agent.updateRotation = false;
 
-        if (enemyAI.AtackCount < enemyAI.HardAtackNum)
-        {
-            enemyAI.Animator.SetTrigger("EnemyAtack");
-            yield return new WaitForSeconds(enemyAI.AttackSetting.AttackWindupTime);
-            enemyAI.AtackCount++;
-        }
-        else
-        {
-            enemyAI.Animator.SetTrigger("HardEnemyAtack");
-            yield return new WaitForSeconds(enemyAI.AttackSetting.AttackWindupTime);
-            enemyAI.AtackCount = 1;
-        }
-
-        //enemyAI.Animator.SetTrigger("EnemyAtack");
-        //yield return new WaitForSeconds(enemyAI.AttackSetting.AttackWindupTime);
+        enemyAI.Animator.SetTrigger(attackSettings.AttackAnimationPropertyName);
+        yield return new WaitForSeconds(attackSettings.AttackWindupTime);
 
         Vector3 hitboxOrigin = transform.position;
 
-        hitboxOrigin += transform.forward * enemyAI.AttackSetting.HitboxOffset.z;
-        hitboxOrigin += transform.right * enemyAI.AttackSetting.HitboxOffset.x;
-        hitboxOrigin += transform.up * enemyAI.AttackSetting.HitboxOffset.y;
+        hitboxOrigin += transform.forward * attackSettings.HitboxOffset.z;
+        hitboxOrigin += transform.right * attackSettings.HitboxOffset.x;
+        hitboxOrigin += transform.up * attackSettings.HitboxOffset.y;
 
-        bool haveHitPlayer = StatcHitboxCreator.TryHitWithBoxHitbox(hitboxOrigin, enemyAI.AttackSetting.HitboxSize, enemyAI.PlayerMask, enemyAI.AttackSetting.Damage, true, transform.rotation);
+        bool haveHitPlayer = StatcHitboxCreator.TryHitWithBoxHitbox(hitboxOrigin, attackSettings.HitboxSize, enemyAI.PlayerMask, attackSettings.Damage, true, transform.rotation, attackSettings.effect);
 
         if (haveHitPlayer)
         {
             Debug.Log("Hit");
         }
 
-        yield return new WaitForSeconds(enemyAI.AttackSetting.Duration);
+        yield return new WaitForSeconds(attackSettings.Duration - attackSettings.AttackWindupTime);
         enemyAI.Animator.SetTrigger("StayAnimForEnemy");
 
         if (enemyAI.Player != null)
@@ -74,9 +78,9 @@ public class EnemyAtack : MonoBehaviour
 
         if (enemyAI.IsPlayerInTrigger && enemyAI.Player != null)
         {
-            yield return new WaitForSeconds(enemyAI.AttackSetting.Cooldown);
+            yield return new WaitForSeconds(attackSettings.Cooldown);
             enemyAI.IsAttacking = false;
-            StartCoroutine(AttackSequence());
+            AttackSequence();
         }
         else
         {

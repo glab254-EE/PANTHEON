@@ -10,7 +10,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] public EnemyHealth EnemyHealth;
     [SerializeField] private EnemyAtack enemyAtack;
     [Header("Settings")]
-    [field: SerializeField] public AttackSettings AttackSetting;
     [SerializeField] public LayerMask PlayerMask;
     [SerializeField] public float RotationSpeed = 8f;
     [SerializeField] public float HardAtackNum = 3f;
@@ -73,7 +72,7 @@ public class EnemyAI : MonoBehaviour
             {
                 Animator.SetBool("EnemyWalk", false);
                 Animator.SetTrigger("StayAnimForEnemy");
-                StartCoroutine(enemyAtack.AttackSequence());
+                enemyAtack.AttackSequence();
             }
         }
     }

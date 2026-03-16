@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour, IDamagable
 {
-    [field:SerializeField] private Image HealthImage; //Edited
+    [field:SerializeField] private Image HealthImage;
 
     [field:SerializeField]
     private double MaxHealth;
@@ -15,7 +15,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable
     {
         Health = MaxHealth;
 
-        HealthImage.fillAmount = (float)(Health / MaxHealth); //Edited
+        HealthImage.fillAmount = (float)(Health / MaxHealth);
     }
     public bool TryDamage(double damage, ADamageEffect effect)
     {
@@ -30,7 +30,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable
             effect.DamageEffect(this, damage);
         }
 
-        HealthImage.fillAmount = (float)(Health / MaxHealth); //Edited
+        HealthImage.fillAmount = (float)(Health / MaxHealth);
 
         OnDamaged?.Invoke(Health);
         #if UNITY_EDITOR
