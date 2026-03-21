@@ -18,7 +18,15 @@ public class BossCameraControl : MonoBehaviour
         bossCamera.Priority = 10;
     }
 
-    private void Update()
+    /*private void Update()
+    {
+        if (playerPoint >= needPoint)
+        {
+            StartCoroutine(ShowBossArena());
+        }
+    }*/
+
+    public void CheckPointsCount()
     {
         if (playerPoint >= needPoint)
         {
