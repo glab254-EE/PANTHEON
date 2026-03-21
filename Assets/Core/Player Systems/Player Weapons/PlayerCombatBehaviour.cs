@@ -88,10 +88,10 @@ public class PlayerCombatBehaviour : MonoBehaviour
         {
             if (IsLight)
             {
-                gameAnalyticsHandler.OnAction("light attack");
+                gameAnalyticsHandler?.OnAction("light attack");
             } else
             {
-                gameAnalyticsHandler.OnAction("heavy attack");
+                gameAnalyticsHandler?.OnAction("heavy attack");
             }
             ComboTimer = comboTimerValue;
             AttackPattern pattern = patterns[currentComboIndex];

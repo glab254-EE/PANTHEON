@@ -23,4 +23,5 @@ public class AttackSettings
     public AudioClip clip;
     [field: SerializeField]
     public ADamageEffect effect = null;
+
 }
