@@ -51,7 +51,7 @@ public class EnemyAI : MonoBehaviour
         {
             if (EnemyHealth.Health <= 0)
             {
-                Destroy(gameObject);
+                //Destroy(gameObject);
                 yield break;
             }
             if (_isActive && Player != null && !IsPlayerInTrigger && !IsAttacking && Agent.isActiveAndEnabled)

@@ -6,14 +6,23 @@ using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour, IDamagable
 {
     [field: SerializeField] private Image HealthImage;
-    [SerializeField] private float destroyDelay = 3;
+    [SerializeField] private float deathDuration = 3;
+    [SerializeField] private EnemyAI enemyAI;
 
     [field: SerializeField]
     private double MaxHealth;
-    internal double Health { get; private set; }
+    public double Health; /*{ get; private set; }*/
     internal event Action<double> OnDamaged;
-    private Animator _animator;
+    //private Animator _animator;
     private Collider col;
+
+    private void Update()
+    {
+        if (Health <= 0)
+        {
+            Die();
+        }
+    }
 
     void Start()
     {
@@ -21,7 +30,6 @@ public class EnemyHealth : MonoBehaviour, IDamagable
         HealthImage.fillAmount = (float)(Health / MaxHealth);
 
         col = GetComponent<Collider>();
-        _animator = GetComponent<Animator>();
     }
     public bool TryDamage(double damage, ADamageEffect effect)
     {
@@ -48,19 +56,21 @@ public class EnemyHealth : MonoBehaviour, IDamagable
 
     private void Die()
     {
-        if (_animator != null)
-        {
-            _animator.SetTrigger("EnemyDeath");
-        }
+        enemyAI.Animator.SetTrigger("EnemyDeath");
 
-        if (col != null) col.enabled = false;
+        /*if (enemyAI.Animator != null)
+        {
+            enemyAI.Animator.SetTrigger("EnemyDeath");
+        }*/
+
+        //if (col != null) col.enabled = false;
 
         StartCoroutine(DestroyAfterDelay());
     }
 
     private IEnumerator DestroyAfterDelay()
     {
-        yield return new WaitForSeconds(destroyDelay);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(deathDuration);
+        gameObject.SetActive(false);
     }
 }
