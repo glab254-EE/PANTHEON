@@ -28,6 +28,8 @@ public class PlayerCombatBehaviour : MonoBehaviour
     private AudioSource CombatSource;
     [Header("Animations")]
     [field:SerializeField]
+    private float RestartAterSecondsTime = 2;
+    [field:SerializeField]
     private string HurtAnimationTriggerName;
     [field:SerializeField]
     private string DeadAnimationBoolName;
@@ -178,7 +180,7 @@ public class PlayerCombatBehaviour : MonoBehaviour
     }
     async Task DeathTask()
     {
-        await Task.Delay(2000);
+        await Task.Delay(Mathf.RoundToInt(RestartAterSecondsTime*1000));
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

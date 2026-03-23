@@ -78,7 +78,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   TargetMaxSpeed: 2
-  Acceloration: 0.5
+  Acceloration: 1
 --- !u!135 &7428446804949085714
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -401,7 +401,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   RotationSpeed: 8
-  HardAtackNum: 3
+  HardAtackNum: 2
   updateInterval: 0.3
   IsAttacking: 0
   Agent: {fileID: 1507871101025751340}
@@ -423,7 +423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAtack
   enemyAI: {fileID: 6024861727405624966}
   NormalAttackSetting:
-    AttackAnimationPropertyName: Attack1
+    AttackAnimationPropertyName: EnemyAtack
     AttackAnimationPropertyIndex: 1
     HitboxOffset: {x: 0, y: 0, z: 0}
     HitboxSize: {x: 0, y: 0, z: 0}
@@ -434,16 +434,16 @@ MonoBehaviour:
     clip: {fileID: 0}
     effect: {fileID: 0}
   HardAttackSetting:
-    AttackAnimationPropertyName: Attack1
+    AttackAnimationPropertyName: HardEnemyAtack
     AttackAnimationPropertyIndex: 1
     HitboxOffset: {x: 0, y: 0, z: 0}
     HitboxSize: {x: 0, y: 0, z: 0}
-    Damage: 1
+    Damage: 2
     AttackWindupTime: 0
     Duration: 1
     Cooldown: 1
     clip: {fileID: 0}
-    effect: {fileID: 0}
+    effect: {fileID: 11400000, guid: 736087a94befd0148b29dc98a0e898f6, type: 2}
 --- !u!114 &7099034566058281851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1124,7 +1124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7342638146459426695}
-  - component: {fileID: 139130411108293791}
+  - component: {fileID: 1125621019751358579}
   - component: {fileID: 8967315785495029852}
   m_Layer: 0
   m_Name: TriggerArea (1)
@@ -1142,14 +1142,14 @@ Transform:
   m_GameObject: {fileID: 5697591978062359087}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000002533197}
-  m_LocalPosition: {x: -3.1400032, y: -6.8024654, z: -6.6099854}
+  m_LocalPosition: {x: -0.14, y: -6.8024654, z: -37.41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8439535666408640018}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &139130411108293791
-SphereCollider:
+--- !u!65 &1125621019751358579
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1167,8 +1167,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 12
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3.9965897, y: 7.7448387, z: 1}
+  m_Center: {x: -0.022936583, y: 3.3724194, z: -4.1561535e-16}
 --- !u!114 &8967315785495029852
 MonoBehaviour:
   m_ObjectHideFlags: 0

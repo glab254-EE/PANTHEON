@@ -70,6 +70,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HurtBox
   damagable:
     Object: {fileID: 1836501431964758546}
+  HitClip: {fileID: 0}
+  SpecialClipsOvveride: []
 --- !u!1 &1790933653705869775
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,6 +739,9 @@ PrefabInstance:
       addedObject: {fileID: 6046924685804896624}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a37e61393cf59b34c8d275cd6fd530a5, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 4834394015746364924}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a37e61393cf59b34c8d275cd6fd530a5, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1836501431964758546}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a37e61393cf59b34c8d275cd6fd530a5, type: 3}
       insertIndex: -1
@@ -865,6 +870,23 @@ MonoBehaviour:
   MaxSlopeAngle: 55
   WalkingSoundSource: {fileID: 0}
   WalkingClip: {fileID: 0}
+  gameAnalyticsHandler: {fileID: 0}
+  RequiredTimeOfalkingToSendData: 60
+--- !u!114 &4834394015746364924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6817552950725341589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 604d5f29a69b9a54885275b3870f1d82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDeathScreenHandler
+  healthHandler: {fileID: 1836501431964758546}
+  UIPrefab: {fileID: 0}
+  UIParent: {fileID: 0}
 --- !u!114 &1836501431964758546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,8 +900,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthHandler
   HealthImage: {fileID: 0}
-  MaxHealth: 5
-  GoddedTimerMilisec: 100
+  MaxHealth: 100
+  GoddedTimerMilisec: 250
   <DamageMultiplier>k__BackingField: 1
 --- !u!114 &9061301348448485848
 MonoBehaviour:
@@ -904,11 +926,13 @@ MonoBehaviour:
     m_Bits: 8
   AttackActionReference: {fileID: 1120369429361536294, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   CombatSource: {fileID: 0}
+  RestartAterSecondsTime: 2
   HurtAnimationTriggerName: Hurt
   DeadAnimationBoolName: Dead
   defaultAnimator: {fileID: 9100000, guid: 3d6dde960973f3a46a3cff5422bf5682, type: 2}
   AvailableTools: []
   CurrentTool: {fileID: 11400000, guid: 30a101f7e1331e34fbc084f0d6a55bdb, type: 2}
+  gameAnalyticsHandler: {fileID: 0}
 --- !u!114 &3497526882548188106
 MonoBehaviour:
   m_ObjectHideFlags: 0

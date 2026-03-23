@@ -29,6 +29,7 @@ public class PlayerHealingBehaviour : MonoBehaviour
     }
     void OnHealAction(InputAction.CallbackContext context)
     {
+        if (Time.timeScale == 0) return;
         if (!Player_MovementController.IsActing && !onCooldown && context.ReadValueAsButton())
         {
             Player_MovementController.IsActing = true;
