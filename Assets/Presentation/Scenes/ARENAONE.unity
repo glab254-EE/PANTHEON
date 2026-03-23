@@ -2487,7 +2487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1814199449273344954, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
       propertyPath: HealingPower
-      value: 15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3010595446204331603, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2516,6 +2516,10 @@ PrefabInstance:
     - target: {fileID: 3010595446204331603, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.0000000012838108
+      objectReference: {fileID: 0}
+    - target: {fileID: 3684833732544658107, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
+      propertyPath: MaxHealth
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6216304113213086959, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
       propertyPath: field of view
