@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,12 +10,18 @@ public class EnemyHealth : MonoBehaviour, IDamagable
     [SerializeField] private float deathDuration = 3;
     [SerializeField] private EnemyAI enemyAI;
     [SerializeField] private SpawnOrbOnDisable orb;
+    [SerializeField] private GameObject enemy;
+    [SerializeField] private GameObject bossDeathUIPanel;
+    [SerializeField] private float bossDeathUIPanelDuration = 3;
+    [SerializeField]private GameObject artifactUIPanel;
+    [SerializeField] private float artifactUIPanelDuration = 10;
+
+    public bool IsBoss;
 
     [field: SerializeField]
     private double MaxHealth;
-    public double Health; /*{ get; private set; }*/
+    internal double Health { get; private set; }
     internal event Action<double> OnDamaged;
-    //private Animator _animator;
     private Collider col;
 
     void Start()
@@ -58,12 +65,13 @@ public class EnemyHealth : MonoBehaviour, IDamagable
     {
         enemyAI.Animator.SetTrigger("EnemyDeath");
 
-        /*if (enemyAI.Animator != null)
-        {
-            enemyAI.Animator.SetTrigger("EnemyDeath");
-        }*/
+        if (col != null) col.enabled = false;
 
-        //if (col != null) col.enabled = false;
+        if (IsBoss)
+        {
+            StartCoroutine(BossUI());
+            return;
+        }
 
         StartCoroutine(DestroyAfterDelay());
     }
@@ -71,6 +79,23 @@ public class EnemyHealth : MonoBehaviour, IDamagable
     private IEnumerator DestroyAfterDelay()
     {
         yield return new WaitForSeconds(deathDuration);
-        gameObject.SetActive(false);
+        StopCoroutine(DestroyAfterDelay());
+        enemy.SetActive(false);
+    }
+
+    private IEnumerator BossUI()
+    {
+        bossDeathUIPanel.SetActive(true);
+
+        yield return new WaitForSeconds(bossDeathUIPanelDuration);
+
+        bossDeathUIPanel.SetActive(false);
+        artifactUIPanel.SetActive(true);
+
+        yield return new WaitForSeconds(artifactUIPanelDuration);
+
+        artifactUIPanel.SetActive(false);
+        StopCoroutine(BossUI());
+        enemy.SetActive(false);
     }
 }

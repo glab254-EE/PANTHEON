@@ -495,6 +495,7 @@ MonoBehaviour:
   deathDuration: 3
   enemyAI: {fileID: 6024272756792761281}
   orb: {fileID: 1863749884054237548}
+  enemy: {fileID: 2557358344009479770}
   MaxHealth: 2
   Health: 0
 --- !u!82 &1083194825800766812

@@ -77,7 +77,7 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 64
-  TargetMaxSpeed: 2
+  TargetMaxSpeed: 4
   Acceloration: 1
 --- !u!135 &7428446804949085714
 SphereCollider:
@@ -98,7 +98,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5129948585699072032
 GameObject:
@@ -209,7 +209,7 @@ MonoBehaviour:
   playerlayer:
     serializedVersion: 2
     m_Bits: 64
-  <Points>k__BackingField: 1
+  <Points>k__BackingField: 5
   manager: {fileID: 0}
 --- !u!135 &4390216099453693317
 SphereCollider:

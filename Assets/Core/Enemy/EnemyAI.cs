@@ -39,10 +39,11 @@ public class EnemyAI : MonoBehaviour
 
     public void DeActivate(Transform target)
     {
+        Agent.SetDestination(transform.position);
         _isActive = false;
         Animator.SetBool("EnemyWalk", false);
         Animator.SetTrigger("StayAnimForEnemy");
-        Agent.SetDestination(transform.position);
+        //Agent.SetDestination(transform.position);
     }
 
     IEnumerator MainCoroutine()
@@ -51,7 +52,6 @@ public class EnemyAI : MonoBehaviour
         {
             if (EnemyHealth.Health <= 0)
             {
-                //Destroy(gameObject);
                 yield break;
             }
             if (_isActive && Player != null && !IsPlayerInTrigger && !IsAttacking && Agent.isActiveAndEnabled)
