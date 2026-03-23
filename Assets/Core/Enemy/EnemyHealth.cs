@@ -8,6 +8,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable
     [field: SerializeField] private Image HealthImage;
     [SerializeField] private float deathDuration = 3;
     [SerializeField] private EnemyAI enemyAI;
+    [SerializeField] private SpawnOrbOnDisable orb;
 
     [field: SerializeField]
     private double MaxHealth;
@@ -15,14 +16,6 @@ public class EnemyHealth : MonoBehaviour, IDamagable
     internal event Action<double> OnDamaged;
     //private Animator _animator;
     private Collider col;
-
-    private void Update()
-    {
-        if (Health <= 0)
-        {
-            Die();
-        }
-    }
 
     void Start()
     {
@@ -39,7 +32,14 @@ public class EnemyHealth : MonoBehaviour, IDamagable
             return false;
         }
         Health -= damage;
-
+        if (Health <= 0)
+        {
+            Die();
+            if (orb != null)
+            {
+                orb.SpawnObject();
+            }
+        }
         /*if (effect != null) 
         {
             effect.DamageEffect(this, damage);

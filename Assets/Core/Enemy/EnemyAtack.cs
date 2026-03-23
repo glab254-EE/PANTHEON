@@ -36,6 +36,10 @@ public class EnemyAtack : MonoBehaviour
         bool originalUpdateRotation = enemyAI.Agent.updateRotation;
 
         if (enemyAI.EnemyHealth.Health <= 0) yield break;
+        if (attackSettings.clip != null && transform.TryGetComponent(out AudioSource source))
+        {
+            source.PlayOneShot(attackSettings.clip);
+        }
 
         enemyAI.Agent.updateRotation = false;
 

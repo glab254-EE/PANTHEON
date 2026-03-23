@@ -32,9 +32,6 @@ public class StaminaBehaviour : MonoBehaviour
         if (Stamina - ammount < 0) return false;
 
         Stamina = Mathf.Clamp(Stamina - ammount, 0, MaxStamina);
-#if UNITY_EDITOR
-        Debug.Log(Stamina);
-#endif
         if (StaminaBarImage != null)
         {
             StaminaBarImage.fillAmount = (float)(Stamina / MaxStamina); //Edited
