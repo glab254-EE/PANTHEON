@@ -2,11 +2,11 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
-public class OnTriggerExitTrigger : MonoBehaviour
+public class OnTriggerEnterTrigger : MonoBehaviour
 {
     [field:SerializeField]
     private UnityEvent events;
-    void OnTriggerExit(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         events?.Invoke();
     }

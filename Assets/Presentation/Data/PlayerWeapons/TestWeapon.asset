@@ -22,8 +22,8 @@ MonoBehaviour:
       HitboxOffset: {x: 0, y: 0, z: 0.7}
       HitboxSize: {x: 1.5, y: 2, z: 2}
       Damage: 1
-      AttackWindupTime: 0.8
-      Duration: 1.15
+      AttackWindupTime: 0.53
+      Duration: 1
       Cooldown: 0.35
       clip: {fileID: 8300000, guid: ef084d9bd25c67840b775872f1e7517f, type: 3}
       effect: {fileID: 0}
@@ -33,9 +33,9 @@ MonoBehaviour:
       HitboxOffset: {x: 0, y: 0, z: 0.7}
       HitboxSize: {x: 1.5, y: 2, z: 2}
       Damage: 1
-      AttackWindupTime: 1
-      Duration: 0.4
-      Cooldown: 0.3
+      AttackWindupTime: 0.7
+      Duration: 0.55
+      Cooldown: 0.35
       clip: {fileID: 8300000, guid: ef084d9bd25c67840b775872f1e7517f, type: 3}
       effect: {fileID: 0}
   - Pattern:
@@ -54,7 +54,7 @@ MonoBehaviour:
       HitboxOffset: {x: 0, y: 0, z: 0.7}
       HitboxSize: {x: 1.5, y: 2, z: 2}
       Damage: 2
-      AttackWindupTime: 0.52
+      AttackWindupTime: 0.5
       Duration: 1.5
       Cooldown: 3
       clip: {fileID: 8300000, guid: 44067103691b25d4594592f27aa58ce5, type: 3}

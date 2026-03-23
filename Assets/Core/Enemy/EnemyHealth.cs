@@ -8,19 +8,14 @@ public class EnemyHealth : MonoBehaviour, IDamagable
     [field: SerializeField] private Image HealthImage;
     [SerializeField] private float deathDuration = 3;
     [SerializeField] private EnemyAI enemyAI;
+    [SerializeField] private SpawnOrbOnDisable orb;
 
-    [field: SerializeField] private double MaxHealth;
-    [field: SerializeField] internal double Health { get; private set; }
+    [field: SerializeField]
+    private double MaxHealth;
+    public double Health; /*{ get; private set; }*/
     internal event Action<double> OnDamaged;
+    //private Animator _animator;
     private Collider col;
-
-    /*private void Update()
-    {
-        if (Health <= 0)
-        {
-            Die();
-        }
-    }*/
 
     void Start()
     {
@@ -31,21 +26,30 @@ public class EnemyHealth : MonoBehaviour, IDamagable
     }
     public bool TryDamage(double damage, ADamageEffect effect)
     {
-        Health -= damage;
-        HealthImage.fillAmount = (float)(Health / MaxHealth);
-
         if (Health <= 0)
         {
             Die();
             return false;
         }
-
+        Health -= damage;
+        if (Health <= 0)
+        {
+            Die();
+            if (orb != null)
+            {
+                orb.SpawnObject();
+            }
+        }
         /*if (effect != null) 
         {
             effect.DamageEffect(this, damage);
         }*/
 
+        HealthImage.fillAmount = (float)(Health / MaxHealth);
+
         OnDamaged?.Invoke(Health);
+
+        Debug.Log(Health);
 
         return true;
     }
@@ -53,6 +57,11 @@ public class EnemyHealth : MonoBehaviour, IDamagable
     private void Die()
     {
         enemyAI.Animator.SetTrigger("EnemyDeath");
+
+        /*if (enemyAI.Animator != null)
+        {
+            enemyAI.Animator.SetTrigger("EnemyDeath");
+        }*/
 
         //if (col != null) col.enabled = false;
 

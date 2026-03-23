@@ -2,47 +2,42 @@ using System.Collections;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BossCameraControl : MonoBehaviour
 {
     [SerializeField] private CinemachineCamera bossCamera;
     [SerializeField] private CinemachineCamera playerCamera;
-    [SerializeField] private float needPoint = 50;
+    [SerializeField] private int CameraPriorityDifference;
+    [SerializeField] private float pointsRequiement = 50;
     [SerializeField] private float bossViewDuration;
-
-    [SerializeField] private float playerPoint;
-
+    [SerializeField] private WillpowerManager willpowerManager;
+    [SerializeField] private UnityEvent OnViewEvents;
+    private int PlayerCameraPriority;
+    private int BossCameraPriority;
     private void Start()
     {
-        playerCamera.Priority = 20;
-        bossCamera.Priority = 10;
+        PlayerCameraPriority = playerCamera.Priority.Value;
+        BossCameraPriority = bossCamera.Priority.Value;
+        willpowerManager.TryConnectEvent(new(CheckPoints));
     }
-
-    /*private void Update()
+    void CheckPoints(float currentPoints)
     {
-        if (playerPoint >= needPoint)
-        {
-            StartCoroutine(ShowBossArena());
-        }
-    }*/
-
-    public void CheckPointsCount()
-    {
-        if (playerPoint >= needPoint)
+        if (currentPoints >= pointsRequiement)
         {
             StartCoroutine(ShowBossArena());
         }
     }
-
-    IEnumerator ShowBossArena()
+    private IEnumerator ShowBossArena()
     {
-        playerCamera.Priority = 10;
-        bossCamera.Priority = 20;
+        OnViewEvents?.Invoke();
+        playerCamera.Priority.Value = PlayerCameraPriority-CameraPriorityDifference;
+        bossCamera.Priority = BossCameraPriority + CameraPriorityDifference;
 
         yield return new WaitForSeconds(bossViewDuration);
 
-        playerCamera.Priority = 20;
-        bossCamera.Priority = 10;
+        playerCamera.Priority = PlayerCameraPriority;
+        bossCamera.Priority = BossCameraPriority;
 
         StopCoroutine(ShowBossArena());
     }

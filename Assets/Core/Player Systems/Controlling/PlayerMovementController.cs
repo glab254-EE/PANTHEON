@@ -116,7 +116,7 @@ public class PlayerMovementController : MonoBehaviour
         if (!IsAlive && WalkedTime != -1)
         {
             WalkedTime = -1;
-            gameAnalyticsHandler.OnAction("death");
+            gameAnalyticsHandler?.OnAction("death");
         }
     }
     void HandlePlayerRunningChecks()
@@ -164,7 +164,7 @@ public class PlayerMovementController : MonoBehaviour
         WalkedTime += Time.deltaTime;
         if (WalkedTime >= RequiredTimeOfalkingToSendData)
         {
-            gameAnalyticsHandler.SendMessage($"Walked for {RequiredTimeOfalkingToSendData} seconds.");
+            gameAnalyticsHandler?.SendMessage($"Walked for {RequiredTimeOfalkingToSendData} seconds.");
             WalkedTime = 0;
         }
     }
@@ -224,8 +224,8 @@ public class PlayerMovementController : MonoBehaviour
     {
         Debug.Log("Starting roll");
         if (CanMove && !IsActing && CanRoll && Listener.MovementVector3.magnitude > 0 && PlayerStaminaBehaviour.TryTakeStamina(PlayerRollStaminaCost))
-        {
-            gameAnalyticsHandler.OnAction("roll");
+        { 
+            gameAnalyticsHandler?.OnAction("roll");
             Animator.SetAnimatorTrigger(RollTriggerName);
             Task.Run(RollTask);
         }
