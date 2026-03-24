@@ -21,7 +21,7 @@ MonoBehaviour:
       AttackAnimationPropertyIndex: 1
       HitboxOffset: {x: 0, y: 0, z: 0.7}
       HitboxSize: {x: 1.5, y: 2, z: 2}
-      Damage: 1
+      Damage: 30
       AttackWindupTime: 0.53
       Duration: 1
       Cooldown: 0.35
@@ -32,7 +32,7 @@ MonoBehaviour:
       AttackAnimationPropertyIndex: 2
       HitboxOffset: {x: 0, y: 0, z: 0.7}
       HitboxSize: {x: 1.5, y: 2, z: 2}
-      Damage: 1
+      Damage: 30
       AttackWindupTime: 0.7
       Duration: 0.55
       Cooldown: 0.35
@@ -43,7 +43,7 @@ MonoBehaviour:
       AttackAnimationPropertyIndex: 3
       HitboxOffset: {x: 0, y: 0, z: 0.7}
       HitboxSize: {x: 1.5, y: 2, z: 2}
-      Damage: 1
+      Damage: 30
       AttackWindupTime: 0.5
       Duration: 1
       Cooldown: 1
@@ -53,7 +53,7 @@ MonoBehaviour:
       AttackAnimationPropertyIndex: 4
       HitboxOffset: {x: 0, y: 0, z: 0.7}
       HitboxSize: {x: 1.5, y: 2, z: 2}
-      Damage: 2
+      Damage: 35
       AttackWindupTime: 0.5
       Duration: 1.5
       Cooldown: 3
@@ -65,36 +65,36 @@ MonoBehaviour:
       AttackAnimationPropertyIndex: 1
       HitboxOffset: {x: 0, y: 0, z: 0}
       HitboxSize: {x: 2.5, y: 2, z: 2.5}
-      Damage: 2
+      Damage: 45
       AttackWindupTime: 1.2
       Duration: 2.4
       Cooldown: 0.3
       clip: {fileID: 8300000, guid: ef084d9bd25c67840b775872f1e7517f, type: 3}
-      effect: {fileID: 0}
+      effect: {fileID: 11400000, guid: 736087a94befd0148b29dc98a0e898f6, type: 2}
   - Pattern:
     - AttackAnimationPropertyName: Attack2
       AttackAnimationPropertyIndex: 2
       HitboxOffset: {x: 0, y: 0, z: 0.7}
       HitboxSize: {x: 1.5, y: 2, z: 2}
-      Damage: 2
+      Damage: 40
       AttackWindupTime: 0.75
       Duration: 0.55
       Cooldown: 0.2
       clip: {fileID: 8300000, guid: 44067103691b25d4594592f27aa58ce5, type: 3}
-      effect: {fileID: 0}
+      effect: {fileID: 11400000, guid: 736087a94befd0148b29dc98a0e898f6, type: 2}
   - Pattern:
     - AttackAnimationPropertyName: Attack2
       AttackAnimationPropertyIndex: 3
       HitboxOffset: {x: 0, y: 0, z: 0.7}
       HitboxSize: {x: 1.5, y: 2, z: 2}
-      Damage: 2
+      Damage: 40
       AttackWindupTime: 0.65
       Duration: 0.8
       Cooldown: 0.3
       clip: {fileID: 8300000, guid: 44067103691b25d4594592f27aa58ce5, type: 3}
-      effect: {fileID: 0}
+      effect: {fileID: 11400000, guid: 736087a94befd0148b29dc98a0e898f6, type: 2}
     - AttackAnimationPropertyName: Attack2
-      AttackAnimationPropertyIndex: 4
+      AttackAnimationPropertyIndex: 45
       HitboxOffset: {x: 0, y: 0, z: 0.7}
       HitboxSize: {x: 1.5, y: 2, z: 2}
       Damage: 3
@@ -102,4 +102,4 @@ MonoBehaviour:
       Duration: 0.5
       Cooldown: 4.5
       clip: {fileID: 8300000, guid: 44067103691b25d4594592f27aa58ce5, type: 3}
-      effect: {fileID: 0}
+      effect: {fileID: 11400000, guid: 736087a94befd0148b29dc98a0e898f6, type: 2}

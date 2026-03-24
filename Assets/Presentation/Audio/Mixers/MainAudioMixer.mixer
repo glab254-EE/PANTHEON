@@ -68,7 +68,7 @@ AudioMixerController:
   - guid: 21aa67484662f0b4f93b47a7bdb5f92c
     name: MASTER_VOL
   - guid: d95a7fe85fe826249a978ffa28bc217a
-    name: MyExposedParam
+    name: OST_VOL
   - guid: 57639b53138f6f84a92220a49b443d4c
     name: SFX_VOL
   m_AudioMixerGroupViews:

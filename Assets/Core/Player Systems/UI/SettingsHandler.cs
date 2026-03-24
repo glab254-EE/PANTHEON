@@ -15,8 +15,6 @@ public class SettingsHandler : MonoBehaviour
         public string attribute;
     } 
     [SerializeField]
-    private CameraBehaviour cameraBehaviour;
-    [SerializeField]
     private GameObject pauseFrameObject;
     [SerializeField]
     private AudioMixer mixer;
@@ -51,15 +49,15 @@ public class SettingsHandler : MonoBehaviour
         if (state==false)
         {
             if (LastCameraActiveState != null){
-                cameraBehaviour.CameraControlsEnabled = (bool)LastCameraActiveState;
+                playerInputListener.MouseLocked = (bool)LastCameraActiveState;
                 LastCameraActiveState = null;
             }
             Time.timeScale = 1;
             pauseFrameObject.SetActive(false);
         } else
         {
-            LastCameraActiveState??=cameraBehaviour.CameraControlsEnabled;
-            cameraBehaviour.CameraControlsEnabled = false;
+            LastCameraActiveState??=playerInputListener.MouseLocked;
+            playerInputListener.MouseLocked = false;
             Time.timeScale = 0;
             pauseFrameObject.SetActive(true);
         }

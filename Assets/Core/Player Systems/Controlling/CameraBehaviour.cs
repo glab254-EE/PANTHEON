@@ -42,7 +42,6 @@ public class CameraBehaviour : MonoBehaviour
     }
     private void SetEnabledInputs(bool enabled)
     {
-        
         foreach (var c in controller.Controllers)
         {
             if (c.Name == "Look Orbit X" || c.Name == "Look Orbit Y")
