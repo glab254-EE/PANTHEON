@@ -24,7 +24,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable
     internal event Action<double> OnDamaged;
     private Collider col;
 
-    void Start()
+    void Awake()
     {
         Health = MaxHealth;
         HealthImage.fillAmount = (float)(Health / MaxHealth);
