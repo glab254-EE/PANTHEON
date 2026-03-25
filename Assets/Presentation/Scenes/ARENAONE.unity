@@ -132,6 +132,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2585258017306564591, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
+      propertyPath: NormalAttackSetting.Damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2585258017306564591, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
+      propertyPath: HardAttackSetting.AttackAnimationPropertyIndex
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612524789271379336, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
+      propertyPath: MaxHealth
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3615572536724303172, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
       propertyPath: CallYourManagerNow
       value: 
@@ -524,6 +536,14 @@ PrefabInstance:
       propertyPath: CallYourManagerNow
       value: 
       objectReference: {fileID: 638887985}
+    - target: {fileID: 2416922607809709566, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
+      propertyPath: NormalAttackSetting.Damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416922607809709566, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
+      propertyPath: HardAttackSetting.AttackAnimationPropertyIndex
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 2557358344009479770, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
       propertyPath: m_Name
       value: Skeleton (2)
@@ -572,6 +592,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 426467258}
+    - target: {fileID: 8586055956911730000, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
+      propertyPath: MaxHealth
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2782,6 +2806,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2585258017306564591, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
+      propertyPath: NormalAttackSetting.Damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2585258017306564591, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
+      propertyPath: HardAttackSetting.AttackAnimationPropertyIndex
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612524789271379336, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
+      propertyPath: MaxHealth
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3615572536724303172, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
       propertyPath: CallYourManagerNow
       value: 
@@ -3170,10 +3206,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2585258017306564591, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
+      propertyPath: NormalAttackSetting.Damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2585258017306564591, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
+      propertyPath: HardAttackSetting.AttackAnimationPropertyIndex
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3612524789271379336, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 53116538}
+    - target: {fileID: 3612524789271379336, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
+      propertyPath: MaxHealth
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3615572536724303172, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
       propertyPath: CallYourManagerNow
       value: 
@@ -3728,10 +3776,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2585258017306564591, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
+      propertyPath: NormalAttackSetting.Damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2585258017306564591, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
+      propertyPath: HardAttackSetting.AttackAnimationPropertyIndex
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3612524789271379336, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
       propertyPath: enemy
       value: 
       objectReference: {fileID: 1592013176}
+    - target: {fileID: 3612524789271379336, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
+      propertyPath: MaxHealth
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3615572536724303172, guid: 1219298af5105844ea9ddaa6f8ebb193, type: 3}
       propertyPath: CallYourManagerNow
       value: 
@@ -4977,6 +5037,14 @@ PrefabInstance:
       propertyPath: CallYourManagerNow
       value: 
       objectReference: {fileID: 638887985}
+    - target: {fileID: 2416922607809709566, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
+      propertyPath: NormalAttackSetting.Damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416922607809709566, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
+      propertyPath: HardAttackSetting.AttackAnimationPropertyIndex
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 2557358344009479770, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
       propertyPath: m_Name
       value: Skeleton (3)
@@ -5025,6 +5093,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 426467258}
+    - target: {fileID: 8586055956911730000, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
+      propertyPath: MaxHealth
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5314,6 +5386,14 @@ PrefabInstance:
       propertyPath: CallYourManagerNow
       value: 
       objectReference: {fileID: 638887985}
+    - target: {fileID: 2416922607809709566, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
+      propertyPath: NormalAttackSetting.Damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416922607809709566, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
+      propertyPath: HardAttackSetting.AttackAnimationPropertyIndex
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 2557358344009479770, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
       propertyPath: m_Name
       value: Skeleton (4)
@@ -5362,6 +5442,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 426467258}
+    - target: {fileID: 8586055956911730000, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
+      propertyPath: MaxHealth
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6999,6 +7083,14 @@ PrefabInstance:
       propertyPath: CallYourManagerNow
       value: 
       objectReference: {fileID: 638887985}
+    - target: {fileID: 2416922607809709566, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
+      propertyPath: NormalAttackSetting.Damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416922607809709566, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
+      propertyPath: HardAttackSetting.AttackAnimationPropertyIndex
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 2557358344009479770, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
       propertyPath: m_Name
       value: Skeleton (5)
@@ -7047,6 +7139,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 426467258}
+    - target: {fileID: 8586055956911730000, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
+      propertyPath: MaxHealth
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9226,6 +9322,14 @@ PrefabInstance:
       propertyPath: CallYourManagerNow
       value: 
       objectReference: {fileID: 638887985}
+    - target: {fileID: 2416922607809709566, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
+      propertyPath: NormalAttackSetting.Damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416922607809709566, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
+      propertyPath: HardAttackSetting.AttackAnimationPropertyIndex
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 2557358344009479770, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
       propertyPath: m_Name
       value: Skeleton (6)
@@ -9274,6 +9378,10 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 426467258}
+    - target: {fileID: 8586055956911730000, guid: ccccaccef1090154a905b5c8340bedf4, type: 3}
+      propertyPath: MaxHealth
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9749,7 +9857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1588715291203968319, guid: da32086501b5d534684a5215266ab049, type: 3}
       propertyPath: HardAttackSetting.Damage
-      value: 1
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1588715291203968319, guid: da32086501b5d534684a5215266ab049, type: 3}
       propertyPath: HardAttackSetting.Cooldown
@@ -9761,7 +9869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1588715291203968319, guid: da32086501b5d534684a5215266ab049, type: 3}
       propertyPath: NormalAttackSetting.Damage
-      value: 2
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 1588715291203968319, guid: da32086501b5d534684a5215266ab049, type: 3}
       propertyPath: NormalAttackSetting.Cooldown
@@ -10105,7 +10213,7 @@ PrefabInstance:
       objectReference: {fileID: 1348446727}
     - target: {fileID: 7099034566058281851, guid: da32086501b5d534684a5215266ab049, type: 3}
       propertyPath: MaxHealth
-      value: 4
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7099034566058281851, guid: da32086501b5d534684a5215266ab049, type: 3}
       propertyPath: HealthImage
