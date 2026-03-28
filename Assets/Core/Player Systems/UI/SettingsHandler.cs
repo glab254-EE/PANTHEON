@@ -56,6 +56,7 @@ public class SettingsHandler : MonoBehaviour
             pauseFrameObject.SetActive(false);
         } else
         {
+            ToggleFrame(0);
             LastCameraActiveState??=playerInputListener.MouseLocked;
             playerInputListener.MouseLocked = false;
             Time.timeScale = 0;
