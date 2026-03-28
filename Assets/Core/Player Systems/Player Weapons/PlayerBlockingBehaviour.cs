@@ -27,6 +27,7 @@ public class PlayerBlockingBehaviour : MonoBehaviour
     }
     private void OnBlockToggle(InputAction.CallbackContext context)
     {
+        if (Time.deltaTime == 0) return;
         blocking = context.ReadValueAsButton();
 
         if (blocking && !Player_MovementController.IsActing)

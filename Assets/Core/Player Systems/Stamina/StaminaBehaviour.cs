@@ -56,9 +56,6 @@ public class StaminaBehaviour : MonoBehaviour
             {
                 StaminaBarImage.fillAmount = (float)(Stamina / MaxStamina); //Edited
             }
-#if UNITY_EDITOR
-            Debug.Log(Stamina);
-#endif
             yield return new WaitForSeconds(StaminaDelay);
 
         }

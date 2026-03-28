@@ -98,6 +98,8 @@ public class PlayerMovementController : MonoBehaviour
     }
     void Update()
     {
+        CameraBehaviour.CameraLocked = Listener.MouseLocked;
+        if (Time.deltaTime == 0) return;
         if (IsAlive && CanMove && IsOnGround(out RaycastHit hit))
         {
             HandleMovement(hit);
@@ -105,7 +107,6 @@ public class PlayerMovementController : MonoBehaviour
             HandlePlayerRunningChecks();
         }
         HandleAnimations();
-        CameraBehaviour.CameraLocked = Listener.MouseLocked;
     }
     void OnPlayerDamaged(double currentHealth)
     {

@@ -87,6 +87,6 @@ public class PlayerInputListener : MonoBehaviour
     private void OnEnpower(InputAction.CallbackContext callBack)
     {
         EnpowerButtonHeld = callBack.ReadValueAsButton();
-        Debug.Log(EnpowerButtonHeld);
+        //Debug.Log(EnpowerButtonHeld);
     }
 }

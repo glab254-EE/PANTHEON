@@ -56,6 +56,7 @@ public class PlayerCombatBehaviour : MonoBehaviour
     }
     void Update()
     {
+        if (Time.deltaTime == 0) return;
         if (HealthHandler.Health <= 0) return;
         HandleToolVisual();
         if (Cooldown > 0)
