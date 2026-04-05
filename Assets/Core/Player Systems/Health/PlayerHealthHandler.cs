@@ -59,7 +59,7 @@ public class PlayerHealthHandler : MonoBehaviour, IDamagable
     private async Task GoddedTask()
     {
         Godded = true;
-        await Task.Delay(GoddedTimerMilisec);
+        Task.Delay(GoddedTimerMilisec).Wait();
         Godded = false;
     }
 }

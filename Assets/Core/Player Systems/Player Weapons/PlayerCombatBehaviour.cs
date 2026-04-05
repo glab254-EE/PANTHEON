@@ -181,7 +181,7 @@ public class PlayerCombatBehaviour : MonoBehaviour
     }
     async Task DeathTask()
     {
-        await Task.Delay(Mathf.RoundToInt(RestartAterSecondsTime*1000));
+        Task.Delay(Mathf.RoundToInt(RestartAterSecondsTime*1000)).Wait();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
