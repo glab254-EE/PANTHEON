@@ -17,7 +17,9 @@ public class PlayerCombatBehaviour : MonoBehaviour
     [field:SerializeField]
     private PlayerHealthHandler HealthHandler;
     [field:SerializeField]
-    private Transform ToolObjectParent;
+    private Transform RightHandReference;
+    [field:SerializeField]
+    private Transform LeftHandReference;
     [field:SerializeField]
     private Transform HitboxReference;
     [field:SerializeField]
@@ -44,6 +46,7 @@ public class PlayerCombatBehaviour : MonoBehaviour
     [SerializeField]
     private GameAnalyticsHandler gameAnalyticsHandler;
     private GameObject CurrentToolVisual;
+    private GameObject CurrentToolVisualAlternative;
     private float Cooldown = 0;
     private float ComboTimer = 0;
     private int currentComboIndex = 0;
@@ -145,15 +148,24 @@ public class PlayerCombatBehaviour : MonoBehaviour
     }
     void HandleToolVisual()
     {
-        if (CurrentToolVisual == null && CurrentTool != null && CurrentTool.model != null)
+        if (CurrentToolVisual == null && CurrentTool != null && CurrentTool.RightArmModel != null)
         {
-            CurrentToolVisual = Instantiate(CurrentTool.model,ToolObjectParent);
+            CurrentToolVisual = Instantiate(CurrentTool.RightArmModel,RightHandReference);
             HandleAnimator();
-        } else if (CurrentToolVisual != null && (CurrentTool == null || CurrentTool.model == null))
+        } else if (CurrentToolVisual != null && (CurrentTool == null || CurrentTool.RightArmModel == null))
         {
             Destroy(CurrentTool);
             HandleAnimator();
-        }
+        } 
+        if (CurrentToolVisualAlternative == null && CurrentTool != null && CurrentTool.LeftArmModel != null)
+        {
+            CurrentToolVisualAlternative = Instantiate(CurrentTool.LeftArmModel,LeftHandReference);
+            HandleAnimator();
+        } else if (CurrentToolVisualAlternative != null && (CurrentTool == null || CurrentTool.LeftArmModel == null))
+        {
+            Destroy(CurrentTool);
+            HandleAnimator();
+        } 
     }
     void HandleAnimator()
     {

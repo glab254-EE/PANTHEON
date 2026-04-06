@@ -4,14 +4,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerWeaponSO", menuName = "Scriptable Objects/PlayerWeaponSO")]
 public class PlayerWeaponSO : ScriptableObject
 {
-    [field:SerializeField]
-    public GameObject model;
-    [field:SerializeField]
+    [SerializeField]
+    public GameObject RightArmModel;
+    [SerializeField]
+    public GameObject LeftArmModel;
+    [SerializeField]
     public RuntimeAnimatorController animator;
-    [field:SerializeField]
+    [SerializeField]
     public float ComboDuration = 4f;
-    [field:SerializeField]
+    [SerializeField]
     public List<AttackPattern> AttackCombos;
-    [field: SerializeField]
+    [ SerializeField]
     public List<AttackPattern> HeavyAttackCombos;
 }

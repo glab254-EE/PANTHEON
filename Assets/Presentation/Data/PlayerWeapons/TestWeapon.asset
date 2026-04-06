@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd0596f4f261104d9389d62be671842, type: 3}
   m_Name: TestWeapon
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponSO
-  model: {fileID: 6885272340107514962, guid: 3b7d2e622de041b41bb8b8010873b20f, type: 3}
+  RightArmModel: {fileID: 6885272340107514962, guid: 3b7d2e622de041b41bb8b8010873b20f, type: 3}
+  LeftArmModel: {fileID: 0}
   animator: {fileID: 9100000, guid: 0f31c34b593fcce47873df9cd1d3b2ef, type: 2}
   ComboDuration: 6
   AttackCombos:
@@ -22,8 +23,8 @@ MonoBehaviour:
       HitboxOffset: {x: 0, y: 0, z: 0.7}
       HitboxSize: {x: 1.5, y: 2, z: 2}
       Damage: 30
-      AttackWindupTime: 0.53
-      Duration: 1
+      AttackWindupTime: 0.4
+      Duration: 0.6
       Cooldown: 0.35
       clip: {fileID: 8300000, guid: ef084d9bd25c67840b775872f1e7517f, type: 3}
       effect: {fileID: 0}
@@ -33,9 +34,9 @@ MonoBehaviour:
       HitboxOffset: {x: 0, y: 0, z: 0.7}
       HitboxSize: {x: 1.5, y: 2, z: 2}
       Damage: 30
-      AttackWindupTime: 0.7
-      Duration: 0.55
-      Cooldown: 0.35
+      AttackWindupTime: 0.6
+      Duration: 0.5
+      Cooldown: 0.3
       clip: {fileID: 8300000, guid: ef084d9bd25c67840b775872f1e7517f, type: 3}
       effect: {fileID: 0}
   - Pattern:
@@ -45,8 +46,8 @@ MonoBehaviour:
       HitboxSize: {x: 1.5, y: 2, z: 2}
       Damage: 30
       AttackWindupTime: 0.5
-      Duration: 1
-      Cooldown: 1
+      Duration: 0.55
+      Cooldown: 0.9
       clip: {fileID: 8300000, guid: ef084d9bd25c67840b775872f1e7517f, type: 3}
       effect: {fileID: 0}
     - AttackAnimationPropertyName: Attack1
