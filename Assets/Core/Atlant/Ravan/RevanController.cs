@@ -9,18 +9,17 @@ public class RevanController : MonoBehaviour
     [SerializeField] private string firstAtackName = "LeftAtack";
     [SerializeField] private string secondAtackName = "MidleAtack";
     [SerializeField] private string thirdAtackName = "RightAtack";
-
-    private Animator animator;
+    [SerializeField] private float cooldown = 2f;
 
     public bool CutsceneActive = true;
 
-    //[field: SerializeField] private AttackSettings firstAtack;
-    //[field: SerializeField] private AttackSettings secondAtack;
-    //[field: SerializeField] private AttackSettings thirdAtackж
+    private Animator animator;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+
+        RevanAttackSequence();
     }
 
     public void RevanAttackSequence()
@@ -31,26 +30,30 @@ public class RevanController : MonoBehaviour
         if (firstZone.FirstZoneActive)
         {
             firstZone.atackZoneModel.SetActive(true);
-            StarterAnimation(firstAtackName);
+            animator.SetTrigger(firstAtackName);
             return;
         }
         if (secondZone.SecondZoneActive)
         {
             secondZone.atackZoneModel.SetActive(true);
-            StarterAnimation(secondAtackName);
+            animator.SetTrigger(secondAtackName);
             return;
         }
         if (thirdZone.ThirdZoneActive)
         {
             thirdZone.atackZoneModel.SetActive(true);
-            StarterAnimation(thirdAtackName);
+            animator.SetTrigger(thirdAtackName);
             return;
         }
     }
 
-    private void StarterAnimation(string nameAnim)
+    private IEnumerator TimerAtackEnumerator()
     {
-        animator.SetTrigger(nameAnim);
+        Debug.Log("Сосиски");
+        animator.SetTrigger("Idle");
+        yield return new WaitForSeconds(cooldown);
+
+        RevanAttackSequence();
     }
 
     public void RevanAtack()
@@ -61,32 +64,4 @@ public class RevanController : MonoBehaviour
         //Выщитывается хитбокс + получение урона
         Debug.Log("Удар!!!");
     }
-
-    public void IdleAnimation()
-    {
-        animator.SetTrigger("Idle");
-        Debug.Log("Айдл");
-    }
-
-    /*private IEnumerator RevanAtackEnumerator (AttackSettings attackSettings)
-    {
-        yield return new WaitForSeconds(attackSettings.Cooldown);
-
-        firstZone.atackZoneModel.SetActive(false);
-        secondZone.atackZoneModel.SetActive(false);
-        thirdZone.atackZoneModel.SetActive(false);
-
-        animator.SetTrigger(attackSettings.AttackAnimationPropertyName);
-
-        yield return new WaitForSeconds(attackSettings.AttackWindupTime);
-
-        //Выщитывается хитбокс + получение урона
-
-        yield return new WaitForSeconds(attackSettings.Duration - attackSettings.AttackWindupTime);
-
-        animator.SetTrigger("Idle");
-
-        RevanAtack();
-    }*/
-
 }
