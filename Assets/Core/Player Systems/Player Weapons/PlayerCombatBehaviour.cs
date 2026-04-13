@@ -160,7 +160,6 @@ public class PlayerCombatBehaviour : MonoBehaviour
         if (CurrentToolVisualAlternative == null && CurrentTool != null && CurrentTool.LeftArmModel != null)
         {
             CurrentToolVisualAlternative = Instantiate(CurrentTool.LeftArmModel,LeftHandReference);
-            HandleAnimator();
         } else if (CurrentToolVisualAlternative != null && (CurrentTool == null || CurrentTool.LeftArmModel == null))
         {
             Destroy(CurrentTool);
