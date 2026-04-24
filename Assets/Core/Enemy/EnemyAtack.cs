@@ -52,7 +52,7 @@ public class EnemyAtack : MonoBehaviour
         hitboxOrigin += transform.right * attackSettings.HitboxOffset.x;
         hitboxOrigin += transform.up * attackSettings.HitboxOffset.y;
 
-        bool haveHitPlayer = StatcHitboxCreator.TryHitWithBoxHitbox(hitboxOrigin, attackSettings.HitboxSize, enemyAI.PlayerMask, attackSettings.Damage, true, transform.rotation, attackSettings.effect);
+        bool haveHitPlayer = StatcHitboxCreator.TryHitWithBoxHitbox(hitboxOrigin, attackSettings.HitboxSize, enemyAI.PlayerMask, attackSettings.Damage, gameObject, true, transform.rotation, attackSettings.effect);
 
         if (haveHitPlayer)
         {

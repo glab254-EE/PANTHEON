@@ -35,7 +35,7 @@ public class PlayerHealingBehaviour : MonoBehaviour
             Player_MovementController.IsActing = true;
             onCooldown = true;
             Animation_Handler.SetAnimatorTrigger(HealAnimationTriggerName);
-            Player_Health.TryDamage(-HealingPower,null);
+            Player_Health.TryDamage(-HealingPower,null,null);
             Player_MovementController.OverrideTargetSpeed = Vector3.zero;
             StartCoroutine(StayStillEnumerator());
         }

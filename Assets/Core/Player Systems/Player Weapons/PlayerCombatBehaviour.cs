@@ -45,12 +45,12 @@ public class PlayerCombatBehaviour : MonoBehaviour
     [Header("Analytics")]
     [SerializeField]
     private GameAnalyticsHandler gameAnalyticsHandler;
+    public bool CanAttack = true;
     private GameObject CurrentToolVisual;
     private GameObject CurrentToolVisualAlternative;
     private float Cooldown = 0;
     private float ComboTimer = 0;
     private int currentComboIndex = 0;
-    private bool CanAttack = true;
     private bool IsLMBHeld = false;
     void Start()
     {
@@ -142,7 +142,7 @@ public class PlayerCombatBehaviour : MonoBehaviour
             origin += HitboxReference.right * attack.HitboxOffset.x;
             origin += HitboxReference.up * attack.HitboxOffset.y;
 
-            bool HaveHitSomething = StatcHitboxCreator.TryHitWithBoxHitbox(origin,attack.HitboxSize,EnemyMask,attack.Damage,false,HitboxReference.rotation);
+            bool HaveHitSomething = StatcHitboxCreator.TryHitWithBoxHitbox(origin,attack.HitboxSize,EnemyMask,attack.Damage, gameObject,false,HitboxReference.rotation);
             Debug.Log(HaveHitSomething);
         }
     }

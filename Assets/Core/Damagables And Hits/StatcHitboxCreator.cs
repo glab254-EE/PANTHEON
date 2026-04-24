@@ -2,15 +2,15 @@ using UnityEngine;
 
 public static class StatcHitboxCreator 
 {
-    public static bool TryHitWithBoxHitbox(Vector3 position, Vector3 boxSize, LayerMask mask, double damage, bool OneEnemy = false, Quaternion rotation = new(), ADamageEffect effect = null)
+    public static bool TryHitWithBoxHitbox(Vector3 position, Vector3 boxSize, LayerMask mask, double damage, GameObject s, bool OneEnemy = false, Quaternion rotation = new(), ADamageEffect effect = null)
     {
-        return HandleHits(Physics.OverlapBox(position,boxSize/2,rotation,mask),damage,OneEnemy,effect);
+        return HandleHits(Physics.OverlapBox(position,boxSize/2,rotation,mask),damage,OneEnemy,s,effect);
     }
-    public static bool TryHitWithRay(Ray ray,float maxdistance,LayerMask mask, double damage, bool OneEnemy = false, ADamageEffect effect = null)
+    public static bool TryHitWithRay(Ray ray,float maxdistance,LayerMask mask, double damage, GameObject s, bool OneEnemy = false, ADamageEffect effect = null)
     {
-        return HandleHits(Physics.RaycastAll(ray,maxdistance,mask),damage,OneEnemy,effect);
+        return HandleHits(Physics.RaycastAll(ray,maxdistance,mask),damage,OneEnemy,s,effect);
     }
-    private static bool HandleHits(object hits, double damage, bool OneEnemy, ADamageEffect effect = null)
+    private static bool HandleHits(object hits, double damage, bool OneEnemy, GameObject Source, ADamageEffect effect = null)
     {
         bool found = true;
         
@@ -23,7 +23,7 @@ public static class StatcHitboxCreator
                 if (collider.collider.gameObject.TryGetComponent(out HurtBox box))
                 {
 
-                    box.OnHit(damage,effect);
+                    box.OnHit(damage,Source,effect);
 
                     if (OneEnemy) return true;
 
@@ -40,7 +40,7 @@ public static class StatcHitboxCreator
                 if (collider.gameObject.TryGetComponent(out HurtBox box))
                 {
 
-                    box.OnHit(damage, effect);
+                    box.OnHit(damage, Source, effect);
 
                     if (OneEnemy) return true;
 

@@ -1,6 +1,4 @@
-using NUnit.Framework;
 using System.Collections.Generic;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class HurtBox : MonoBehaviour
@@ -25,9 +23,13 @@ public class HurtBox : MonoBehaviour
         public AudioClip clip;
         [field: SerializeField]
         public ADamageEffect Index;
-        public override bool Equals(object obj)
+        public override readonly bool Equals(object obj)
         {
-            return Index == obj;
+            return Object.Equals(Index, obj);
+        }
+        public override readonly int GetHashCode()
+        {
+            return Index.GetHashCode();
         }
     }
     [field:SerializeField]
@@ -36,9 +38,9 @@ public class HurtBox : MonoBehaviour
     private AudioClip HitClip;
     [field: SerializeField]
     private List<SpecialADamagableOvverideElement> SpecialClipsOvveride;
-    public bool OnHit(double damage,ADamageEffect effect = null)
+    public bool OnHit(double damage,GameObject HitSource,ADamageEffect effect = null)
     {
-        AudioClip? toPlayClip = HitClip;
+        AudioClip toPlayClip = HitClip;
         if (SpecialClipsOvveride.Count > 0 && effect != null)
         {
             foreach(SpecialADamagableOvverideElement element in SpecialClipsOvveride)
@@ -54,6 +56,6 @@ public class HurtBox : MonoBehaviour
         {
             source.PlayOneShot(toPlayClip);
         }
-        return damagable.damagable.TryDamage(damage,effect);
+        return damagable.damagable.TryDamage(damage,effect,HitSource);
     }
 }

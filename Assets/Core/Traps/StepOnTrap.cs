@@ -23,7 +23,7 @@ public class StepOnTrap : MonoBehaviour
     {
         if (Active) return;
         Active = true;
-        StatcHitboxCreator.TryHitWithBoxHitbox(transform.position+OffsetPosition,HitboxSize,layerMask,damage,false,transform.rotation);
+        StatcHitboxCreator.TryHitWithBoxHitbox(transform.position+OffsetPosition,HitboxSize,layerMask,damage, null,false,transform.rotation);
         if (TrapObject != null)
         {
             StartCoroutine(TrapVisible());

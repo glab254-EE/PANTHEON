@@ -31,7 +31,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable
 
         col = GetComponent<Collider>();
     }
-    public bool TryDamage(double damage, ADamageEffect effect)
+    public bool TryDamage(double damage, ADamageEffect effect,GameObject s)
     {
         if (Health <= 0)
         {

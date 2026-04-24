@@ -25,7 +25,7 @@ public class PlayerHealthHandler : MonoBehaviour, IDamagable
             HealthImage.fillAmount = (float)(Health / MaxHealth); //Edited
         }
     }
-    public bool TryDamage(double damage, ADamageEffect e)
+    public bool TryDamage(double damage, ADamageEffect e, GameObject source)
     {
         if (Godded || Health <= 0)
         {
