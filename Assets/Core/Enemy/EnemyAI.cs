@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] public float RotationSpeed = 8f;
     [SerializeField] public float HardAtackNum = 3f;
     [SerializeField] private float updateInterval = 0.3f;
+    public float StunnedTime = 0;
 
     public bool IsAttacking = false;
     public NavMeshAgent Agent;
@@ -35,6 +36,7 @@ public class EnemyAI : MonoBehaviour
     {
         Player = target;
         _isActive = true;
+        StunnedTime = 0;
     }
 
     public void DeActivate(Transform target)
@@ -51,10 +53,15 @@ public class EnemyAI : MonoBehaviour
         {
             if (EnemyHealth.Health <= 0)
             {
-                Debug.Log("Fkasej");
                 yield break;
             }
-            if (_isActive && Player != null && !IsPlayerInTrigger && !IsAttacking && Agent.isActiveAndEnabled)
+            if (StunnedTime > 0)
+            {
+                StunnedTime -= updateInterval;
+                Animator.SetBool("EnemyWalk", false);
+                Agent.SetDestination(transform.position);
+            }
+            if (_isActive && Player != null && !IsPlayerInTrigger && !IsAttacking && Agent.isActiveAndEnabled && StunnedTime <= 0)
             {
                 //Debug.Log("Fkasej");
                 Animator.SetBool("EnemyWalk", true);
@@ -65,7 +72,7 @@ public class EnemyAI : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && _isActive)
+        if (other.CompareTag("Player") && _isActive && StunnedTime <= 0)
         {
             IsPlayerInTrigger = true;
 

@@ -17,6 +17,8 @@ public class PlayerBlockingBehaviour : MonoBehaviour
     private double BlockingDamageMultiSetter = .75;
     [SerializeField]
     private string BlockBoolName = "Block";
+    [SerializeField]
+    private APlayerDamageTakeStrategy blockingStrategy;
     public bool blocking { get; private set; } = false;
     private double BaseDamageMulti;
     private void Start()
@@ -36,12 +38,20 @@ public class PlayerBlockingBehaviour : MonoBehaviour
             Animation_Handler.SetAnimatorBool(BlockBoolName, true);
             Player_Health.DamageMultiplier = BlockingDamageMultiSetter;
             Player_MovementController.OverrideTargetSpeed = Vector3.zero;
+            if (blockingStrategy != null)
+            {
+                Player_Health.aPlayerDamageStrategy = blockingStrategy;
+            }
         } else
         {
             Player_MovementController.IsActing = false;
             Animation_Handler.SetAnimatorBool(BlockBoolName, false);
             Player_Health.DamageMultiplier = BaseDamageMulti;
             Player_MovementController.OverrideTargetSpeed = null;
+            if (blockingStrategy != null)
+            {
+                Player_Health.aPlayerDamageStrategy = null;
+            }
         }
     }
 }
