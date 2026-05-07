@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class DialogWindowController : MonoBehaviour
     private TMP_Text TextField;
     [SerializeField]
     private CanvasGroup DialogWindowCanvas;
+    [SerializeField]
+    private AudioSource DefaultSource;
     [Header("Fade Settings")]
     [SerializeField]
     private float AppearTime = 0.5f;
@@ -21,7 +24,8 @@ public class DialogWindowController : MonoBehaviour
     private float NormalLetterTypingDelay = 0.1f;
     [SerializeField]
     private float PunctuiationTypingDelay = 0.3f;
-    private Coroutine currentCoroutine;
+    private Coroutine currentMainCoroutine;
+    private Coroutine currentFadeCoroutine;
     private bool IsDialogEnabled
     {
         get
@@ -33,8 +37,54 @@ public class DialogWindowController : MonoBehaviour
             return false;
         }
     }
-    private Awaitable TextShowEnumerator(string TargetText, ) 
-    { 
+    public void DisplayText(string text, AudioClip _clip, bool PlayPerLetter = false, AudioSource overrideSource = null)
+    {
+        if (text == null || _clip == null) return;
+        if (currentMainCoroutine != null)
+        {
+            StopCoroutine(currentMainCoroutine);
+            currentMainCoroutine = null;
+        }
+        currentMainCoroutine = StartCoroutine(TextDisplayCoroutine(text,_clip,PlayPerLetter,overrideSource));
+    }
+    public IEnumerator TextDisplayCoroutine(string text, AudioClip _clip, bool PlayPerLetter = false, AudioSource overrideSource = null)
+    {
+        AudioSource originSource = overrideSource != null ? overrideSource : DefaultSource;
+        if (originSource.isPlaying) originSource.Stop();
+
+        if (!IsDialogEnabled && currentFadeCoroutine == null)
+        {
+            currentFadeCoroutine = StartCoroutine(ChangeTransparencyEnumerator(0, true));
+            yield return currentFadeCoroutine;
+            currentFadeCoroutine = null;
+        }
+        if (!PlayPerLetter)
+        {
+            originSource.clip = _clip;
+            originSource.Play();
+        }
+        string current = "";
+        foreach (char c in text)
+        {
+            current += c;
+            TextField.text = current;
+            if (!char.IsWhiteSpace(c))
+            {
+                if (PlayPerLetter) originSource.PlayOneShot(_clip);
+                yield return new WaitForSeconds(char.IsPunctuation(c) ? PunctuiationTypingDelay : NormalLetterTypingDelay);
+            }
+        }
+        if (!PlayPerLetter)
+        {
+            originSource.clip = null;
+            originSource.Stop();
+        }
+        if (IsDialogEnabled && currentFadeCoroutine == null)
+        {
+            currentFadeCoroutine = StartCoroutine(ChangeTransparencyEnumerator(1, false));
+            yield return currentFadeCoroutine;
+            currentFadeCoroutine = null;
+        }
     }
     private IEnumerator ChangeTransparencyEnumerator(float target,bool EnableOnStart)
     {
