@@ -127,9 +127,6 @@ public class LayerCulling : MonoBehaviour {
 
 	static void ClearLayerCulling(Camera cullTarget, Light shadowCullTarget) {
 		if(cullTarget)
-			cullTarget.layerCullSpherical = false;
-
-		if(cullTarget)
 			cullTarget.layerCullDistances = new float[32];
 
 		if(shadowCullTarget)

@@ -18,6 +18,9 @@ public class PlayerInputListener : MonoBehaviour
     internal bool EnpowerButtonHeld = false;
     private Dictionary<InputActionReference, List<CustomInputListenerConnection>> connections = new();
     private InputSystem_Actions inputActions;
+#if UNITY_EDITOR
+    public Vector2 MockMovementInput = Vector2.zero;
+#endif
     void Start()
     {
         inputActions??=new(); 
@@ -33,6 +36,12 @@ public class PlayerInputListener : MonoBehaviour
     void Update()
     {
         AxisOutput = inputActions.Player.Move.ReadValue<Vector2>();
+#if UNITY_EDITOR
+        if (MockMovementInput != Vector2.zero)
+        {
+            AxisOutput = MockMovementInput;
+        }
+#endif
 
         if (CameraTransform == null)
         {
