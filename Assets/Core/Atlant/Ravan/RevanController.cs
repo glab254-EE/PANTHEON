@@ -26,7 +26,7 @@ public class RevanController : MonoBehaviour
     {
         if (CutsceneActive) { return; }
 
-        Debug.Log("Поехали");
+        //Debug.Log("Поехали");
         if (firstZone.FirstZoneActive)
         {
             firstZone.atackZoneModel.SetActive(true);
@@ -49,7 +49,7 @@ public class RevanController : MonoBehaviour
 
     private IEnumerator TimerAtackEnumerator()
     {
-        Debug.Log("Сосиски");
+        //Debug.Log("Сосиски");
         animator.SetTrigger("Idle");
         yield return new WaitForSeconds(cooldown);
 
@@ -62,6 +62,6 @@ public class RevanController : MonoBehaviour
         secondZone.atackZoneModel.SetActive(false);
         thirdZone.atackZoneModel.SetActive(false);
         //Выщитывается хитбокс + получение урона
-        Debug.Log("Удар!!!");
+        //Debug.Log("Удар!!!");
     }
 }
