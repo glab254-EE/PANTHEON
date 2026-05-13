@@ -11,6 +11,10 @@ public class PlayerHealingBehaviour : MonoBehaviour
     [SerializeField]
     private PlayerMovementController Player_MovementController;
     [SerializeField]
+    private PlayerStatSO PlayerHealingOrbStatReference;
+    [SerializeField]
+    private double HealthPerOrbAddition = 2;
+    [SerializeField]
     private PlayerInputListener Listener;
     [SerializeField]
     private InputActionReference HealAction;
@@ -30,12 +34,22 @@ public class PlayerHealingBehaviour : MonoBehaviour
     void OnHealAction(InputAction.CallbackContext context)
     {
         if (Time.timeScale == 0) return;
-        if (!Player_MovementController.IsActing && !onCooldown && context.ReadValueAsButton())
+        if (!Player_MovementController.IsActing && !onCooldown && context.ReadValueAsButton() && (PlayerHealingOrbStatReference == null || PlayerHealingOrbStatReference.CurrentValue > 0))
         {
             Player_MovementController.IsActing = true;
             onCooldown = true;
             Animation_Handler.SetAnimatorTrigger(HealAnimationTriggerName);
-            Player_Health.TryDamage(-HealingPower,null,null);
+            double ammount = HealingPower;
+            if (PlayerHealingOrbStatReference != null)
+            {
+                double MaxHP = Player_Health.MaxHealth;
+                double Needed = Player_Health.MaxHealth - Player_Health.Health;
+                double Taken = System.Math.Min(PlayerHealingOrbStatReference.CurrentValue, Needed/HealthPerOrbAddition);
+                ammount = Taken*HealthPerOrbAddition;
+                PlayerHealingOrbStatReference.CurrentValue -= Taken;
+                PlayerHealingOrbStatReference.InvokeEvent();
+            }
+            Player_Health.TryDamage(-ammount, null,null);
             Player_MovementController.OverrideTargetSpeed = Vector3.zero;
             StartCoroutine(StayStillEnumerator());
         }

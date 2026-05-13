@@ -11,6 +11,8 @@ public class StaminaBehaviour : MonoBehaviour
     [SerializeField]
     private int StaminaGainingStartDelay = 100;
     [SerializeField]
+    private int TargetAttributeIndex = -1;
+    [SerializeField]
     public float StaminaGainPerDelay = 1;
     [SerializeField]
     private float StaminaDelay = 0.1f;
@@ -25,6 +27,11 @@ public class StaminaBehaviour : MonoBehaviour
         if (StaminaBarImage != null)
         {
             StaminaBarImage.fillAmount = (float)(Stamina / MaxStamina); //Edited
+        }
+        if (TargetAttributeIndex != -1 && PlayerStatisticsManager.TryGetValue(TargetAttributeIndex, out double value, out PlayerStatSO stat))
+        {
+            MaxStamina = (float)value;
+            stat.OnUpdate += OnUpdate;
         }
     }
     public bool TryTakeStamina(float ammount)
@@ -43,7 +50,10 @@ public class StaminaBehaviour : MonoBehaviour
         }
         return true;
     }
-
+    private void OnUpdate(double newval)
+    {
+        MaxStamina = (float)newval;
+    }
     private IEnumerator GainEnumerator()
     {
         Debug.Log("Start");

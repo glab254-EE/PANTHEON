@@ -7,9 +7,11 @@ public class PlayerHealthHandler : MonoBehaviour, IDamagable
 {
     [SerializeField] private Image HealthImage; //Edited
     [field:SerializeField]
-    private double MaxHealth = 10;
+    public double MaxHealth { get; private set; } = 10;
     [field:SerializeField]
     private int GoddedTimerMilisec = 100;
+    [field: SerializeField]
+    private int PlayerMaxhealthStatIndex = -1;
     [field: SerializeField]
     public double DamageMultiplier { get; internal set; } = 1;
 
@@ -26,6 +28,13 @@ public class PlayerHealthHandler : MonoBehaviour, IDamagable
         if (HealthImage != null)
         {
             HealthImage.fillAmount = (float)(Health / MaxHealth); //Edited
+        }
+
+        if (PlayerMaxhealthStatIndex != -1 && PlayerStatisticsManager.TryGetValue(PlayerMaxhealthStatIndex, out double value,out PlayerStatSO stat))
+        {
+            MaxHealth = value;
+            Health = value;
+            stat.OnUpdate += OnMaxHealthUpdated;
         }
     }
     public bool TryDamage(double damage, ADamageEffect e, GameObject source)
@@ -59,9 +68,6 @@ public class PlayerHealthHandler : MonoBehaviour, IDamagable
             Task.Run(GoddedTask);
             OnDamaged.Invoke(Health);
         }
-#if UNITY_EDITOR
-        Debug.Log(Health);
-        #endif
         return true;
     }
     private async Task GoddedTask()
@@ -69,5 +75,11 @@ public class PlayerHealthHandler : MonoBehaviour, IDamagable
         Godded = true;
         Task.Delay(GoddedTimerMilisec).Wait();
         Godded = false;
+    }
+    private void OnMaxHealthUpdated(double newValue)
+    {
+        double Ratio = newValue / MaxHealth;
+        MaxHealth = newValue;
+        Health *= Ratio;
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2302802085013231952}
   - component: {fileID: 7428446804949085714}
   m_Layer: 0
-  m_Name: WillpowerOrb
+  m_Name: HealingOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7eb7a436648cb9643b95e7274241cbc8, type: 2}
+  - {fileID: 2100000, guid: 83f623aff4de73b41adbce86c86d28e3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
   playerlayer:
     serializedVersion: 2
     m_Bits: 64
-  TargetCurrencyStatistic: {fileID: 11400000, guid: 003b5a7d2084ebe4dadaf83a5e5acd39, type: 2}
+  TargetCurrencyStatistic: {fileID: 11400000, guid: 42ca5c019da275e448f621f0c64b5b72, type: 2}
   <Points>k__BackingField: 1
   manager: {fileID: 0}
 --- !u!1 &7616713766462756646

@@ -13,6 +13,8 @@ public class AttackSettings
     public Vector3 HitboxSize;
     [field:SerializeField]
     public double Damage = 1;
+    [field: SerializeField]
+    public int AdditionalDamageMultiplierSOIndex = -1;
     [field:SerializeField]
     public float AttackWindupTime = 0f;
     [field:SerializeField]

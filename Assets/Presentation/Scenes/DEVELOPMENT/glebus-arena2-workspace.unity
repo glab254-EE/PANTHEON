@@ -1390,6 +1390,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: eca38bc3a922ce442b2c0ad5d5c87d93, type: 2}
+    - target: {fileID: 1814199449273344954, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
+      propertyPath: PlayerHealingOrbStatReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 42ca5c019da275e448f621f0c64b5b72, type: 2}
     - target: {fileID: 3010595446204331603, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.45498657

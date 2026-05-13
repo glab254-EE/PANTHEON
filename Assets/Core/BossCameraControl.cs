@@ -11,7 +11,7 @@ public class BossCameraControl : MonoBehaviour
     [SerializeField] private int CameraPriorityDifference;
     [SerializeField] private float pointsRequiement = 50;
     [SerializeField] private float bossViewDuration;
-    [SerializeField] private WillpowerManager willpowerManager;
+    [SerializeField] private CollectWillpowerToActivateHandler willpowerManager;
     [SerializeField] private UnityEvent OnViewEvents;
     private int PlayerCameraPriority;
     private int BossCameraPriority;

@@ -887,6 +887,8 @@ MonoBehaviour:
   Animation_Handler: {fileID: 3497526882548188106}
   Player_Health: {fileID: 1836501431964758546}
   Player_MovementController: {fileID: 6046924685804896624}
+  PlayerHealingOrbStatReference: {fileID: 0}
+  HealthPerOrbAddition: 2
   Listener: {fileID: 0}
   HealAction: {fileID: -8043949568545141630, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   HealingPower: 5
@@ -912,6 +914,7 @@ MonoBehaviour:
   BlockAction: {fileID: 2365118210677756248, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   BlockingDamageMultiSetter: 0.2
   BlockBoolName: Block
+  blockingStrategy: {fileID: 0}
 --- !u!114 &7000095977203316759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -998,9 +1001,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthHandler
   HealthImage: {fileID: 0}
-  MaxHealth: 100
+  <MaxHealth>k__BackingField: 250
   GoddedTimerMilisec: 250
+  PlayerMaxhealthStatIndex: 0
   <DamageMultiplier>k__BackingField: 1
+  aPlayerDamageStrategy: {fileID: 0}
 --- !u!114 &9061301348448485848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,7 +1022,8 @@ MonoBehaviour:
   PlayerAnimatorHandler: {fileID: 3497526882548188106}
   movementController: {fileID: 0}
   HealthHandler: {fileID: 1836501431964758546}
-  ToolObjectParent: {fileID: 5469645189440123660}
+  RightHandReference: {fileID: 5469645189440123660}
+  LeftHandReference: {fileID: 0}
   HitboxReference: {fileID: 5450919968805101470}
   EnemyMask:
     serializedVersion: 2
@@ -1031,6 +1037,7 @@ MonoBehaviour:
   AvailableTools: []
   CurrentTool: {fileID: 11400000, guid: 30a101f7e1331e34fbc084f0d6a55bdb, type: 2}
   gameAnalyticsHandler: {fileID: 0}
+  CanAttack: 1
 --- !u!114 &3497526882548188106
 MonoBehaviour:
   m_ObjectHideFlags: 0

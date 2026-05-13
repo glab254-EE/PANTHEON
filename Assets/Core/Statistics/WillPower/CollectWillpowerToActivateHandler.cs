@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WillpowerManager : MonoBehaviour
+public class CollectWillpowerToActivateHandler : MonoBehaviour
 {
     [field:SerializeField]
     public float CurrentPoints { get; private set; } = 0;
@@ -28,7 +28,7 @@ public class WillpowerManager : MonoBehaviour
         }
         return true;
     }
-    public bool TryAddPoints(WillOrbCollectionBehaviour orb)
+    public bool TryAddPoints(OrbCollectingBehaviour orb)
     {
         if (orb == null || orb.gameObject == null || orb.Points <= 0) return false;
 

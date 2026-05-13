@@ -56,8 +56,6 @@ public class EnemyHealth : MonoBehaviour, IDamagable
 
         OnDamaged?.Invoke(Health);
 
-        Debug.Log(Health);
-
         return true;
     }
 
