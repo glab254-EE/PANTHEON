@@ -35,6 +35,10 @@ public static class PlayerStatisticsManager
     {
         value = 0;
         stat = null;
+        if (AvailableAttributeData==null)
+        {
+            return false;
+        }
         if (index >= 0 && index < AvailableAttributeData.Count)
         {
             stat = AvailableAttributeData[index].attribute;
