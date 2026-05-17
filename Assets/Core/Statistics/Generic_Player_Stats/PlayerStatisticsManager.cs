@@ -33,7 +33,7 @@ public static class PlayerStatisticsManager
     }
     public static bool TryGetValue(int index, out double value, out PlayerStatSO stat)
     {
-        value = 0;
+        value = 1;
         stat = null;
         if (AvailableAttributeData==null)
         {

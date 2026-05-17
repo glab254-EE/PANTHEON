@@ -438,6 +438,7 @@ MonoBehaviour:
   RotationSpeed: 2
   HardAtackNum: 3
   updateInterval: 0.5
+  StunnedTime: 0
   IsAttacking: 0
   Agent: {fileID: 4669224473849344802}
   Animator: {fileID: 2742233788400223666}
@@ -463,6 +464,7 @@ MonoBehaviour:
     HitboxOffset: {x: -0.049, y: 0.844, z: 1.7974}
     HitboxSize: {x: 1, y: 2.3273, z: 1.6316563}
     Damage: 1
+    AdditionalDamageMultiplierSOIndex: -1
     AttackWindupTime: 0.56
     Duration: 2
     Cooldown: 1
@@ -474,6 +476,7 @@ MonoBehaviour:
     HitboxOffset: {x: -0.049, y: 0.844, z: 1.7974}
     HitboxSize: {x: 1, y: 2.3273, z: 1.6316563}
     Damage: 2
+    AdditionalDamageMultiplierSOIndex: -1
     AttackWindupTime: 1
     Duration: 2.5
     Cooldown: 1
@@ -496,8 +499,12 @@ MonoBehaviour:
   enemyAI: {fileID: 6024272756792761281}
   orb: {fileID: 1863749884054237548}
   enemy: {fileID: 2557358344009479770}
+  bossDeathUIPanel: {fileID: 0}
+  bossDeathUIPanelDuration: 3
+  artifactUIPanel: {fileID: 0}
+  artifactUIPanelDuration: 10
+  IsBoss: 0
   MaxHealth: 2
-  Health: 0
 --- !u!82 &1083194825800766812
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2100,6 +2107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe807ed3f0eaa64492e0b2c57b406d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnOrbOnDisable
+  enemyHealth: {fileID: 8586055956911730000}
   CallYourManagerNow: {fileID: 0}
   prefab: {fileID: 4730443414585426527, guid: 6607e914477e19b438e23c6749f8cf22, type: 3}
 --- !u!1 &5270230271782157226

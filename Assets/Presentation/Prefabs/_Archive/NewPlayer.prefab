@@ -887,7 +887,7 @@ MonoBehaviour:
   Animation_Handler: {fileID: 3497526882548188106}
   Player_Health: {fileID: 1836501431964758546}
   Player_MovementController: {fileID: 6046924685804896624}
-  PlayerHealingOrbStatReference: {fileID: 0}
+  PlayerHealingOrbStatReference: {fileID: 11400000, guid: 42ca5c019da275e448f621f0c64b5b72, type: 2}
   HealthPerOrbAddition: 2
   Listener: {fileID: 0}
   HealAction: {fileID: -8043949568545141630, guid: 289c1b55c9541489481df5cc06664110, type: 3}
@@ -930,6 +930,7 @@ MonoBehaviour:
   StaminaBarImage: {fileID: 0}
   MaxStamina: 100
   StaminaGainingStartDelay: 1
+  TargetAttributeIndex: -1
   StaminaGainPerDelay: 1
   StaminaDelay: 0.5
 --- !u!114 &6046924685804896624
@@ -1030,11 +1031,11 @@ MonoBehaviour:
     m_Bits: 8
   AttackActionReference: {fileID: 1120369429361536294, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   CombatSource: {fileID: 0}
+  PlayerStatisticIndexForDamage: 0
   RestartAterSecondsTime: 2
   HurtAnimationTriggerName: Hurt
   DeadAnimationBoolName: Dead
   defaultAnimator: {fileID: 9100000, guid: 3d6dde960973f3a46a3cff5422bf5682, type: 2}
-  AvailableTools: []
   CurrentTool: {fileID: 11400000, guid: 30a101f7e1331e34fbc084f0d6a55bdb, type: 2}
   gameAnalyticsHandler: {fileID: 0}
   CanAttack: 1

@@ -28,6 +28,9 @@ public class PlayerCombatBehaviour : MonoBehaviour
     private InputActionReference AttackActionReference;
     [field: SerializeField]
     private AudioSource CombatSource;
+    [Header("Stats")]
+    [SerializeField]
+    private int PlayerStatisticIndexForDamage;
     [Header("Animations")]
     [field:SerializeField]
     private float RestartAterSecondsTime = 2;
@@ -38,8 +41,8 @@ public class PlayerCombatBehaviour : MonoBehaviour
     [field:SerializeField]
     private RuntimeAnimatorController defaultAnimator;
     [Header("Tools")]
-    [field:SerializeField]
-    private List<PlayerWeaponSO> AvailableTools;
+    //[field:SerializeField]
+    //private List<PlayerWeaponSO> AvailableTools;
     [field:SerializeField]
     private PlayerWeaponSO CurrentTool = null;
     [Header("Analytics")]
@@ -115,7 +118,12 @@ public class PlayerCombatBehaviour : MonoBehaviour
                     Cooldown = attack.AttackWindupTime + attack.Duration + attack.Cooldown + 1.75f; // 'failsafe' for cooldown.
                     yield return new WaitForSeconds(attack.AttackWindupTime);
                     PlayerAnimatorHandler.SetAnimatorIntFrame(attack.AttackAnimationPropertyName, 0);
-                    HandleHit(attack);
+                    double multi = 1;
+                    if (PlayerStatisticIndexForDamage > -1)
+                    {
+                        PlayerStatisticsManager.TryGetValue(PlayerStatisticIndexForDamage, out multi);
+                    }
+                    HandleHit(attack,multi);
                     yield return new WaitForSeconds(attack.Duration);
                     Cooldown = attack.Cooldown;
                 }
@@ -132,11 +140,11 @@ public class PlayerCombatBehaviour : MonoBehaviour
             CombatSource.PlayOneShot(clip, 1);
         }
     }
-    void HandleHit(AttackSettings attack)
+    void HandleHit(AttackSettings attack,double damageMulti = 1)
     {
         if (attack.Damage > 0 && attack.HitboxSize.magnitude > 0 && HitboxReference != null)
         {
-            double damage = attack.Damage;
+            double damage = attack.Damage * damageMulti;
             if (attack.AdditionalDamageMultiplierSOIndex != -1 && PlayerStatisticsManager.TryGetValue(attack.AdditionalDamageMultiplierSOIndex,out double valua))
             {
                 damage *= valua;
