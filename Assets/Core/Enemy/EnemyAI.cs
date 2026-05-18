@@ -63,7 +63,6 @@ public class EnemyAI : MonoBehaviour
             }
             if (_isActive && Player != null && !IsPlayerInTrigger && !IsAttacking && Agent.isActiveAndEnabled && StunnedTime <= 0)
             {
-                //Debug.Log("Fkasej");
                 Animator.SetBool("EnemyWalk", true);
                 Agent.SetDestination(Player.position);
             }
