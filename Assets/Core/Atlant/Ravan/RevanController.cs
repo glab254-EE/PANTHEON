@@ -10,9 +10,11 @@ public class RevanController : MonoBehaviour
     [SerializeField] private string secondAtackName = "MidleAtack";
     [SerializeField] private string thirdAtackName = "RightAtack";
     [SerializeField] private float cooldown = 2f;
+    [SerializeField] private float SecondPhaseTimer = 10f;
 
     public bool CutsceneActive = true;
 
+    public bool InSecondPhase = false;
     private Animator animator;
 
     private void Start()
@@ -20,13 +22,13 @@ public class RevanController : MonoBehaviour
         animator = GetComponent<Animator>();
 
         RevanAttackSequence();
+        StartCoroutine(SecondPhaseEnumerator());
     }
 
     public void RevanAttackSequence()
     {
         if (CutsceneActive) { return; }
 
-        //Debug.Log("Поехали");
         if (firstZone.FirstZoneActive)
         {
             firstZone.atackZoneModel.SetActive(true);
@@ -49,11 +51,24 @@ public class RevanController : MonoBehaviour
 
     private IEnumerator TimerAtackEnumerator()
     {
-        //Debug.Log("Сосиски");
         animator.SetTrigger("Idle");
         yield return new WaitForSeconds(cooldown);
 
         RevanAttackSequence();
+    }
+
+    private IEnumerator SecondPhaseEnumerator()
+    {
+        while (true)
+        {
+            if (!InSecondPhase) { continue; }
+            Debug.Log("Second");
+
+            cooldown = 0;
+            yield return new WaitForSeconds(SecondPhaseTimer);
+            cooldown = 2;
+            yield return new WaitForSeconds(SecondPhaseTimer);
+        }
     }
 
     public void RevanAtack()
@@ -62,6 +77,5 @@ public class RevanController : MonoBehaviour
         secondZone.atackZoneModel.SetActive(false);
         thirdZone.atackZoneModel.SetActive(false);
         //Выщитывается хитбокс + получение урона
-        //Debug.Log("Удар!!!");
     }
 }

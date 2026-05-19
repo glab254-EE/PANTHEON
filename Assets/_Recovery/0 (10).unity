@@ -1260,7 +1260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 469731511174130378, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -387.3
+      value: -270.1
       objectReference: {fileID: 0}
     - target: {fileID: 469731511174130378, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1268,7 +1268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 469731511174130378, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 222
+      value: 256.1
       objectReference: {fileID: 0}
     - target: {fileID: 469731511174130378, guid: 142a054391c4024448f2d33d8038d8fc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10499,6 +10499,7 @@ MonoBehaviour:
   dashMaxRange: 15
   dashSpeed: 20
   dashCooldown: 10
+  IsWalking: IsWalking
 --- !u!195 &720314547653308824
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -10585,6 +10586,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AtlantAttack
   atlantController: {fileID: 720314547653308823}
   rotationSpeed: 8
+  Attack: Attack
+  AttackType: AttackType
+  DashAttack: DashAttack
 --- !u!95 &720314547653308829
 Animator:
   serializedVersion: 7
@@ -15317,7 +15321,9 @@ MonoBehaviour:
   secondAtackName: MidleAtack
   thirdAtackName: RightAtack
   cooldown: 2
+  SecondPhaseTimer: 10
   CutsceneActive: 0
+  InSecondPhase: 0
 --- !u!95 &7707366830641818115
 Animator:
   serializedVersion: 7
