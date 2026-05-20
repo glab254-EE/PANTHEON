@@ -156,6 +156,7 @@ MonoBehaviour:
       sssCustomDownsampleSteps: 0
       msaaMode: 1
       materialQuality: 0
+  m_Version: 14
   m_Settings:
     m_SettingsList:
       m_List:
@@ -197,31 +198,9 @@ MonoBehaviour:
       - rid: 3909367503464955931
       - rid: 3909367868872720384
       - rid: 3909367868872720385
+      - rid: 2430954708443070551
     m_RuntimeSettings:
-      m_List:
-      - rid: 8556427327610290176
-      - rid: 8556427327610290180
-      - rid: 3909367503464955904
-      - rid: 3909367503464955905
-      - rid: 3909367503464955908
-      - rid: 3909367503464955909
-      - rid: 3909367503464955910
-      - rid: 3909367503464955911
-      - rid: 3909367503464955912
-      - rid: 3909367503464955913
-      - rid: 3909367503464955914
-      - rid: 3909367503464955915
-      - rid: 3909367503464955917
-      - rid: 3909367503464955918
-      - rid: 3909367503464955919
-      - rid: 3909367503464955921
-      - rid: 3909367503464955923
-      - rid: 3909367503464955924
-      - rid: 3909367503464955927
-      - rid: 3909367503464955928
-      - rid: 3909367503464955929
-      - rid: 3909367503464955930
-      - rid: 3909367503464955931
+      m_List: []
   renderingLayerNames:
   - Light Layer default
   - Light Layer 1
@@ -262,10 +241,20 @@ MonoBehaviour:
     obsoleteHasProbeVolumes:
       m_Keys: []
       m_Values: 
-  m_Version: 14
   references:
     version: 2
     RefIds:
+    - rid: 2430954708443070551
+      type: {class: WorldRenderPipelineResources, ns: UnityEngine.PathTracing.Core, asm: Unity.PathTracing.Runtime}
+      data:
+        _version: 3
+        _blitCubemap: {fileID: 7200000, guid: 5a992812cb320d146a66cc600200cce7, type: 3}
+        _blitGrayScaleCookie: {fileID: 7200000, guid: 557fa399e33bf7647bda5697c5c158df, type: 3}
+        _setAlphaChannelShader: {fileID: 7200000, guid: 5efaea0e81c66334aa9d062d6573e6fd, type: 3}
+        _environmentImportanceSamplingBuild: {fileID: 7200000, guid: 5bb2534d2411d344cbc54f880232640f, type: 3}
+        _skyBoxMesh: {fileID: 4300000, guid: 0529e6c5f6dea8c4a8c2835ed7de57cb, type: 2}
+        _sixFaceSkyBoxMesh: {fileID: 4300000, guid: a80925ceebd011741b42509226cefc74, type: 2}
+        _buildLightGridShader: {fileID: 7200000, guid: 16e47c1641bd0104e92b624601457bb0, type: 3}
     - rid: 3909367503464955904
       type: {class: HDRPDefaultVolumeProfileSettings, ns: UnityEngine.Rendering.HighDefinition, asm: Unity.RenderPipelines.HighDefinition.Runtime}
       data:
