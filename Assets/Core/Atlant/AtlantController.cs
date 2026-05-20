@@ -13,24 +13,34 @@ public class AtlantController : MonoBehaviour
     [SerializeField] private float pathUpdateInterval = 0.3f;
     [SerializeField] private float stoppingDistance = 2f;
 
-    [Header("Настройки атаки")]
+    [Header("Настройки ближней атаки")]
     [SerializeField] private float attackRange = 2.5f;
+
+    [Header("Настройки рывка-атаки")]
+    [SerializeField] private float dashMinRange = 10f;
+    [SerializeField] private float dashMaxRange = 15f;
+    [SerializeField] private float dashSpeed = 20f;
+    [SerializeField] private float dashCooldown = 5f;
+
+    [SerializeField] private string IsWalking = "IsWalking";
 
     private bool _canMove = true;
     private bool _isAttacking;
+    private bool _isDashing;
+    private float _lastDashTime = -999f;
     private NavMeshAgent _agent;
     private Coroutine _followRoutine;
     private Animator _animator;
-    private static readonly int IsWalking = Animator.StringToHash("IsWalking");
+    //private static readonly int IsWalking = Animator.StringToHash("IsWalking");
 
     private void Awake()
     {
-        _agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponent <NavMeshAgent>();
         _agent.stoppingDistance = stoppingDistance;
-        _animator = GetComponent<Animator>();
+        _animator = GetComponent <Animator>();
 
         if (attack == null)
-            attack = GetComponent<AtlantAttack>();
+            attack = GetComponent <AtlantAttack>();
 
         if (_canMove) SetCanMove(true);
     }
@@ -79,7 +89,7 @@ public class AtlantController : MonoBehaviour
                 continue;
             }
 
-            if (_isAttacking)
+            if (_isAttacking || _isDashing)
             {
                 yield return new WaitForSeconds(pathUpdateInterval);
                 continue;
@@ -87,13 +97,29 @@ public class AtlantController : MonoBehaviour
 
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
+            bool inDashZone = distanceToPlayer >= dashMinRange && distanceToPlayer <= dashMaxRange;
+
+            if (inDashZone)
+            {
+                if (Time.time >= _lastDashTime + dashCooldown)
+                {
+                    int roll = Random.Range(0, 3);
+
+                    if (roll == 1)
+                    {
+                        yield return StartCoroutine(DashAttackRoutine());
+                        continue;
+                    }
+                }
+            }
+
             if (distanceToPlayer <= attackRange)
             {
                 _isAttacking = true;
                 _agent.isStopped = true;
                 _agent.ResetPath();
                 _animator.SetBool(IsWalking, false);
-                attack.PerformAttack();
+                attack.PerformMeleeAttack();
             }
             else
             {
@@ -106,6 +132,45 @@ public class AtlantController : MonoBehaviour
 
             yield return new WaitForSeconds(pathUpdateInterval);
         }
+    }
+
+    IEnumerator DashAttackRoutine()
+    {
+        _isDashing = true;
+        _lastDashTime = Time.time;
+
+        _agent.isStopped = true;
+        _agent.enabled = false;
+
+        Vector3 targetPos = player.position;
+        Vector3 startPos = transform.position;
+
+        Vector3 direction = (targetPos - startPos).normalized;
+        direction.y = 0;
+
+        if (direction != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(direction);
+
+        attack.PerformDashAttack();
+
+        float distance = Vector3.Distance(startPos, targetPos);
+        float dashDuration = distance / dashSpeed;
+        float elapsed = 0f;
+
+        while (elapsed < dashDuration)
+        {
+            transform.position += direction * dashSpeed * Time.deltaTime;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPos;
+
+        _agent.enabled = true;
+        _agent.Warp(transform.position);
+        _agent.isStopped = false;
+
+        _isDashing = false;
     }
 
     private void OnDisable()
