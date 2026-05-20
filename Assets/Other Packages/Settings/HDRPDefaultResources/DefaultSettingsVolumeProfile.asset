@@ -47,6 +47,41 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 404820c4cf36ad944862fa59c56064f0, type: 2}
     - {fileID: 11400000, guid: 2384dbf2c1c420f45a792fbc315fbfb1, type: 2}
     - {fileID: 11400000, guid: 8ff64253f62dd1346a5038293d44fa39, type: 2}
+--- !u!114 &-7952887688279059164
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b9ad5047bdaef41afc9d0c000e3d93, type: 3}
+  m_Name: LightProperties
+  m_EditorClassIdentifier: Assembly-CSharp::LightProperties
+  active: 1
+  rotation:
+    m_OverrideState: 1
+    m_Value: {x: 0, y: 0, z: 0}
+  color:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  colorTemperature:
+    m_OverrideState: 1
+    m_Value: 5500
+  intensity:
+    m_OverrideState: 1
+    m_Value: 1
+  bounceIntensity:
+    m_OverrideState: 1
+    m_Value: 0
+  cookie:
+    m_OverrideState: 1
+    m_Value: {fileID: 0}
+    dimension: 1
+  cookieSize:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &-7089757308646879465
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -623,6 +658,10 @@ MonoBehaviour:
   - {fileID: 2910918134956507080}
   - {fileID: 8659589727067020858}
   - {fileID: -6417730473223908354}
+  - {fileID: 5918871914973410266}
+  - {fileID: 4043882238763047803}
+  - {fileID: -7952887688279059164}
+  - {fileID: 5731450518428672217}
 --- !u!114 &448115243408767295
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1621,6 +1660,54 @@ MonoBehaviour:
   reflectionProbeIntensityMultiplier:
     m_OverrideState: 1
     m_Value: 1
+--- !u!114 &4043882238763047803
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18f0e6cbf0e506941a19fadaa71f906f, type: 3}
+  m_Name: CullingProperties
+  m_EditorClassIdentifier: Assembly-CSharp::CullingProperties
+  active: 1
+  target:
+    m_OverrideState: 1
+    m_Value:
+      exposedName: 
+      defaultValue: {fileID: 0}
+  environmentSmallCullDistance:
+    m_OverrideState: 1
+    m_Value: 40
+  environmentSmallShadowCullDistance:
+    m_OverrideState: 1
+    m_Value: 32
+  environmentLargeCullDistance:
+    m_OverrideState: 1
+    m_Value: 150
+  environmentLargeShadowCullDistance:
+    m_OverrideState: 1
+    m_Value: 150
+  undergrowthSmallCullDistance:
+    m_OverrideState: 1
+    m_Value: 26
+  undergrowthSmallShadowCullDistance:
+    m_OverrideState: 1
+    m_Value: 14
+  undergrowthMediumCullDistance:
+    m_OverrideState: 1
+    m_Value: 45
+  undergrowthMediumShadowCullDistance:
+    m_OverrideState: 1
+    m_Value: 30
+  undergrowthLargeCullDistance:
+    m_OverrideState: 1
+    m_Value: 46
+  undergrowthLargeShadowCullDistance:
+    m_OverrideState: 1
+    m_Value: 34
 --- !u!114 &4670294478571078652
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1894,6 +1981,161 @@ MonoBehaviour:
   proceduralSoftness:
     m_OverrideState: 1
     m_Value: 0.5
+--- !u!114 &5731450518428672217
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464f6e0848260324ba3912158c965f9a, type: 3}
+  m_Name: AutoFocusProperties
+  m_EditorClassIdentifier: Assembly-CSharp::AutoFocusProperties
+  active: 1
+  influence:
+    m_OverrideState: 1
+    m_Value: 1
+  focusDistanceWalk:
+    m_OverrideState: 1
+    m_Value: 10
+  apertureWalk:
+    m_OverrideState: 1
+    m_Value: 5.6
+  focusDistanceRun:
+    m_OverrideState: 1
+    m_Value: 10
+  apertureRun:
+    m_OverrideState: 1
+    m_Value: 5.6
+--- !u!114 &5918871914973410266
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4d4d92c6326cd74dab6467654a6d929, type: 3}
+  m_Name: WindControlProperties
+  m_EditorClassIdentifier: Assembly-CSharp::WindControlProperties
+  active: 1
+  windGlobalStrengthScale:
+    m_OverrideState: 1
+    m_Value: 1
+  windGlobalStrengthAudioInfluence:
+    m_OverrideState: 1
+    m_Value: 0
+  windGlobalStrengthAudioAmplitudeThreshold:
+    m_OverrideState: 1
+    m_Value: 0.05
+  windDirection:
+    m_OverrideState: 1
+    m_Value: 65
+  windDirectionVariance:
+    m_OverrideState: 1
+    m_Value: 25
+  windDirectionVariancePeriod:
+    m_OverrideState: 1
+    m_Value: 15
+  windZoneIntensityOffset:
+    m_OverrideState: 1
+    m_Value: 0.1
+  windZoneIntensityBaseScale:
+    m_OverrideState: 1
+    m_Value: 0.25
+  windZoneIntensityGustScale:
+    m_OverrideState: 1
+    m_Value: 0.5
+  windZoneIntensityFromGrass:
+    m_OverrideState: 1
+    m_Value: 1
+  windBaseStrength:
+    m_OverrideState: 1
+    m_Value: 15
+  windBaseStrengthOffset:
+    m_OverrideState: 1
+    m_Value: 0.25
+  windBaseStrengthPhase:
+    m_OverrideState: 1
+    m_Value: 3
+  windBaseStrengthVariancePeriod:
+    m_OverrideState: 1
+    m_Value: 10
+  windGustStrength:
+    m_OverrideState: 1
+    m_Value: 25
+  windGustStrengthOffset:
+    m_OverrideState: 1
+    m_Value: 1
+  windGustStrengthPhase:
+    m_OverrideState: 1
+    m_Value: 3
+  windGustStrengthVariancePeriod:
+    m_OverrideState: 1
+    m_Value: 2
+  windGustInnerCosScale:
+    m_OverrideState: 1
+    m_Value: 2
+  windFlutterStrength:
+    m_OverrideState: 1
+    m_Value: 0.4
+  windFlutterGustStrength:
+    m_OverrideState: 1
+    m_Value: 0.2
+  windFlutterGustStrengthOffset:
+    m_OverrideState: 1
+    m_Value: 50
+  windFlutterGustStrengthScale:
+    m_OverrideState: 1
+    m_Value: 75
+  windFlutterGustVariancePeriod:
+    m_OverrideState: 1
+    m_Value: 0.25
+  windTreeBaseStrength:
+    m_OverrideState: 1
+    m_Value: 0.25
+  windTreeBaseStrengthOffset:
+    m_OverrideState: 1
+    m_Value: 1
+  windTreeBaseStrengthPhase:
+    m_OverrideState: 1
+    m_Value: 0.5
+  windTreeBaseStrengthVariancePeriod:
+    m_OverrideState: 1
+    m_Value: 6
+  windTreeGustStrength:
+    m_OverrideState: 1
+    m_Value: 3
+  windTreeGustStrengthOffset:
+    m_OverrideState: 1
+    m_Value: 1
+  windTreeGustStrengthPhase:
+    m_OverrideState: 1
+    m_Value: 2
+  windTreeGustStrengthVariancePeriod:
+    m_OverrideState: 1
+    m_Value: 4
+  windTreeGustInnerCosScale:
+    m_OverrideState: 1
+    m_Value: 2
+  windTreeFlutterStrength:
+    m_OverrideState: 1
+    m_Value: 0.1
+  windTreeFlutterGustStrength:
+    m_OverrideState: 1
+    m_Value: 0.5
+  windTreeFlutterGustStrengthOffset:
+    m_OverrideState: 1
+    m_Value: 12.5
+  windTreeFlutterGustStrengthScale:
+    m_OverrideState: 1
+    m_Value: 25
+  windTreeFlutterGustVariancePeriod:
+    m_OverrideState: 1
+    m_Value: 0.1
 --- !u!114 &5960937161849954031
 MonoBehaviour:
   m_ObjectHideFlags: 3
