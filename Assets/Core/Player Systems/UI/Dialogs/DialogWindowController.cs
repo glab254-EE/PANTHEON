@@ -6,8 +6,8 @@ using UnityEngine;
 public class DialogWindowController : MonoBehaviour
 {
     [Header("General Settings")]
-    [SerializeField]
-    private TMP_Text TextField;
+    [field:SerializeField]
+    public TMP_Text TextField {get;private set;}
     [SerializeField]
     private CanvasGroup DialogWindowCanvas;
     [SerializeField]
@@ -26,6 +26,8 @@ public class DialogWindowController : MonoBehaviour
     private float PunctuiationTypingDelay = 0.3f;
     private Coroutine currentMainCoroutine;
     private Coroutine currentFadeCoroutine;
+    private Coroutine textDisplayCoroutine;
+    private string currentText;
     private bool IsDialogEnabled
     {
         get
@@ -45,9 +47,22 @@ public class DialogWindowController : MonoBehaviour
             StopCoroutine(currentMainCoroutine);
             currentMainCoroutine = null;
         }
+        currentText = text;
         currentMainCoroutine = StartCoroutine(MainTextDisplayCoroutine(text,_clip,PlayPerLetter,overrideSource));
     }
-    public IEnumerator MainTextDisplayCoroutine(string text, AudioClip _clip = null, bool PlayPerLetter = false, AudioSource overrideSource = null)
+    public IEnumerator DisplayTextFromSequence(string text, AudioClip _clip, bool PlayPerLetter = false, bool disable = false, AudioSource overrideSource = null)
+    {
+        if (text == null) yield break;
+        if (currentMainCoroutine != null)
+        {
+            StopCoroutine(currentMainCoroutine);
+            currentMainCoroutine = null;
+        }
+        currentText = text;
+        currentMainCoroutine = StartCoroutine(MainTextDisplayCoroutine(text,_clip,PlayPerLetter,overrideSource,disable));
+        yield return currentMainCoroutine;
+    }
+    private IEnumerator MainTextDisplayCoroutine(string text, AudioClip _clip = null, bool PlayPerLetter = false, AudioSource overrideSource = null, bool DisableOnEnd = true)
     {
         AudioSource originSource = overrideSource != null ? overrideSource : DefaultSource;
         if (originSource.isPlaying) originSource.Stop();
@@ -60,16 +75,27 @@ public class DialogWindowController : MonoBehaviour
             currentFadeCoroutine = null;
         }
         yield return new WaitForSeconds(StartingTime);
-        yield return StartCoroutine(TextDisplayCoroutine(text,_clip,PlayPerLetter,overrideSource));
+        if (textDisplayCoroutine != null)
+        {
+            StopCoroutine(textDisplayCoroutine);
+            textDisplayCoroutine = null;
+        }
+        textDisplayCoroutine = StartCoroutine(TextDisplayCoroutine(text,_clip,PlayPerLetter,overrideSource));
+        yield return textDisplayCoroutine;
         yield return new WaitForSeconds(TextDisplayTimeAfterShown);
-        if (IsDialogEnabled)
+        if (IsDialogEnabled && DisableOnEnd)
         {
             currentFadeCoroutine = StartCoroutine(ChangeTransparencyEnumerator(0, false));
             yield return currentFadeCoroutine;
             currentFadeCoroutine = null;
         }
+        if (currentMainCoroutine != null)
+        {
+            StopCoroutine(currentMainCoroutine);
+            currentMainCoroutine = null;
+        }
     }
-    public IEnumerator TextDisplayCoroutine(string text, AudioClip _clip = null, bool PlayPerLetter = false, AudioSource overrideSource = null)
+    private IEnumerator TextDisplayCoroutine(string text, AudioClip _clip = null, bool PlayPerLetter = false, AudioSource overrideSource = null)
     {
         AudioSource originSource = overrideSource != null ? overrideSource : DefaultSource;
         if (originSource.isPlaying) originSource.Stop();
@@ -96,7 +122,7 @@ public class DialogWindowController : MonoBehaviour
             originSource.Stop();
         }
     }
-    private IEnumerator ChangeTransparencyEnumerator(float target,bool EnableOnStart)
+    public IEnumerator ChangeTransparencyEnumerator(float target,bool EnableOnStart)
     {
         if (DialogWindowCanvas == null) yield break;
         float _current = DialogWindowCanvas.alpha;
@@ -114,6 +140,20 @@ public class DialogWindowController : MonoBehaviour
         if (!EnableOnStart && IsDialogEnabled)
         {
             DialogWindowCanvas.gameObject.SetActive(false);
+        }
+    }
+    public void CancelDisplay()
+    {
+        if (currentMainCoroutine != null)
+        {
+            StopCoroutine(currentMainCoroutine);
+            currentMainCoroutine = null;
+            if (textDisplayCoroutine != null)
+            {
+                StopCoroutine(textDisplayCoroutine);
+                textDisplayCoroutine = null;
+            }
+            TextField.text = currentText;
         }
     }
 }

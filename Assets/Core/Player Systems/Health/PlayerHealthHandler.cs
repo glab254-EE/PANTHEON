@@ -16,7 +16,7 @@ public class PlayerHealthHandler : MonoBehaviour, IDamagable
     public double DamageMultiplier { get; internal set; } = 1;
 
 #nullable enable
-    public APlayerDamageTakeStrategy aPlayerDamageStrategy;
+    public APlayerDamageTakeStrategy? aPlayerDamageStrategy;
 #nullable restore
     internal bool Godded {get;private set;}
     internal double Health {get;private set;}
@@ -73,7 +73,7 @@ public class PlayerHealthHandler : MonoBehaviour, IDamagable
     private async Task GoddedTask()
     {
         Godded = true;
-        Task.Delay(GoddedTimerMilisec).Wait();
+        await Task.Delay(GoddedTimerMilisec);
         Godded = false;
     }
     private void OnMaxHealthUpdated(double newValue)

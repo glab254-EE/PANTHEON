@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1293820375590168055
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -28.815784
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 22.527645
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -307.72482
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6081735
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7938041
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -105.085
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3142386395187009483, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 918a34cb68d04d94e89897bb1496f27f, type: 2}
+    - target: {fileID: 2075507424835801, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 57e0a633159bbec4386aab790c01f2a0, type: 2}
+    - target: {fileID: 919132149155446097, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}
+      propertyPath: m_Name
+      value: Old Man Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2601730538552717191, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f4a186b99f07e334f8cf5f29909ba70a, type: 2}
+    - target: {fileID: 4608450515021227344, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a7994d2a569272428396b294b66a1a1, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 89bc0e400de9d4e439bb956895e79372, type: 3}

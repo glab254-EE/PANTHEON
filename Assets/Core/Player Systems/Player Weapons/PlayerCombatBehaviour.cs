@@ -205,7 +205,11 @@ public class PlayerCombatBehaviour : MonoBehaviour
     }
     async Task DeathTask()
     {
-        Task.Delay(Mathf.RoundToInt(RestartAterSecondsTime*1000)).Wait();
+        await Task.Delay(Mathf.RoundToInt(RestartAterSecondsTime*1000));
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void SetAbilityToAttack(bool state)
+    {
+        CanAttack = state;
     }
 }

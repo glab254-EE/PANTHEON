@@ -250,6 +250,17 @@ public class PlayerMovementController : MonoBehaviour
     {
         ToggleRunning(callbackContext.ReadValueAsButton());
     }
+    public void SetMovementEnabled(bool state)
+    {
+        CanMove = state;
+    }
+    public void SetMouseLocked(bool state)
+    {
+        if (Listener != null)
+        {
+            Listener.MouseLocked = state;
+        }
+    }
     Task RollTask()
     {
         IsActing = true;
