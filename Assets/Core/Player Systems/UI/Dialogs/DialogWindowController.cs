@@ -53,6 +53,18 @@ public class DialogWindowController : MonoBehaviour
     public IEnumerator DisplayTextFromSequence(string text, AudioClip _clip, bool PlayPerLetter = false, bool disable = false, AudioSource overrideSource = null)
     {
         if (text == null) yield break;
+        if (!IsDialogEnabled && currentFadeCoroutine == null)
+        {
+            currentFadeCoroutine = StartCoroutine(ChangeTransparencyEnumerator(1, true));
+            yield return currentFadeCoroutine;
+            StopCoroutine(currentFadeCoroutine);
+            currentFadeCoroutine = null;
+        }
+        if (textDisplayCoroutine != null)
+        {
+            StopCoroutine(textDisplayCoroutine);
+            textDisplayCoroutine = null;
+        }
         if (currentMainCoroutine != null)
         {
             StopCoroutine(currentMainCoroutine);
@@ -61,6 +73,16 @@ public class DialogWindowController : MonoBehaviour
         currentText = text;
         currentMainCoroutine = StartCoroutine(MainTextDisplayCoroutine(text,_clip,PlayPerLetter,overrideSource,disable));
         yield return currentMainCoroutine;
+        if (currentMainCoroutine != null)
+        {
+            StopCoroutine(currentMainCoroutine);
+            currentMainCoroutine = null;
+        }
+        if (textDisplayCoroutine != null)
+        {
+            StopCoroutine(textDisplayCoroutine);
+            textDisplayCoroutine = null;
+        }
     }
     private IEnumerator MainTextDisplayCoroutine(string text, AudioClip _clip = null, bool PlayPerLetter = false, AudioSource overrideSource = null, bool DisableOnEnd = true)
     {
@@ -93,6 +115,11 @@ public class DialogWindowController : MonoBehaviour
         {
             StopCoroutine(currentMainCoroutine);
             currentMainCoroutine = null;
+        }
+        if (textDisplayCoroutine != null)
+        {
+            StopCoroutine(textDisplayCoroutine);
+            textDisplayCoroutine = null;
         }
     }
     private IEnumerator TextDisplayCoroutine(string text, AudioClip _clip = null, bool PlayPerLetter = false, AudioSource overrideSource = null)
@@ -136,7 +163,6 @@ public class DialogWindowController : MonoBehaviour
             DialogWindowCanvas.alpha += _step;
             yield return new WaitForSeconds(TransitionStepCooldown);
         }
-        yield return new WaitForEndOfFrame();
         if (!EnableOnStart && IsDialogEnabled)
         {
             DialogWindowCanvas.gameObject.SetActive(false);

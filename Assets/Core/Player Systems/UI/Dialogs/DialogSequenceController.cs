@@ -24,18 +24,18 @@ public class DialogSequenceController : MonoBehaviour
     private UnityEvent completionEvent;
     [field:SerializeField]
     private List<DialogSequenceOption> sequence;
-    private bool Activated = false;
+    private bool Active = false;
     private bool Continue = false;
     public bool SkipTrigger = false;
     public void Trigger()
     {
-        if (Activated || sequence == null || proceedKey == null || playerInputListener == null) return;
+        if (Active || sequence == null || proceedKey == null || playerInputListener == null) return;
         StartCoroutine(PrimaryEnumerator());
     }
     public IEnumerator PrimaryEnumerator()
     {
         WaitForSeconds _waitForSeconds0_1 = new(0.1f);
-        Activated = true;
+        Active = true;
         playerInputListener.MockMovementInput = Vector2.zero;
         for (int i = 0; i < sequence.Count; i++)
         {
@@ -73,15 +73,16 @@ public class DialogSequenceController : MonoBehaviour
                     } while (!Continue);
                 }
                 Continue = false;
-                if (i == sequence.Count - 1)
+                if (i >= sequence.Count - 1)
                 {
-                    StartCoroutine(option.invoker._dialogWindowController.ChangeTransparencyEnumerator(0,false));
                     option.invoker._dialogWindowController.TextField.text = "";
+                    yield return StartCoroutine(option.invoker._dialogWindowController.ChangeTransparencyEnumerator(0,false));
                 }
             }
         }
         completionEvent?.Invoke();
         playerInputListener.MockMovementInput = null;
+        Active = false;
     }
     public void Skip(InputAction.CallbackContext _)
     {

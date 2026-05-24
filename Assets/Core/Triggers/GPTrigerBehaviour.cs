@@ -17,7 +17,7 @@ public class GPTrigerBehaviour : MonoBehaviour
         if (other.transform != null && other.gameObject != null  && LayerMaskUtils.CompareCollisionlayers(other.gameObject.layer,MaskToDetect) && (ActivationAmount == -1 || ActivationAmount > 0))
         {
             EnterEvents.Invoke(other.transform);
-            ActivationAmount -= 1;
+            if (ActivationAmount > 0) ActivationAmount -= 1;
         }
     }
     void OnTriggerExit(Collider other)
@@ -26,7 +26,7 @@ public class GPTrigerBehaviour : MonoBehaviour
         if (other.transform != null && other.gameObject != null && LayerMaskUtils.CompareCollisionlayers(other.gameObject.layer,MaskToDetect) && (ActivationAmount == -1 || ActivationAmount > 0))
         {
             ExitEvents.Invoke(other.transform);
-            ActivationAmount -= 1;
+            if (ActivationAmount > 0) ActivationAmount -= 1;
         }
     }
 }
