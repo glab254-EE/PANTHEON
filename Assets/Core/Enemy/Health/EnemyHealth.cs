@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour, IDamagable
 {
+    [SerializeField] private Animator animator;
+    [SerializeField] private string ImpactTriggerName = "Damaged";
     [field: SerializeField] private Image HealthImage;
     [SerializeField] private float deathDuration = 3;
     [SerializeField] private EnemyAI enemyAI;
@@ -20,6 +22,8 @@ public class EnemyHealth : MonoBehaviour, IDamagable
 
     [field: SerializeField]
     private double MaxHealth;
+    [SerializeField]
+    private AEnemyHealthStrategy strategy;
     internal double Health { get; private set; }
     internal event Action<double> OnDamaged;
     private Collider col;
@@ -38,6 +42,13 @@ public class EnemyHealth : MonoBehaviour, IDamagable
             Die();
             return false;
         }
+        if (strategy != null)
+        {
+            if (!strategy.TryDamage(effect,damage, out damage))
+            {
+                return false;
+            }
+        }
         Health -= damage;
         if (Health <= 0)
         {
@@ -46,6 +57,11 @@ public class EnemyHealth : MonoBehaviour, IDamagable
             {
                 orb.SpawnObject();
             }
+        }
+
+        if (Health > 0)
+        {
+            if (animator != null && ImpactTriggerName != "") animator.SetTrigger(ImpactTriggerName);
         }
         /*if (effect != null) 
         {

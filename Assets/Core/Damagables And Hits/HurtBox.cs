@@ -45,7 +45,7 @@ public class HurtBox : MonoBehaviour
         {
             foreach(SpecialADamagableOvverideElement element in SpecialClipsOvveride)
             {
-                if (element.Equals(effect))
+                if (element.Equals(effect) || (effect != null && element.Index.GetType() == effect.GetType()))
                 {
                     toPlayClip = element.clip;
                     break;

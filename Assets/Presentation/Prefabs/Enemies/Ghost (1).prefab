@@ -2759,7 +2759,7 @@ MonoBehaviour:
     AttackWindupTime: 1.3
     Duration: 2.1
     Cooldown: 1
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 568c9deb8e85c67419c25105459e601a, type: 3}
     effect: {fileID: 0}
   HardAttackSetting:
     AttackAnimationPropertyName: HardEnemyAtack
@@ -2771,7 +2771,7 @@ MonoBehaviour:
     AttackWindupTime: 0.5
     Duration: 1
     Cooldown: 1
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 568c9deb8e85c67419c25105459e601a, type: 3}
     effect: {fileID: 11400000, guid: 736087a94befd0148b29dc98a0e898f6, type: 2}
 --- !u!114 &3612524789271379336
 MonoBehaviour:
@@ -2818,7 +2818,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 150
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -2853,7 +2853,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

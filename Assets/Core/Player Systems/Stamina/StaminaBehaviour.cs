@@ -42,6 +42,7 @@ public class StaminaBehaviour : MonoBehaviour
         if (StaminaBarImage != null)
         {
             StaminaBarImage.fillAmount = (float)(Stamina / MaxStamina); //Edited
+            OnStaminaChange?.Invoke(Stamina);
         }
         isGaining = false;
         if (CanReplenishStamina)
@@ -65,6 +66,7 @@ public class StaminaBehaviour : MonoBehaviour
             if (StaminaBarImage != null)
             {
                 StaminaBarImage.fillAmount = (float)(Stamina / MaxStamina); //Edited
+            OnStaminaChange?.Invoke(Stamina);
             }
             yield return new WaitForSeconds(StaminaDelay);
 

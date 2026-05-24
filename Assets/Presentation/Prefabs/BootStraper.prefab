@@ -70,25 +70,25 @@ MonoBehaviour:
     <CurrencyIndex>k__BackingField: 0
     <CurrentLevelIndex>k__BackingField: 0
   - <levelingData>k__BackingField:
-    - <Value>k__BackingField: 10
+    - <Value>k__BackingField: 1
       <Cost>k__BackingField: 0
-    - <Value>k__BackingField: 15
+    - <Value>k__BackingField: 1.5
       <Cost>k__BackingField: 300
-    - <Value>k__BackingField: 20
+    - <Value>k__BackingField: 2
       <Cost>k__BackingField: 500
-    - <Value>k__BackingField: 25
+    - <Value>k__BackingField: 2.5
       <Cost>k__BackingField: 700
-    - <Value>k__BackingField: 30
+    - <Value>k__BackingField: 3
       <Cost>k__BackingField: 900
-    - <Value>k__BackingField: 35
+    - <Value>k__BackingField: 3.5
       <Cost>k__BackingField: 1100
-    - <Value>k__BackingField: 40
+    - <Value>k__BackingField: 4
       <Cost>k__BackingField: 1300
-    - <Value>k__BackingField: 45
+    - <Value>k__BackingField: 4.5
       <Cost>k__BackingField: 1500
-    - <Value>k__BackingField: 50
+    - <Value>k__BackingField: 5
       <Cost>k__BackingField: 1700
-    - <Value>k__BackingField: 60
+    - <Value>k__BackingField: 6
       <Cost>k__BackingField: 2000
     <attribute>k__BackingField: {fileID: 11400000, guid: 37c5d46679a2e9849bc5d08649898b13, type: 2}
     <CurrencyIndex>k__BackingField: 0

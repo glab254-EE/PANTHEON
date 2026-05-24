@@ -145,7 +145,7 @@ public class PlayerCombatBehaviour : MonoBehaviour
         if (attack.Damage > 0 && attack.HitboxSize.magnitude > 0 && HitboxReference != null)
         {
             double damage = attack.Damage * damageMulti;
-            if (attack.AdditionalDamageMultiplierSOIndex != -1 && PlayerStatisticsManager.TryGetValue(attack.AdditionalDamageMultiplierSOIndex,out double valua))
+            if (attack.AdditionalDamageMultiplierSOIndex >= -1 && PlayerStatisticsManager.TryGetValue(attack.AdditionalDamageMultiplierSOIndex,out double valua))
             {
                 damage *= valua;
             }
@@ -155,8 +155,7 @@ public class PlayerCombatBehaviour : MonoBehaviour
             origin += HitboxReference.right * attack.HitboxOffset.x;
             origin += HitboxReference.up * attack.HitboxOffset.y;
 
-            bool HaveHitSomething = StatcHitboxCreator.TryHitWithBoxHitbox(origin,attack.HitboxSize,EnemyMask, damage, gameObject,false,HitboxReference.rotation);
-            Debug.Log(HaveHitSomething);
+            bool HaveHitSomething = StatcHitboxCreator.TryHitWithBoxHitbox(origin,attack.HitboxSize,EnemyMask, damage, gameObject,false,HitboxReference.rotation,attack.effect);
         }
     }
     void HandleToolVisual()

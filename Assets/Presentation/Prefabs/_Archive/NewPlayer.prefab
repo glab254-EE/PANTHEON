@@ -1031,7 +1031,7 @@ MonoBehaviour:
     m_Bits: 8
   AttackActionReference: {fileID: 1120369429361536294, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   CombatSource: {fileID: 0}
-  PlayerStatisticIndexForDamage: 0
+  PlayerStatisticIndexForDamage: 1
   RestartAterSecondsTime: 2
   HurtAnimationTriggerName: Hurt
   DeadAnimationBoolName: Dead

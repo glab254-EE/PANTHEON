@@ -13,6 +13,7 @@ public class GPTrigerBehaviour : MonoBehaviour
     private UnityEvent<Transform> ExitEvents;
     void OnTriggerEnter(Collider other)
     {
+        if (!gameObject.activeInHierarchy) return;
         if (other.transform != null && other.gameObject != null  && LayerMaskUtils.CompareCollisionlayers(other.gameObject.layer,MaskToDetect) && (ActivationAmount == -1 || ActivationAmount > 0))
         {
             EnterEvents.Invoke(other.transform);
@@ -21,6 +22,7 @@ public class GPTrigerBehaviour : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
+        if (!gameObject.activeInHierarchy) return;
         if (other.transform != null && other.gameObject != null && LayerMaskUtils.CompareCollisionlayers(other.gameObject.layer,MaskToDetect) && (ActivationAmount == -1 || ActivationAmount > 0))
         {
             ExitEvents.Invoke(other.transform);
