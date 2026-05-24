@@ -11,9 +11,6 @@ public class AtlantAttack : MonoBehaviour
     [SerializeField] private string DashAttack = "DashAttack";
 
     private Animator _animator;
-    //private static readonly int Attack = Animator.StringToHash("Attack");
-    //private static readonly int AttackType = Animator.StringToHash("AttackType");
-    //private static readonly int DashAttack = Animator.StringToHash("DashAttack");
 
     private void Awake()
     {

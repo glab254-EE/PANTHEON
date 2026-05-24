@@ -31,7 +31,6 @@ public class AtlantController : MonoBehaviour
     private NavMeshAgent _agent;
     private Coroutine _followRoutine;
     private Animator _animator;
-    //private static readonly int IsWalking = Animator.StringToHash("IsWalking");
 
     private void Awake()
     {
