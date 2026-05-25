@@ -5,30 +5,11 @@ using UnityEngine.InputSystem;
 
 public class IntroManager : MonoBehaviour
 {
-    [Header("Настройки")]
     public VideoPlayer videoPlayer;
     public string nextSceneName;
 
     private InputAction skipAction;
     private bool isSkipping;
-
-    void OnEnable()
-    {
-        skipAction = new InputAction("SkipIntro");
-        skipAction.AddBinding("<Keyboard>/anyKey");
-        skipAction.AddBinding("<Mouse>/leftButton");
-        skipAction.AddBinding("<Mouse>/rightButton");
-
-        skipAction.performed += _ => SkipAndLoad();
-        skipAction.Enable();
-    }
-
-    void OnDisable()
-    {
-        skipAction?.Disable();
-        skipAction?.Dispose();
-    }
-
     void Start()
     {
         videoPlayer.playOnAwake = false;
@@ -42,6 +23,7 @@ public class IntroManager : MonoBehaviour
 
     void OnVideoPrepared(VideoPlayer vp)
     {
+        if (vp.isPlaying) return;
         vp.Play();
     }
 
@@ -49,18 +31,6 @@ public class IntroManager : MonoBehaviour
     {
         LoadNextScene();
     }
-
-    void SkipAndLoad()
-    {
-        if (isSkipping) return;
-        isSkipping = true;
-
-        videoPlayer.prepareCompleted -= OnVideoPrepared;
-        videoPlayer.loopPointReached -= OnVideoFinished;
-        videoPlayer.Stop();
-        LoadNextScene();
-    }
-
     void LoadNextScene()
     {
         if (!string.IsNullOrEmpty(nextSceneName))

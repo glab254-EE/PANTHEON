@@ -2556,6 +2556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WillpowerCounterBehaviour
   targetStatisticSO: {fileID: 11400000, guid: 003b5a7d2084ebe4dadaf83a5e5acd39, type: 2}
+  TargetCurrencyIndex: -1
   TextPrefix: 'WILLPOWER: '
   DisableOnZeroValue: 0
 --- !u!222 &1968372823783558566
@@ -3077,6 +3078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WillpowerCounterBehaviour
   targetStatisticSO: {fileID: 11400000, guid: 42ca5c019da275e448f621f0c64b5b72, type: 2}
+  TargetCurrencyIndex: -1
   TextPrefix: 'AURA: '
   DisableOnZeroValue: 1
 --- !u!222 &1357812702811107877
@@ -5997,7 +5999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1488f3fb16c012c4baf8495d2e858f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeSceneOnRequestHandler
-  TargetIndex: 1
+  TargetIndex: 2
 --- !u!1 &9138038741710885722
 GameObject:
   m_ObjectHideFlags: 0
