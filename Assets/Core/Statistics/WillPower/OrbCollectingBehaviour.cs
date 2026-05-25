@@ -27,11 +27,10 @@ public class OrbCollectingBehaviour : MonoBehaviour
                 TargetCurrencyStatistic.CurrentValue += Points;
                 TargetCurrencyStatistic.InvokeEvent();
             }
-            if (collected)
+            if (collected == true)
             {
-                if (gameObject.TryGetComponent(out source))
+                if (gameObject.TryGetComponent(out source) && source.clip != null)
                 {
-                    gameObject.SetActive(true);
                     StartCoroutine(DestroyEnumerator());
                 }
                 else
@@ -65,7 +64,7 @@ public class OrbCollectingBehaviour : MonoBehaviour
                 }
                 else
                 {
-                    Destroy(gameObject);
+                    Destroy(transform.root.gameObject);
                 }
             }
         }
@@ -79,6 +78,6 @@ public class OrbCollectingBehaviour : MonoBehaviour
         }
         source.Play();
         yield return new WaitForSeconds(source.clip.length);
-        Destroy(gameObject);
+        Destroy(transform.root.gameObject);
     }
 }

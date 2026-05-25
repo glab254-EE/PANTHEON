@@ -9,6 +9,10 @@ public class AtlantAttack : MonoBehaviour
     [SerializeField] private string Attack = "Attack";
     [SerializeField] private string AttackType = "AttackType";
     [SerializeField] private string DashAttack = "DashAttack";
+    [SerializeField] private AttackSettings Attack1Setting;
+    [SerializeField] private AttackSettings Attack2Setting;
+    [SerializeField] private AttackSettings Attack3Setting;
+    [SerializeField] private LayerMask playerMask;
 
     private Animator _animator;
 
@@ -28,6 +32,25 @@ public class AtlantAttack : MonoBehaviour
         StartCoroutine(RotateToPlayerRoutine());
     }
 
+    public void OnAnimationHit(int typo)
+    {
+        AttackSettings setting = Attack1Setting;
+        switch (typo)
+        {
+            case 1:
+                setting = Attack2Setting;
+                break;
+            case 2:
+                setting = Attack3Setting;
+                break;
+        }
+        Vector3 origin = transform.position;
+        origin += transform.right * setting.HitboxOffset.x;
+        origin += transform.up * setting.HitboxOffset.y;
+        origin += transform.forward * setting.HitboxOffset.z;
+        StatcHitboxCreator.TryHitWithBoxHitbox(origin,setting.HitboxSize,playerMask,setting.Damage,gameObject,false,transform.rotation,setting.effect);
+    }
+
     public void PerformDashAttack()
     {
         _animator.SetTrigger(DashAttack);
@@ -35,7 +58,7 @@ public class AtlantAttack : MonoBehaviour
 
     private IEnumerator RotateToPlayerRoutine()
     {
-        if (atlantController.player == null) yield break;
+        if (atlantController.player == null || atlantController.health.Health <=0) yield break;
 
         Vector3 direction = (atlantController.player.position - transform.position).normalized;
         direction.y = 0;

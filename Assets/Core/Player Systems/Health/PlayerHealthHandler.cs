@@ -66,8 +66,8 @@ public class PlayerHealthHandler : MonoBehaviour, IDamagable
         {
             Godded = true;
             Task.Run(GoddedTask);
-            OnDamaged.Invoke(Health);
         }
+        OnDamaged?.Invoke(Health);
         return true;
     }
     private async Task GoddedTask()

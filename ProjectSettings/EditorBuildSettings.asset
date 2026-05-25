@@ -9,8 +9,7 @@ EditorBuildSettings:
     path: Assets/Presentation/Scenes/RELEASE/ARENAONE.unity
     guid: 24f9807669bfbe249aa93684a720494b
   - enabled: 1
-    path: Assets/Presentation/Scenes/DEVELOPMENT/Level1TestingScene.unity
-    guid: edb64feb8652c7f41aa9934967e554a2
+    path: Assets/Presentation/Scenes/RELEASE/ARENATWO.unity
+    guid: afac515ccfcdc1d48b788177c209d0bb
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-  m_UseUCBPForAssetBundles: 0

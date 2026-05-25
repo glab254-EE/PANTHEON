@@ -226,7 +226,7 @@ public class PlayerMovementController : MonoBehaviour
     void OnRollButtonPress(InputAction.CallbackContext callbackContext)
     {
         Debug.Log("Starting roll");
-        if (CanMove && !IsActing && CanRoll && Listener.MovementVector3.magnitude > 0 && PlayerStaminaBehaviour.TryTakeStamina(PlayerRollStaminaCost))
+        if (CanMove && !IsActing && CanRoll && Listener.MovementVector3.magnitude > 0 && PlayerStaminaBehaviour != null && PlayerStaminaBehaviour.TryTakeStamina(PlayerRollStaminaCost))
         { 
             gameAnalyticsHandler?.OnAction("roll");
             Animator.SetAnimatorTrigger(RollTriggerName);
@@ -235,6 +235,7 @@ public class PlayerMovementController : MonoBehaviour
     }
     void ToggleRunning(bool isRunning)
     {
+        if (PlayerStaminaBehaviour == null) return;
         PlayerStaminaBehaviour.CanReplenishStamina = !isRunning;
         PlayerStaminaBehaviour.TryTakeStamina(0);
         IsRunning = isRunning;

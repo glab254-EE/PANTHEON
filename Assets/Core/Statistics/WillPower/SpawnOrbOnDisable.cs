@@ -23,8 +23,7 @@ public class SpawnOrbOnDisable : MonoBehaviour
     public void SpawnObject()
     {
         GameObject cloned = Instantiate(prefab,transform.position,Quaternion.identity);
-        OrbCollectingBehaviour behaviour = cloned.GetComponentInChildren<OrbCollectingBehaviour>();
-        if (behaviour != null && CallYourManagerNow != null)
+        if (cloned.TryGetComponent(out OrbCollectingBehaviour behaviour) && CallYourManagerNow != null)
         {
             behaviour.manager = CallYourManagerNow;
         }

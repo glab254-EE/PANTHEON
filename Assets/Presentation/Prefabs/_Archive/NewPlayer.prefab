@@ -857,6 +857,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2793712744787773093}
   m_SourcePrefab: {fileID: 100100000, guid: a37e61393cf59b34c8d275cd6fd530a5, type: 3}
+--- !u!4 &604007160598878471 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6502182839619065283, guid: a37e61393cf59b34c8d275cd6fd530a5, type: 3}
+  m_PrefabInstance: {fileID: 5935103947729226948}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5469645189440123660 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: a37e61393cf59b34c8d275cd6fd530a5, type: 3}
@@ -1027,7 +1032,7 @@ MonoBehaviour:
   movementController: {fileID: 0}
   HealthHandler: {fileID: 1836501431964758546}
   RightHandReference: {fileID: 5469645189440123660}
-  LeftHandReference: {fileID: 0}
+  LeftHandReference: {fileID: 604007160598878471}
   HitboxReference: {fileID: 5450919968805101470}
   EnemyMask:
     serializedVersion: 2
@@ -1039,7 +1044,7 @@ MonoBehaviour:
   HurtAnimationTriggerName: Hurt
   DeadAnimationBoolName: Dead
   defaultAnimator: {fileID: 9100000, guid: 3d6dde960973f3a46a3cff5422bf5682, type: 2}
-  CurrentTool: {fileID: 11400000, guid: 30a101f7e1331e34fbc084f0d6a55bdb, type: 2}
+  CurrentTool: {fileID: 11400000, guid: 34ff7bd8d365cc043baa8b8bff0768ea, type: 2}
   gameAnalyticsHandler: {fileID: 0}
   CanAttack: 1
 --- !u!114 &3497526882548188106

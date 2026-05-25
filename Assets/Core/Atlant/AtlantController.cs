@@ -1,33 +1,39 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class AtlantController : MonoBehaviour
 {
-    [Header("Ссылки")]
+    [Header("Set-up")]
     [SerializeField] public Transform player;
     [SerializeField] private AtlantAttack attack;
+    [SerializeField] private RevanController revanController;
+    [field:SerializeField] public EnemyHealth health{get;private set;}
 
-    [Header("Настройки движения")]
+    [Header("AI")]
     [SerializeField] private float pathUpdateInterval = 0.3f;
     [SerializeField] private float stoppingDistance = 2f;
+    [SerializeField] private double healthThresholdForSecondPhase = 1000;
+    [SerializeField] private double healthThresholdForThirdPhase = 250;
 
-    [Header("Настройки ближней атаки")]
+    [Header("AttackSetting")]
     [SerializeField] private float attackRange = 2.5f;
 
-    [Header("Настройки рывка-атаки")]
+    [Header("AttackSetting - dash")]
     [SerializeField] private float dashMinRange = 10f;
     [SerializeField] private float dashMaxRange = 15f;
     [SerializeField] private float dashSpeed = 20f;
     [SerializeField] private float dashCooldown = 5f;
-
+    [Header("Animations")]
     [SerializeField] private string IsWalking = "IsWalking";
 
     private bool _canMove = true;
     private bool _isAttacking;
     private bool _isDashing;
-    private float _lastDashTime = -999f;
+    private float _lastDashTime = 0;
+    private int CurrentState = 1;
     private NavMeshAgent _agent;
     private Coroutine _followRoutine;
     private Animator _animator;
@@ -42,6 +48,25 @@ public class AtlantController : MonoBehaviour
             attack = GetComponent <AtlantAttack>();
 
         if (_canMove) SetCanMove(true);
+
+        health.OnDamaged += OnHealthChanged;
+    }
+
+    private void OnHealthChanged(double newHP)
+    {
+        if (CurrentState == 1 && newHP <= healthThresholdForSecondPhase)
+        {
+            CurrentState = 2;
+            revanController.Activate();
+        } else if (CurrentState == 2 && newHP <= healthThresholdForThirdPhase)
+        {
+            CurrentState = 3;
+            revanController.InSecondPhase = true;
+        } else if (newHP <= 0 && CurrentState != -1)
+        {
+            CurrentState = -1;
+            revanController.Die();
+        }
     }
 
     public void SetCanMove(bool value)
@@ -80,7 +105,7 @@ public class AtlantController : MonoBehaviour
     {
         yield return null;
 
-        while (true)
+        while (health.Health > 0)
         {
             if (player == null || !_agent.isActiveAndEnabled)
             {
@@ -102,7 +127,7 @@ public class AtlantController : MonoBehaviour
             {
                 if (Time.time >= _lastDashTime + dashCooldown)
                 {
-                    int roll = Random.Range(0, 3);
+                    int roll = UnityEngine.Random.Range(0, 3);
 
                     if (roll == 1)
                     {

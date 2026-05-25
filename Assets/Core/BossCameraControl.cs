@@ -10,6 +10,7 @@ public class BossCameraControl : MonoBehaviour
     [SerializeField] private CinemachineCamera playerCamera;
     [SerializeField] private int CameraPriorityDifference;
     [SerializeField] private float pointsRequiement = 50;
+    [SerializeField] private PlayerStatSO playerStat;
     [SerializeField] private float bossViewDuration;
     [SerializeField] private CollectWillpowerToActivateHandler willpowerManager;
     [SerializeField] private UnityEvent OnViewEvents;
@@ -21,8 +22,20 @@ public class BossCameraControl : MonoBehaviour
         PlayerCameraPriority = playerCamera.Priority.Value;
         BossCameraPriority = bossCamera.Priority.Value;
         willpowerManager.TryConnectEvent(new(CheckPoints));
+        if (playerStat != null)
+        {
+            playerStat.OnUpdate += new System.Action<double>(CheckPoints);
+        }
     }
     void CheckPoints(float currentPoints)
+    {
+        if (currentPoints >= pointsRequiement && !shown)
+        {
+            shown = true;
+            StartCoroutine(ShowBossArena());
+        }
+    }
+    void CheckPoints(double currentPoints)
     {
         if (currentPoints >= pointsRequiement && !shown)
         {

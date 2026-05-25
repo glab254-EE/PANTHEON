@@ -20,7 +20,8 @@ public class StaminaBehaviour : MonoBehaviour
     internal bool CanReplenishStamina = true;
     internal event System.Action<double> OnStaminaChange;
     private bool isGaining = false;
-    void Awake()
+    private Coroutine GainCoroutine;
+    void Start()
     {
         Stamina = MaxStamina;
 
@@ -33,6 +34,11 @@ public class StaminaBehaviour : MonoBehaviour
             MaxStamina = (float)value;
             stat.OnUpdate += OnUpdate;
         }
+    }
+    void OnDestroy()
+    {
+        if (GainCoroutine != null) StopCoroutine(GainCoroutine);     
+        OnStaminaChange = null;   
     }
     public bool TryTakeStamina(float ammount)
     {
@@ -47,7 +53,8 @@ public class StaminaBehaviour : MonoBehaviour
         isGaining = false;
         if (CanReplenishStamina)
         {
-            StartCoroutine(GainEnumerator());
+            if (GainCoroutine != null) StopCoroutine(GainCoroutine);
+            GainCoroutine = StartCoroutine(GainEnumerator());
         }
         return true;
     }

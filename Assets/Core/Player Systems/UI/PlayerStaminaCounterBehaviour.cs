@@ -16,6 +16,10 @@ public class PlayerStaminaCounterBehaviour : MonoBehaviour
         image = GetComponent<Image>();
         Stamina.OnStaminaChange += OnStaminaChange;
     }
+    void OnDestroy()
+    {
+        Stamina.OnStaminaChange -= OnStaminaChange;        
+    }
     private void OnStaminaChange(double stamina)
     {
         image.fillAmount = (float)(stamina/MaxStamina);

@@ -55,6 +55,7 @@ public class PlayerCombatBehaviour : MonoBehaviour
     private float ComboTimer = 0;
     private int currentComboIndex = 0;
     private bool IsLMBHeld = false;
+    private bool dead = false;
     void Start()
     {
         HealthHandler.OnDamaged += OnPlayerDamaged;
@@ -63,13 +64,13 @@ public class PlayerCombatBehaviour : MonoBehaviour
     void Update()
     {
         if (Time.deltaTime == 0) return;
-        if (HealthHandler.Health <= 0) return;
+        if (HealthHandler.Health <= 0 || dead) return;
         HandleToolVisual();
         if (Cooldown > 0)
         {
             Cooldown -= Time.deltaTime;
         }
-        if (CurrentTool != null && CanAttack)
+        if (CurrentTool != null && CanAttack && !movementController.IsActing)
         {
             if (Cooldown <= 0 && IsLMBHeld)
             {
@@ -193,19 +194,22 @@ public class PlayerCombatBehaviour : MonoBehaviour
     }
     void OnPlayerDamaged(double newHealth)
     {
+        if (dead) return;
         if (newHealth <= 0 && DeadAnimationBoolName != null)
         {
+            dead = true;
             PlayerAnimatorHandler.SetAnimatorBool(DeadAnimationBoolName,true);
-            Task.Run(DeathTask);
+            StartCoroutine(DeathEnumerator());
         } else
         {
             PlayerAnimatorHandler.SetAnimatorTrigger(HurtAnimationTriggerName);            
         }
     }
-    async Task DeathTask()
+    private IEnumerator DeathEnumerator()
     {
-        await Task.Delay(Mathf.RoundToInt(RestartAterSecondsTime*1000));
+        yield return new WaitForSeconds(RestartAterSecondsTime);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
     }
     public void SetAbilityToAttack(bool state)
     {

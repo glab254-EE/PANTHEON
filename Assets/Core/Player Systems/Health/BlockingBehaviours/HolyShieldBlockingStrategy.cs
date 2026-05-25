@@ -55,13 +55,12 @@ public class HolyShieldBlockingStrategy : APlayerDamageTakeStrategy
         {
             if (behaviour.TryTakeStamina(pararr.StaminaReduction))
             {
-                if (source != null)
+                if (source != null && source.TryGetComponent(out Rigidbody rb))
                 {
-                    source.TryGetComponent(out EnemyAI ai);
-                    source.TryGetComponent(out Rigidbody rb);
+                    if (source.TryGetComponent(out EnemyAI ai)) ai.StunnedTime = pararr.StunDuration;
+                    
                     Vector3 velocity = (source.transform.position- playerObject.transform.position).normalized * pararr.KnockbackMultiplier;
                     rb.AddForce(velocity, ForceMode.Impulse);
-                    ai.StunnedTime = pararr.StunDuration;
                 }
 
                 return incoming / pararr.DamageReduction;
