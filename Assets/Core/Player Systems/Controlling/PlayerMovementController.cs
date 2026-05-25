@@ -58,13 +58,15 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField]
     private float MoveAnimationThreshold = 0.1f;
     [SerializeField]
-    private float AdditionalGroundCheckingRayDistance = 0.1f;
-    [SerializeField]
     private float MaxSlopeAngle = 15f;
     [SerializeField]
     private AudioSource WalkingSoundSource;
     [SerializeField]
     private AudioClip WalkingClip;
+    [Header("Ground detection settings")]
+    [SerializeField] private LayerMask GroundMask;
+    [SerializeField]
+    private float AdditionalGroundCheckingRayDistance = 0.1f;
     [Header("Analytics")]
     [SerializeField]
     private GameAnalyticsHandler gameAnalyticsHandler;
@@ -171,7 +173,7 @@ public class PlayerMovementController : MonoBehaviour
     }
     bool IsOnGround(out RaycastHit hit)
     {
-        if (Physics.Raycast(new(transform.position+Vector3.up * .1f,Vector3.down),out hit,transform.localScale.y/2+AdditionalGroundCheckingRayDistance))
+        if (Physics.Raycast(new(transform.position+Vector3.up * .1f,Vector3.down),out hit,transform.localScale.y/2+AdditionalGroundCheckingRayDistance,GroundMask.value))
         {
             return true;
         }

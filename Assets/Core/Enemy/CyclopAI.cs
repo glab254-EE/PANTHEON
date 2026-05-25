@@ -12,7 +12,9 @@ public class CyclopAI : MonoBehaviour
     [SerializeField] private string attack = "Attack";
     [SerializeField] private string attackType = "AttackType";
     [SerializeField] private string isWalking = "IsWalking";
-
+    [SerializeField] private AttackSettings setting;
+    [SerializeField] private LayerMask playerMask;
+    [SerializeField] private EnemyHealth health;
     private Animator _animator;
     private NavMeshAgent _agent;
     private bool _canMove = false;
@@ -38,7 +40,7 @@ public class CyclopAI : MonoBehaviour
 
     private IEnumerator ControllerCoroutine()
     {
-        while (true)
+        while (health.Health > 0)
         {
             if (_canMove && !_inTrigger && !_inAtack && _agent != null && _target != null)
             {
@@ -51,13 +53,20 @@ public class CyclopAI : MonoBehaviour
                 _animator.SetBool(isWalking, false);
             }
 
+            if (_inTrigger && !_inAtack)
+            {
+                _canMove = false;
+                _inTrigger = true;
+                PerformMeleeAttack();                
+            }
+
             yield return new WaitForSeconds(updateInterval);
         } 
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !_inAtack)
         {
             _canMove = false;
             _inTrigger = true;
@@ -76,6 +85,11 @@ public class CyclopAI : MonoBehaviour
 
     public void PerformMeleeAttack()
     {
+        if (health.Health <= 0) return;
+        if (setting.clip != null && gameObject.TryGetComponent(out AudioSource source))
+        {
+            source.PlayOneShot(setting.clip);
+        }
         _agent.isStopped = true;
         _agent.updateRotation = false;
         int randomAttack = Random.Range(0, 3);
@@ -86,6 +100,7 @@ public class CyclopAI : MonoBehaviour
 
     private IEnumerator RotationToPlayer()
     {
+        if (health.Health <= 0) yield break;
         if (_target != null)
         {
             Vector3 direction = (_target.position - transform.position).normalized;
@@ -97,6 +112,7 @@ public class CyclopAI : MonoBehaviour
 
                 while (Quaternion.Angle(transform.rotation, targetRotation) > 5f)
                 {
+                    if (health.Health <= 0) yield break;
                     transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
                     yield return null;
                 }
@@ -107,6 +123,7 @@ public class CyclopAI : MonoBehaviour
 
     private IEnumerator EndAtack()
     {
+        if (health.Health <= 0) yield break;
         _inAtack = false;
         _agent.isStopped = false;
         _agent.updateRotation = true;
@@ -117,8 +134,17 @@ public class CyclopAI : MonoBehaviour
         }
     }
 
-    private void Atack()
-    {
-        Debug.Log("Hit");
+    private IEnumerator Atack()
+    {   
+        if (health.Health <= 0) yield break;
+        yield return new WaitForSeconds(setting.AttackWindupTime);
+
+        Vector3 hitboxOrigin = transform.position;
+
+        hitboxOrigin += transform.forward * setting.HitboxOffset.z;
+        hitboxOrigin += transform.right * setting.HitboxOffset.x;
+        hitboxOrigin += transform.up * setting.HitboxOffset.y;
+
+        bool haveHitPlayer = StatcHitboxCreator.TryHitWithBoxHitbox(hitboxOrigin, setting.HitboxSize, playerMask, setting.Damage, gameObject, true, transform.rotation, setting.effect);
     }
 }

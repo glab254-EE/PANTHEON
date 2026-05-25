@@ -497,8 +497,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   animator: {fileID: 0}
   ImpactTriggerName: Damaged
-  hitSource: {fileID: 0}
-  hitClip: {fileID: 0}
   HealthImage: {fileID: 1533705766996424898}
   deathDuration: 3
   enemyAI: {fileID: 6024272756792761281}

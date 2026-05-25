@@ -34,13 +34,6 @@ public class CollectWillpowerToActivateHandler : MonoBehaviour
 
         CurrentPoints += orb.Points;
         PointsUpdateConncetions?.Invoke(CurrentPoints);
-        if (orb.transform.root != orb.transform && orb.transform.root.gameObject != null)
-        {
-            Destroy(orb.transform.root.gameObject);
-        } else
-        {
-            Destroy(orb.gameObject);
-        }
         return true;        
     }
 }

@@ -10,6 +10,8 @@ public class WillOrbChasePlayerBehviour : MonoBehaviour
     private float TargetMaxSpeed = 2;
     [SerializeField]
     private float Acceloration = 4;
+    [SerializeField]
+    private Vector3 positionDifferenceRelativeToPlayer = Vector3.up;
     private Transform PlayerTransform = null;
     private Rigidbody rb;
     private void Start()
@@ -24,7 +26,8 @@ public class WillOrbChasePlayerBehviour : MonoBehaviour
         }
         else
         {
-            Vector3 Direction = (PlayerTransform.position-transform.position).normalized;
+            Vector3 target = PlayerTransform.position + PlayerTransform.up * positionDifferenceRelativeToPlayer.y + PlayerTransform.forward * positionDifferenceRelativeToPlayer.z + PlayerTransform.right * positionDifferenceRelativeToPlayer.x;
+            Vector3 Direction = (target-transform.position).normalized;
             Vector3 lerped = Vector3.Lerp(rb.linearVelocity, Direction * TargetMaxSpeed, Time.fixedDeltaTime * Acceloration);
             rb.linearVelocity = lerped;
         }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6796519781015340692}
   - component: {fileID: 2302802085013231952}
   - component: {fileID: 7428446804949085714}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WillpowerOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,6 +79,7 @@ MonoBehaviour:
     m_Bits: 64
   TargetMaxSpeed: 4
   Acceloration: 1
+  positionDifferenceRelativeToPlayer: {x: 0, y: 1, z: 0}
 --- !u!135 &7428446804949085714
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -115,7 +116,7 @@ GameObject:
   - component: {fileID: 5105695507183761001}
   - component: {fileID: 3579436267399318295}
   - component: {fileID: 1618006900112276334}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WillpowerSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +319,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -369,7 +370,7 @@ GameObject:
   - component: {fileID: 6560134510624423714}
   - component: {fileID: 6446796641912802636}
   - component: {fileID: 3268215520970393493}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}

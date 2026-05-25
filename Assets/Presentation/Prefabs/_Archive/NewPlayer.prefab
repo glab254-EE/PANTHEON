@@ -888,7 +888,7 @@ MonoBehaviour:
   Player_Health: {fileID: 1836501431964758546}
   Player_MovementController: {fileID: 6046924685804896624}
   PlayerHealingOrbStatReference: {fileID: 11400000, guid: 42ca5c019da275e448f621f0c64b5b72, type: 2}
-  HealthPerOrbAddition: 2
+  HealthPerOrbAddition: 4
   Listener: {fileID: 0}
   HealAction: {fileID: -8043949568545141630, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   HealingPower: 5
@@ -964,14 +964,17 @@ MonoBehaviour:
   PlayerRollSpeed: 25
   PlayerRollDuration: 0.1
   PlayerRollForceDuration: 0.25
-  PlayerRollCooldown: 2
+  PlayerRollCooldown: 1.5
   PlayerRollStaminaCost: 15
   PlayerRunStaminaCostPerUpdate: 5
   MoveAnimationThreshold: 0.3
-  AdditionalGroundCheckingRayDistance: 0.2
   MaxSlopeAngle: 55
   WalkingSoundSource: {fileID: 0}
   WalkingClip: {fileID: 0}
+  GroundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  AdditionalGroundCheckingRayDistance: 0.2
   gameAnalyticsHandler: {fileID: 0}
   RequiredTimeOfalkingToSendData: 60
 --- !u!114 &4834394015746364924

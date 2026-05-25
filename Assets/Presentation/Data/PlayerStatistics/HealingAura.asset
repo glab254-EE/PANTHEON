@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatSO
   <DisplayName>k__BackingField: Healing Aura
   <StartingValue>k__BackingField: 0
-  CurrentValue: 0
+  CurrentValue: 87.5

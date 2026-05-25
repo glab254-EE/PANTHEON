@@ -77,7 +77,10 @@ public class EnemyHealth : MonoBehaviour, IDamagable
 
     private void Die()
     {
-        enemyAI.Animator.SetTrigger("EnemyDeath");
+        if (enemyAI != null)
+        {
+            enemyAI.Animator.SetTrigger("EnemyDeath");            
+        }
 
         if (col != null) col.enabled = false;
 

@@ -1217,7 +1217,7 @@ Transform:
   m_GameObject: {fileID: 3076047632659844572}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.3, z: 0.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1518,7 +1518,7 @@ MonoBehaviour:
     AttackAnimationPropertyIndex: 1
     HitboxOffset: {x: 0.065, y: 0.73, z: 1.7343}
     HitboxSize: {x: 0.77357, y: 2.2121336, z: 1.4850919}
-    Damage: 0
+    Damage: 15
     AdditionalDamageMultiplierSOIndex: -1
     AttackWindupTime: 0.3
     Duration: 1.2
@@ -1530,7 +1530,7 @@ MonoBehaviour:
     AttackAnimationPropertyIndex: 20
     HitboxOffset: {x: 0.065, y: 0.73, z: 2.008}
     HitboxSize: {x: 0.77357, y: 2.2121336, z: 2.0327165}
-    Damage: 0
+    Damage: 20
     AdditionalDamageMultiplierSOIndex: -1
     AttackWindupTime: 0.5
     Duration: 1

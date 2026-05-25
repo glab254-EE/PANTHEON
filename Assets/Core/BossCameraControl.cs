@@ -15,6 +15,7 @@ public class BossCameraControl : MonoBehaviour
     [SerializeField] private UnityEvent OnViewEvents;
     private int PlayerCameraPriority;
     private int BossCameraPriority;
+    private bool shown = false;
     private void Start()
     {
         PlayerCameraPriority = playerCamera.Priority.Value;
@@ -23,8 +24,9 @@ public class BossCameraControl : MonoBehaviour
     }
     void CheckPoints(float currentPoints)
     {
-        if (currentPoints >= pointsRequiement)
+        if (currentPoints >= pointsRequiement && !shown)
         {
+            shown = true;
             StartCoroutine(ShowBossArena());
         }
     }

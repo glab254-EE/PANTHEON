@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4881f9a2c4d568047b316028d20a8dca, type: 3}
   m_Name: ARENAONE Baking Set
   m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.ProbeVolumeBakingSet
+  m_SceneBakeData:
+    m_Keys:
+    - 24f9807669bfbe249aa93684a720494b
+    m_Values:
+    - hasProbeVolume: 0
+      bakeScene: 1
+      bounds:
+        m_Center: {x: -40.5, y: 40.5, z: -243}
+        m_Extent: {x: 121.5, y: 40.5, z: 162}
   singleSceneMode: 1
   dialogNoProbeVolumeInSetShown: 1
   settings:
@@ -241,7 +250,7 @@ MonoBehaviour:
         elementCount: 13
       - offset: 950272
         elementCount: 7
-    m_Asset: {fileID: 4900000, guid: d6b2de78e3ca8a24bbc0265af8af9a75, type: 3}
+    m_Asset: {fileID: 0}
   scenarios:
     m_Keys:
     - Default
@@ -278,7 +287,7 @@ MonoBehaviour:
             elementCount: 13
           - offset: 15204352
             elementCount: 7
-        m_Asset: {fileID: 4900000, guid: d39a675c86ce02c418d54a04619d40b2, type: 3}
+        m_Asset: {fileID: 0}
       cellOptionalDataAsset:
         m_AssetGUID: 41ed5bab0c35259469dc1fadac0f7b11
         m_StreamableAssetPath: APVStreamingAssets\6249e1730153f314ca1dae42d6c2b4ba\41ed5bab0c35259469dc1fadac0f7b11.bytes
@@ -310,7 +319,7 @@ MonoBehaviour:
             elementCount: 13
           - offset: 15204352
             elementCount: 7
-        m_Asset: {fileID: 4900000, guid: 41ed5bab0c35259469dc1fadac0f7b11, type: 3}
+        m_Asset: {fileID: 0}
       cellProbeOcclusionDataAsset:
         m_AssetGUID: 
         m_StreamableAssetPath: APVStreamingAssets\6249e1730153f314ca1dae42d6c2b4ba\.bytes
@@ -374,7 +383,7 @@ MonoBehaviour:
         elementCount: 1636
       - offset: 226544
         elementCount: 784
-    m_Asset: {fileID: 4900000, guid: 631db05be126d8b4baa1138f77c5f4fe, type: 3}
+    m_Asset: {fileID: 0}
   cellSupportDataAsset:
     m_AssetGUID: bd34b4c4b47c9a441a60edaf8317ff9d
     m_StreamableAssetPath: APVStreamingAssets\6249e1730153f314ca1dae42d6c2b4ba\bd34b4c4b47c9a441a60edaf8317ff9d.bytes
@@ -406,7 +415,7 @@ MonoBehaviour:
         elementCount: 13
       - offset: 30408704
         elementCount: 7
-    m_Asset: {fileID: 4900000, guid: bd34b4c4b47c9a441a60edaf8317ff9d, type: 3}
+    m_Asset: {fileID: 0}
   chunkSizeInBricks: 128
   maxCellPosition: {x: 1, y: 1, z: -1}
   minCellPosition: {x: -2, y: 0, z: -5}
@@ -458,12 +467,3 @@ MonoBehaviour:
   skyOcclusionShadingDirection: 0
   useRenderingLayers: 0
   renderingLayerMasks: []
-  m_SceneBakeData:
-    m_Keys:
-    - 24f9807669bfbe249aa93684a720494b
-    m_Values:
-    - hasProbeVolume: 1
-      bakeScene: 1
-      bounds:
-        m_Center: {x: -40.5, y: 40.5, z: -243}
-        m_Extent: {x: 121.5, y: 40.5, z: 162}

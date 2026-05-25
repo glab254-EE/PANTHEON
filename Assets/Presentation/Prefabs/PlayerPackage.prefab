@@ -361,7 +361,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4999818602295659462, guid: cf613a90a07ec2c4c9f6fefe6c25a42d, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 81161c099e9063a419df3fbce26fb4d7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1028,6 +1028,10 @@ PrefabInstance:
       propertyPath: cameraBehaviour
       value: 
       objectReference: {fileID: 7738200787825847534}
+    - target: {fileID: 6046924685804896624, guid: 741327bb8772c624388ad5f372ac0b50, type: 3}
+      propertyPath: GroundMask.m_Bits
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6046924685804896624, guid: 741327bb8772c624388ad5f372ac0b50, type: 3}
       propertyPath: WalkingSoundSource
       value: 

@@ -54,11 +54,6 @@ public class EnemyAtack : MonoBehaviour
 
         bool haveHitPlayer = StatcHitboxCreator.TryHitWithBoxHitbox(hitboxOrigin, attackSettings.HitboxSize, enemyAI.PlayerMask, attackSettings.Damage, gameObject, true, transform.rotation, attackSettings.effect);
 
-        if (haveHitPlayer)
-        {
-            Debug.Log("Hit");
-        }
-
         yield return new WaitForSeconds(attackSettings.Duration - attackSettings.AttackWindupTime);
         enemyAI.Animator.SetTrigger("StayAnimForEnemy");
 
