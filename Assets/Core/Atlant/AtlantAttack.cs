@@ -28,8 +28,6 @@ public class AtlantAttack : MonoBehaviour
         int randomAttack = Random.Range(0, 3);
         _animator.SetInteger(AttackType, randomAttack);
         _animator.SetTrigger(Attack);
-
-        StartCoroutine(RotateToPlayerRoutine());
     }
 
     public void OnAnimationHit(int typo)
