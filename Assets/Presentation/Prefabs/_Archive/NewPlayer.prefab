@@ -892,7 +892,7 @@ MonoBehaviour:
   Animation_Handler: {fileID: 3497526882548188106}
   Player_Health: {fileID: 1836501431964758546}
   Player_MovementController: {fileID: 6046924685804896624}
-  PlayerHealingOrbStatReference: {fileID: 11400000, guid: 42ca5c019da275e448f621f0c64b5b72, type: 2}
+  HealingOrbIndex: 1
   HealthPerOrbAddition: 4
   Listener: {fileID: 0}
   HealAction: {fileID: -8043949568545141630, guid: 289c1b55c9541489481df5cc06664110, type: 3}
@@ -936,7 +936,7 @@ MonoBehaviour:
   MaxStamina: 100
   StaminaGainingStartDelay: 1
   TargetAttributeIndex: -1
-  StaminaGainPerDelay: 1
+  StaminaGainPerDelay: 5
   StaminaDelay: 0.5
 --- !u!114 &6046924685804896624
 MonoBehaviour:

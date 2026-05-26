@@ -9,12 +9,18 @@ public class OrbCollectingBehaviour : MonoBehaviour
     private PlayerStatSO TargetCurrencyStatistic;
     [field:SerializeField]
     public float Points {get;private set; }
+    [field:SerializeField]
+    private int TargetCurrencyIndex = -1;
     public CollectWillpowerToActivateHandler manager;
     private bool collected = false;
     private AudioSource source;
     void OnTriggerStay(Collider other)
     {
         if (other == null || other.gameObject == null || collected) return;
+        if (TargetCurrencyIndex != -1 && PlayerStatisticsManager.Currencies.Count > TargetCurrencyIndex)
+        {
+            TargetCurrencyStatistic = PlayerStatisticsManager.Currencies[TargetCurrencyIndex];
+        }
         if (LayerMaskUtils.CompareCollisionlayers(other.gameObject.layer,playerlayer))
         {
             if (manager != null && manager.TryAddPoints(this) && gameObject != null)
@@ -43,6 +49,10 @@ public class OrbCollectingBehaviour : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other == null || other.gameObject == null || collected) return;
+        if (TargetCurrencyIndex != -1 && PlayerStatisticsManager.Currencies.Count > TargetCurrencyIndex)
+        {
+            TargetCurrencyStatistic = PlayerStatisticsManager.Currencies[TargetCurrencyIndex];
+        }
         if (LayerMaskUtils.CompareCollisionlayers(other.gameObject.layer,playerlayer))
         {
             if (manager != null && manager.TryAddPoints(this) && gameObject != null)

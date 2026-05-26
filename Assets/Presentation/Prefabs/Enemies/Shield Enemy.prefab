@@ -1471,7 +1471,7 @@ MonoBehaviour:
   artifactUIPanel: {fileID: 0}
   artifactUIPanelDuration: 10
   IsBoss: 0
-  MaxHealth: 90
+  MaxHealth: 100
   strategy: {fileID: 11400000, guid: f8fe5e15725f9c04691c8b8267cec0e4, type: 2}
 --- !u!114 &2682864329003703349
 MonoBehaviour:

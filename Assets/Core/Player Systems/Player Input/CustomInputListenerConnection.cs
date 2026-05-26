@@ -34,6 +34,7 @@ public class CustomInputListenerConnection
         if (context.duration >= MaxHoldDuration) return;
         if (context.ReadValueAsButton() || ActivateOnCancel)
         {
+            if (Callback == null) return;
             Callback(context);
             if (DeactivateOnFirstInvoke)
             {

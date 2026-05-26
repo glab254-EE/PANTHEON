@@ -56,10 +56,12 @@ public class PlayerCombatBehaviour : MonoBehaviour
     private int currentComboIndex = 0;
     private bool IsLMBHeld = false;
     private bool dead = false;
+    double oldHealth = -1;
     void Start()
     {
         HealthHandler.OnDamaged += OnPlayerDamaged;
         InputListener.ConnectEventToKeybind(AttackActionReference, OnLeftMousePressOrUp, true);
+        oldHealth = HealthHandler.Health;
     }
     void Update()
     {
@@ -202,12 +204,17 @@ public class PlayerCombatBehaviour : MonoBehaviour
             StartCoroutine(DeathEnumerator());
         } else
         {
-            PlayerAnimatorHandler.SetAnimatorTrigger(HurtAnimationTriggerName);            
+            if (newHealth < oldHealth && HealthHandler.DamageMultiplier > 0)
+            {
+                PlayerAnimatorHandler.SetAnimatorTrigger(HurtAnimationTriggerName);                   
+            }     
+            oldHealth = newHealth;    
         }
     }
     private IEnumerator DeathEnumerator()
     {
         yield return new WaitForSeconds(RestartAterSecondsTime);
+        PlayerStatisticsManager.TryResetStatistics();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         
     }

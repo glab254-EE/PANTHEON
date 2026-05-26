@@ -47,6 +47,18 @@ public static class PlayerStatisticsManager
         }
         return false;
     }
+    public static bool TryResetStatistics()
+    {
+        bool successfull = false;
+        foreach (PlayerStatSO currency in Currencies)
+        {
+            if (currency.CurrentValue <= 0) continue;
+            successfull = true;
+            currency.CurrentValue = 0;
+            currency.InvokeEvent();
+        }
+        return successfull;
+    }
     public static bool TryUpgrade(int index)
     {
         if (index >= 0 && index < AvailableAttributeData.Count)

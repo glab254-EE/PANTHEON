@@ -28,7 +28,7 @@ public class DialogWindowController : MonoBehaviour
     private Coroutine currentFadeCoroutine;
     private Coroutine textDisplayCoroutine;
     private string currentText;
-    private bool IsDialogEnabled
+    public bool IsDialogEnabled
     {
         get
         {

@@ -31,6 +31,19 @@ public class PlayerInputListener : MonoBehaviour
     }
     void OnDestroy()
     {
+        Dictionary<InputActionReference, List<CustomInputListenerConnection>> connectionsClone = connections;
+        foreach (KeyValuePair<InputActionReference, List<CustomInputListenerConnection>> pair in connectionsClone){
+            if (connections.ContainsKey(pair.Key))
+            {
+                for (int i = 0; i < pair.Value.Count; i++)
+                {
+                    if (connections[pair.Key].Count < i)
+                    {
+                        connections[pair.Key][i].Disable();
+                    }
+                }
+            }
+        }
         connections = new();
         inputActions.Player.Disable();         
     }

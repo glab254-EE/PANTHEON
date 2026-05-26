@@ -230,7 +230,7 @@ public class PlayerMovementController : MonoBehaviour
         { 
             gameAnalyticsHandler?.OnAction("roll");
             Animator.SetAnimatorTrigger(RollTriggerName);
-            Task.Run(RollTask);
+            StartCoroutine(RollEnumrator());
         }
     }
     void ToggleRunning(bool isRunning)
@@ -264,8 +264,10 @@ public class PlayerMovementController : MonoBehaviour
             Listener.MouseLocked = state;
         }
     }
-    Task RollTask()
+    IEnumerator RollEnumrator()
     {
+        PlayerHealth.DamageMultiplier = 0;
+
         IsActing = true;
 
         bool _oldlook = LookForward;
@@ -278,20 +280,18 @@ public class PlayerMovementController : MonoBehaviour
 
         OverrideTargetSpeed = _targetSpeed;
 
-        Task.Delay(Mathf.RoundToInt(PlayerRollForceDuration * 1000)).Wait();
+        yield return new WaitForSeconds(PlayerRollForceDuration);
 
         OverrideTargetSpeed = null;
 
         IsActing = false;
-
-        Task.Delay(Mathf.RoundToInt(PlayerRollDuration * 1000)).Wait();
+        PlayerHealth.DamageMultiplier = 1;
+        yield return new WaitForSeconds(PlayerRollDuration);
 
         LookForward = _oldlook;
 
-        Task.Delay(Mathf.RoundToInt(PlayerRollCooldown * 1000)).Wait();
+        yield return new WaitForSeconds(PlayerRollCooldown);
 
         CanRoll = true;
-
-        return Task.CompletedTask;
     }
 }

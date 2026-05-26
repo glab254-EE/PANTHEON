@@ -31,7 +31,7 @@ public class PlayerHealingBehaviour : MonoBehaviour
     private Coroutine coroutine;
     private void Start()
     {
-        Listener.ConnectEventToKeybind(HealAction, OnHealAction, true, false);
+        Listener.ConnectEventToKeybind(HealAction, OnHealAction);
         if (HealingOrbIndex >= 0 && HealingOrbIndex < PlayerStatisticsManager.Currencies.Count) PlayerHealingOrbStatReference = PlayerStatisticsManager.Currencies[HealingOrbIndex];
     }
     void OnDisable()
@@ -40,10 +40,11 @@ public class PlayerHealingBehaviour : MonoBehaviour
         {
             StopCoroutine(coroutine);
         } 
+        Listener.DisableAction(OnHealAction);
     }
     void OnHealAction(InputAction.CallbackContext context)
     {
-        if (Time.timeScale == 0) return;
+        if (Time.timeScale == 0 || this == null || gameObject == null) return;
         if (!Player_MovementController.IsActing && !onCooldown && context.ReadValueAsButton() && (PlayerHealingOrbStatReference == null || PlayerHealingOrbStatReference.CurrentValue > 0))
         {
             Player_MovementController.IsActing = true;
@@ -55,13 +56,17 @@ public class PlayerHealingBehaviour : MonoBehaviour
                 double MaxHP = Player_Health.MaxHealth;
                 double Needed = Player_Health.MaxHealth - Player_Health.Health;
                 double Taken = System.Math.Min(PlayerHealingOrbStatReference.CurrentValue, Needed/HealthPerOrbAddition);
+                if (Taken == 0) return;
                 ammount = Taken*HealthPerOrbAddition;
                 PlayerHealingOrbStatReference.CurrentValue -= Taken;
                 PlayerHealingOrbStatReference.InvokeEvent();
             }
             Player_Health.TryDamage(-ammount, null,null);
             Player_MovementController.OverrideTargetSpeed = Vector3.zero;
-            OnDisable();
+       if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        } 
             coroutine = StartCoroutine(StayStillEnumerator());
         }
     }

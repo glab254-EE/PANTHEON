@@ -8857,7 +8857,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1716665802}
   m_Enabled: 1
-  serializedVersion: 12
+  serializedVersion: 13
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 100000
@@ -8909,7 +8909,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShadowRadius: 0
+  m_ShapeRadius: 0.025
   m_ShadowAngle: 0
   m_LightUnit: 2
   m_LuxAtDistance: 1
@@ -8952,7 +8952,8 @@ MonoBehaviour:
   m_ShapeWidth: -1
   m_ShapeHeight: -1
   m_AspectRatio: -1
-  m_Version: 14
+  m_ShapeRadius: -1
+  m_Version: 15
   m_ObsoleteShadowResolutionTier: 1
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
@@ -8965,7 +8966,6 @@ MonoBehaviour:
   m_AffectDiffuse: 1
   m_AffectSpecular: 1
   m_NonLightmappedOnly: 0
-  m_ShapeRadius: 0.025
   m_SoftnessScale: 1
   m_UseCustomSpotLightShadowCone: 0
   m_CustomSpotLightShadowCone: 30
@@ -9003,7 +9003,6 @@ MonoBehaviour:
   m_FilterTracedShadow: 1
   m_FilterSizeTraced: 16
   m_SunLightConeAngle: 0.5
-  m_LightShadowRadius: 0.5
   m_SemiTransparentShadow: 0
   m_ColorShadow: 1
   m_DistanceBasedFiltering: 0
@@ -11137,8 +11136,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AtlantController
   player: {fileID: 966032903}
   attack: {fileID: 720314547653308828}
+  revanController: {fileID: 0}
+  <health>k__BackingField: {fileID: 0}
   pathUpdateInterval: 0.3
   stoppingDistance: 3
+  healthThresholdForSecondPhase: 1000
+  healthThresholdForThirdPhase: 250
   attackRange: 3
   dashMinRange: 10
   dashMaxRange: 15
@@ -11234,6 +11237,45 @@ MonoBehaviour:
   Attack: Attack
   AttackType: AttackType
   DashAttack: DashAttack
+  Attack1Setting:
+    AttackAnimationPropertyName: Attack1
+    AttackAnimationPropertyIndex: 1
+    HitboxOffset: {x: 0, y: 0, z: 0}
+    HitboxSize: {x: 0, y: 0, z: 0}
+    Damage: 1
+    AdditionalDamageMultiplierSOIndex: -1
+    AttackWindupTime: 0
+    Duration: 1
+    Cooldown: 1
+    clip: {fileID: 0}
+    effect: {fileID: 0}
+  Attack2Setting:
+    AttackAnimationPropertyName: Attack1
+    AttackAnimationPropertyIndex: 1
+    HitboxOffset: {x: 0, y: 0, z: 0}
+    HitboxSize: {x: 0, y: 0, z: 0}
+    Damage: 1
+    AdditionalDamageMultiplierSOIndex: -1
+    AttackWindupTime: 0
+    Duration: 1
+    Cooldown: 1
+    clip: {fileID: 0}
+    effect: {fileID: 0}
+  Attack3Setting:
+    AttackAnimationPropertyName: Attack1
+    AttackAnimationPropertyIndex: 1
+    HitboxOffset: {x: 0, y: 0, z: 0}
+    HitboxSize: {x: 0, y: 0, z: 0}
+    Damage: 1
+    AdditionalDamageMultiplierSOIndex: -1
+    AttackWindupTime: 0
+    Duration: 1
+    Cooldown: 1
+    clip: {fileID: 0}
+    effect: {fileID: 0}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!95 &720314547653308829
 Animator:
   serializedVersion: 7
@@ -15962,11 +16004,29 @@ MonoBehaviour:
   firstZone: {fileID: 1335113056}
   secondZone: {fileID: 109354142}
   thirdZone: {fileID: 588318935}
+  DeathName: Dead
+  AppearedName: Appeared
+  AppearingName: Appearing
   firstAtackName: LeftAtack
   secondAtackName: MidleAtack
   thirdAtackName: RightAtack
   cooldown: 2
   SecondPhaseTimer: 10
+  AttackSetting:
+    AttackAnimationPropertyName: Attack1
+    AttackAnimationPropertyIndex: 1
+    HitboxOffset: {x: 0, y: 0, z: 0}
+    HitboxSize: {x: 0, y: 0, z: 0}
+    Damage: 1
+    AdditionalDamageMultiplierSOIndex: -1
+    AttackWindupTime: 0
+    Duration: 1
+    Cooldown: 1
+    clip: {fileID: 0}
+    effect: {fileID: 0}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 0
   CutsceneActive: 0
   InSecondPhase: 0
 --- !u!95 &7707366830641818115
@@ -17002,6 +17062,6 @@ SceneRoots:
   - {fileID: 1448587916}
   - {fileID: 1666138004}
   - {fileID: 2140145715}
+  - {fileID: 194995017144314668}
   - {fileID: 7707366830641818112}
   - {fileID: 481429302}
-  - {fileID: 194995017144314668}

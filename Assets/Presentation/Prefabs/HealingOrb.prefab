@@ -261,6 +261,7 @@ MonoBehaviour:
     m_Bits: 64
   TargetCurrencyStatistic: {fileID: 11400000, guid: 42ca5c019da275e448f621f0c64b5b72, type: 2}
   <Points>k__BackingField: 1
+  TargetCurrencyIndex: 1
   manager: {fileID: 0}
 --- !u!82 &6545093490392898039
 AudioSource:
