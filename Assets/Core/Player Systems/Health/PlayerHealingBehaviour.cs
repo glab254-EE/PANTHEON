@@ -11,7 +11,7 @@ public class PlayerHealingBehaviour : MonoBehaviour
     [SerializeField]
     private PlayerMovementController Player_MovementController;
     [SerializeField]
-    private PlayerStatSO PlayerHealingOrbStatReference;
+    private int HealingOrbIndex;
     [SerializeField]
     private double HealthPerOrbAddition = 2;
     [SerializeField]
@@ -27,9 +27,19 @@ public class PlayerHealingBehaviour : MonoBehaviour
     [SerializeField]
     private string HealAnimationTriggerName = "Block";
     private bool onCooldown = false;
+    private PlayerStatSO PlayerHealingOrbStatReference;
+    private Coroutine coroutine;
     private void Start()
     {
         Listener.ConnectEventToKeybind(HealAction, OnHealAction, true, false);
+        if (HealingOrbIndex >= 0 && HealingOrbIndex < PlayerStatisticsManager.Currencies.Count) PlayerHealingOrbStatReference = PlayerStatisticsManager.Currencies[HealingOrbIndex];
+    }
+    void OnDisable()
+    {
+       if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        } 
     }
     void OnHealAction(InputAction.CallbackContext context)
     {
@@ -51,7 +61,8 @@ public class PlayerHealingBehaviour : MonoBehaviour
             }
             Player_Health.TryDamage(-ammount, null,null);
             Player_MovementController.OverrideTargetSpeed = Vector3.zero;
-            StartCoroutine(StayStillEnumerator());
+            OnDisable();
+            coroutine = StartCoroutine(StayStillEnumerator());
         }
     }
     private IEnumerator StayStillEnumerator()

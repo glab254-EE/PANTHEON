@@ -31,14 +31,7 @@ public class PlayerInputListener : MonoBehaviour
     }
     void OnDestroy()
     {
-        foreach(KeyValuePair<InputActionReference, List<CustomInputListenerConnection>> connection in connections)
-        {
-            List<CustomInputListenerConnection> cloned = connection.Value;
-            foreach(CustomInputListenerConnection connection1 in cloned)
-            {
-                DisableAction(connection1);
-            }
-        }
+        connections = new();
         inputActions.Player.Disable();         
     }
     void Update()
