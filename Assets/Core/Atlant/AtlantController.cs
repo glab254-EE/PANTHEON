@@ -20,6 +20,7 @@ public class AtlantController : MonoBehaviour
 
     [Header("AttackSetting")]
     [SerializeField] private float attackRange = 2.5f;
+    [SerializeField] private float attackCooldown = 0.5f;
 
     [Header("AttackSetting - dash")]
     [SerializeField] private float dashMinRange = 10f;
@@ -30,9 +31,10 @@ public class AtlantController : MonoBehaviour
     [SerializeField] private string IsWalking = "IsWalking";
 
     private bool _canMove = true;
-    private bool _isAttacking;
+    //private bool _isAttacking;
     private bool _isDashing;
     private float _lastDashTime = 0;
+    private float _lastAttackTime;
     private int CurrentState = 1;
     private NavMeshAgent _agent;
     private Coroutine _followRoutine;
@@ -96,10 +98,9 @@ public class AtlantController : MonoBehaviour
         }
     }
 
-    public void EndAttack()
-    {
-        _isAttacking = false;
-    }
+    //public void EndAttack() { _isAttacking = false; }
+
+    //private static readonly int AttackTag = Animator.StringToHash("Attack");
 
     IEnumerator FollowPlayerRoutine()
     {
@@ -113,7 +114,9 @@ public class AtlantController : MonoBehaviour
                 continue;
             }
 
-            if (_isAttacking || _isDashing)
+            bool isAttacking = _animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack");
+
+            if (isAttacking || _isDashing)
             {
                 yield return new WaitForSeconds(pathUpdateInterval);
                 continue;
@@ -137,9 +140,10 @@ public class AtlantController : MonoBehaviour
                 }
             }
 
-            if (distanceToPlayer <= attackRange)
+            if (distanceToPlayer <= attackRange && Time.time >= _lastAttackTime + attackCooldown)
             {
-                _isAttacking = true;
+                _lastAttackTime = Time.time;
+                //_isAttacking = true;
                 _agent.isStopped = true;
                 _agent.ResetPath();
                 _animator.SetBool(IsWalking, false);
