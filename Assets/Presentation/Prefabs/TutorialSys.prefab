@@ -45,7 +45,89 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8ada50b94542c48884c3b5a52ae2cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialManager
-  TutorialScreens: []
+  TutorialScreens:
+  - Message: Press WASD keys to move yourself towards the old man.
+    Input: {fileID: 0}
+    CompletionEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    AutoCancelTime: 2
+    DelayAfterSection: 0.5
+    MaxHoldDuration: 0
+  - Message: 
+    Input: {fileID: 0}
+    CompletionEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    AutoCancelTime: 0
+    DelayAfterSection: 0.5
+    MaxHoldDuration: 0
+  - Message: To run hold WASD and SPACE keys at same time.
+    Input: {fileID: -5725962155711561128, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+    CompletionEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    AutoCancelTime: 0
+    DelayAfterSection: 0.5
+    MaxHoldDuration: 90
+  - Message: Press Left Mouse Button to attack, press multiple times to do an combo.
+    Input: {fileID: 1120369429361536294, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+    CompletionEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    AutoCancelTime: 0
+    DelayAfterSection: 0.5
+    MaxHoldDuration: 90
+  - Message: Hold Right Mouse Button to block.
+    Input: {fileID: 2365118210677756248, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+    CompletionEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    AutoCancelTime: 0
+    DelayAfterSection: 0.5
+    MaxHoldDuration: 90
+  - Message: To dodge attacks, you can tap the space key to roll yourself.
+    Input: {fileID: 0}
+    CompletionEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    AutoCancelTime: 2
+    DelayAfterSection: 0.5
+    MaxHoldDuration: 0
+  - Message: Use your heavy attack by holding shift and pressing left mouse button.
+    Input: {fileID: 2386394298684761316, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+    CompletionEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    AutoCancelTime: 0
+    DelayAfterSection: 0.5
+    MaxHoldDuration: 90
+  - Message: Press Q to use your AURA points to heal yourself when one or more points
+      is available.
+    Input: {fileID: -8043949568545141630, guid: 289c1b55c9541489481df5cc06664110, type: 3}
+    CompletionEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    AutoCancelTime: 0
+    DelayAfterSection: 0.5
+    MaxHoldDuration: 90
+  - Message: You have to look for your stamina and health, the healing aura is limited
+      here.
+    Input: {fileID: 0}
+    CompletionEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    AutoCancelTime: 4
+    DelayAfterSection: 0.5
+    MaxHoldDuration: 0
+  - Message: You have completed the tutorial. Good luck.
+    Input: {fileID: 0}
+    CompletionEvent:
+      m_PersistentCalls:
+        m_Calls: []
+    AutoCancelTime: 2
+    DelayAfterSection: 0.5
+    MaxHoldDuration: 0
   invoker: {fileID: 2025792437985038164}
   listener: {fileID: 0}
 --- !u!114 &2025792437985038164

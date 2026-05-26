@@ -15,6 +15,7 @@ public class TutorialManager : MonoBehaviour
         public UnityEvent CompletionEvent;
         public float AutoCancelTime;
         public float DelayAfterSection;
+        public float MaxHoldDuration;
     }
     [SerializeField] private List<TutorialSection> TutorialScreens;
     [SerializeField] private DialogInvoker invoker;
@@ -40,6 +41,7 @@ public class TutorialManager : MonoBehaviour
     }
     public void Skip(InputAction.CallbackContext _)
     {
+        Debug.Log("NEEXTXXT!");
         skipping = true;
     }
     private IEnumerator DisplayEnumerator()
@@ -56,7 +58,7 @@ public class TutorialManager : MonoBehaviour
         }
         if (_currentSection.Input != null)
         {
-            listener.ConnectEventToKeybind(_currentSection.Input,Skip,false,true);
+            listener.ConnectEventToKeybind(_currentSection.Input,Skip,false,true,_currentSection.MaxHoldDuration);
         }
         if (_currentSection.AutoCancelTime > 0)
         {

@@ -12181,6 +12181,10 @@ PrefabInstance:
       propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3330766715602306700, guid: 598a3c8af36704b4eb2c2790aa7b1c15, type: 3}
+      propertyPath: playerInputListener
+      value: 
+      objectReference: {fileID: 502561602}
     - target: {fileID: 5467537027533224163, guid: 598a3c8af36704b4eb2c2790aa7b1c15, type: 3}
       propertyPath: playerInputListener
       value: 
@@ -12403,50 +12407,6 @@ PrefabInstance:
       propertyPath: listener
       value: 
       objectReference: {fileID: 502561602}
-    - target: {fileID: 1210222448826078627, guid: bb9caa6e4a07487429b43b6b2ebe7fde, type: 3}
-      propertyPath: TutorialScreens.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1210222448826078627, guid: bb9caa6e4a07487429b43b6b2ebe7fde, type: 3}
-      propertyPath: TutorialScreens.Array.data[0].Input
-      value: 
-      objectReference: {fileID: 1120369429361536294, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-    - target: {fileID: 1210222448826078627, guid: bb9caa6e4a07487429b43b6b2ebe7fde, type: 3}
-      propertyPath: TutorialScreens.Array.data[1].Input
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1210222448826078627, guid: bb9caa6e4a07487429b43b6b2ebe7fde, type: 3}
-      propertyPath: TutorialScreens.Array.data[0].Message
-      value: This is a test message. Press LMB to continue.
-      objectReference: {fileID: 0}
-    - target: {fileID: 1210222448826078627, guid: bb9caa6e4a07487429b43b6b2ebe7fde, type: 3}
-      propertyPath: TutorialScreens.Array.data[1].Message
-      value: This is a test display.
-      objectReference: {fileID: 0}
-    - target: {fileID: 1210222448826078627, guid: bb9caa6e4a07487429b43b6b2ebe7fde, type: 3}
-      propertyPath: TutorialScreens.Array.data[2].Message
-      value: ' '
-      objectReference: {fileID: 0}
-    - target: {fileID: 1210222448826078627, guid: bb9caa6e4a07487429b43b6b2ebe7fde, type: 3}
-      propertyPath: TutorialScreens.Array.data[3].Message
-      value: 'This is ending message '
-      objectReference: {fileID: 0}
-    - target: {fileID: 1210222448826078627, guid: bb9caa6e4a07487429b43b6b2ebe7fde, type: 3}
-      propertyPath: TutorialScreens.Array.data[1].AutoCancelTime
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1210222448826078627, guid: bb9caa6e4a07487429b43b6b2ebe7fde, type: 3}
-      propertyPath: TutorialScreens.Array.data[2].AutoCancelTime
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1210222448826078627, guid: bb9caa6e4a07487429b43b6b2ebe7fde, type: 3}
-      propertyPath: TutorialScreens.Array.data[3].AutoCancelTime
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1210222448826078627, guid: bb9caa6e4a07487429b43b6b2ebe7fde, type: 3}
-      propertyPath: TutorialScreens.Array.data[1].DelayAfterSection
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1622060598868956289, guid: bb9caa6e4a07487429b43b6b2ebe7fde, type: 3}
       propertyPath: m_Name
       value: TutorialSys
@@ -12685,8 +12645,8 @@ SceneRoots:
   - {fileID: 17157892}
   - {fileID: 1538461453}
   - {fileID: 3133905209469727846}
-  - {fileID: 1567294866232480489}
   - {fileID: 426467256}
   - {fileID: 8901698162139556531}
   - {fileID: 1908357635}
   - {fileID: 1532471788}
+  - {fileID: 1567294866232480489}

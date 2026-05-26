@@ -45,6 +45,7 @@ public class EnemyAtack : MonoBehaviour
 
         enemyAI.Animator.SetTrigger(attackSettings.AttackAnimationPropertyName);
         yield return new WaitForSeconds(attackSettings.AttackWindupTime);
+        if (enemyAI.EnemyHealth.Health <= 0) yield break;
 
         Vector3 hitboxOrigin = transform.position;
 

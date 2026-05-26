@@ -225,7 +225,6 @@ public class PlayerMovementController : MonoBehaviour
     }
     void OnRollButtonPress(InputAction.CallbackContext callbackContext)
     {
-        Debug.Log("Starting roll");
         if (CanMove && !IsActing && CanRoll && Listener.MovementVector3.magnitude > 0 && PlayerStaminaBehaviour != null && PlayerStaminaBehaviour.TryTakeStamina(PlayerRollStaminaCost))
         { 
             gameAnalyticsHandler?.OnAction("roll");

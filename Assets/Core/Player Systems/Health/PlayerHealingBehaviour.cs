@@ -49,24 +49,29 @@ public class PlayerHealingBehaviour : MonoBehaviour
         {
             Player_MovementController.IsActing = true;
             onCooldown = true;
-            Animation_Handler.SetAnimatorTrigger(HealAnimationTriggerName);
             double ammount = HealingPower;
             if (PlayerHealingOrbStatReference != null)
             {
                 double MaxHP = Player_Health.MaxHealth;
                 double Needed = Player_Health.MaxHealth - Player_Health.Health;
                 double Taken = System.Math.Min(PlayerHealingOrbStatReference.CurrentValue, Needed/HealthPerOrbAddition);
-                if (Taken == 0) return;
+                if (Taken == 0) 
+                {
+                    Player_MovementController.OverrideTargetSpeed = null;
+                    Player_MovementController.IsActing = false;
+                    return;
+                }
                 ammount = Taken*HealthPerOrbAddition;
                 PlayerHealingOrbStatReference.CurrentValue -= Taken;
                 PlayerHealingOrbStatReference.InvokeEvent();
             }
+            Animation_Handler.SetAnimatorTrigger(HealAnimationTriggerName);
             Player_Health.TryDamage(-ammount, null,null);
             Player_MovementController.OverrideTargetSpeed = Vector3.zero;
-       if (coroutine != null)
-        {
-            StopCoroutine(coroutine);
-        } 
+        if (coroutine != null)
+            {
+                StopCoroutine(coroutine);
+            } 
             coroutine = StartCoroutine(StayStillEnumerator());
         }
     }
