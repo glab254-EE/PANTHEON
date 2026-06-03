@@ -31,7 +31,7 @@ public class OrbCollectingBehaviour : MonoBehaviour
             {
                 collected = true;
                 TargetCurrencyStatistic.CurrentValue += Points;
-                TargetCurrencyStatistic.InvokeEvent();
+                TargetCurrencyStatistic?.InvokeEvent();
             }
             if (collected == true)
             {
@@ -63,7 +63,7 @@ public class OrbCollectingBehaviour : MonoBehaviour
             {
                 collected = true;
                 TargetCurrencyStatistic.CurrentValue += Points;
-                TargetCurrencyStatistic.InvokeEvent();
+                TargetCurrencyStatistic?.InvokeEvent();
             }
             if (collected)
             {

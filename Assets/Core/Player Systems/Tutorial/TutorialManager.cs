@@ -20,11 +20,17 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private List<TutorialSection> TutorialScreens;
     [SerializeField] private DialogInvoker invoker;
     [SerializeField] private PlayerInputListener listener;
+    #if UNITY_EDITOR
+    [SerializeField] private bool SkipTutorial;
+    #endif
     private int currentIndex = 0;
     private bool skipping = false;
     private float CancelTime = 0;
     void Start()
     {
+    #if UNITY_EDITOR
+        if (SkipTutorial) return;
+    #endif
         Debug.Log("Tutorial start!");
         StartCoroutine(DisplayEnumerator());
     }

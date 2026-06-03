@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -25,7 +27,7 @@ public class PlayerInputListener : MonoBehaviour
     {
         inputActions??=new(); 
 
-        ConnectEventToKeybind(inputActionForCameraLock,OnMouseLock);
+        ConnectEventToKeybind(inputActionForCameraLock, OnMouseLock);
         ConnectEventToKeybind(inputActionForEnpowering, OnEnpower,true);
         inputActions.Player.Enable(); 
     }
@@ -85,18 +87,18 @@ public class PlayerInputListener : MonoBehaviour
                 connection.Keybind.action.Disable();
             }
         }
-    }
+    }  
     public void DisableAction(UnityAction<InputAction.CallbackContext> action)
     {
-        foreach (List<CustomInputListenerConnection> list in connections.Values)
+        Dictionary<InputActionReference,List<CustomInputListenerConnection>> cloned = connections;
+        foreach (KeyValuePair<InputActionReference,List<CustomInputListenerConnection>> connection in cloned)
         {
-            foreach(CustomInputListenerConnection connection in list)
+            if (connections.ContainsKey(connection.Key))
             {
-                if (connection.Callback == action)
+                for (int i = connection.Value.Count-1; i > 0; i--)
                 {
-                    connection.Disable();
-                    return;
-                }
+                    connections[connection.Key][i].Disable(action);
+                }              
             }
         }
     }

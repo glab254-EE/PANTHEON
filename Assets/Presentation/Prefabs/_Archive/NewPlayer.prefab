@@ -893,12 +893,12 @@ MonoBehaviour:
   Player_Health: {fileID: 1836501431964758546}
   Player_MovementController: {fileID: 6046924685804896624}
   HealingOrbIndex: 1
-  HealthPerOrbAddition: 4
+  HealthPerOrbAddition: 5
   Listener: {fileID: 0}
   HealAction: {fileID: -8043949568545141630, guid: 289c1b55c9541489481df5cc06664110, type: 3}
-  HealingPower: 5
-  HealingStayDurationSeconds: 1
-  HealingCooldownSeconds: 1
+  HealingPower: 1
+  HealingStayDurationSeconds: 3
+  HealingCooldownSeconds: 2
   HealAnimationTriggerName: Heal
 --- !u!114 &5007046306049012931
 MonoBehaviour:

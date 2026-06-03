@@ -13,10 +13,6 @@ public class ToggleUIOnButtonPress : MonoBehaviour
     {
         playerInputListener.ConnectEventToKeybind(keybind,OnPress);        
     }
-    void OnDestroy()
-    {
-        playerInputListener.DisableAction(OnPress);
-    }
     void OnPress(InputAction.CallbackContext _)
     {
         bool nextState = !ToToggle.activeInHierarchy;

@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 public class CustomInputListenerConnection
 {
-    internal UnityAction<InputAction.CallbackContext> Callback { get; private set; }
+    internal UnityEvent<InputAction.CallbackContext> Callback { get; private set; } = new();
     internal Action<CustomInputListenerConnection> OnDisableAction { get; private set; }
     internal InputActionReference Keybind {  get; private set; }
     internal bool ActivateOnCancel { get; private set; }
@@ -18,13 +18,21 @@ public class CustomInputListenerConnection
         Keybind = keybind;
         ActivateOnCancel = activateOnCancel;
         DeactivateOnFirstInvoke = deactivateOnFirstInvoke;
-        Callback = callback;
+        Callback.AddListener(callback);
         MaxHoldDuration = maxDuration;
 
         OnActivate();
     }
     public void Disable()
     {
+        Callback.RemoveAllListeners();
+        Keybind.action.performed -= OnKeybindPress;
+        Keybind.action.canceled -= OnKeybindPress;
+        OnDisableAction(this);
+    }
+    public void Disable(UnityAction<InputAction.CallbackContext> action)
+    {
+        Callback.RemoveListener(action);
         Keybind.action.performed -= OnKeybindPress;
         Keybind.action.canceled -= OnKeybindPress;
         OnDisableAction(this);
@@ -35,7 +43,7 @@ public class CustomInputListenerConnection
         if (context.ReadValueAsButton() || ActivateOnCancel)
         {
             if (Callback == null) return;
-            Callback(context);
+            Callback.Invoke(context);
             if (DeactivateOnFirstInvoke)
             {
                 Disable();

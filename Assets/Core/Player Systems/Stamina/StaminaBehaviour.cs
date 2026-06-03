@@ -64,7 +64,6 @@ public class StaminaBehaviour : MonoBehaviour
     }
     private IEnumerator GainEnumerator()
     {
-        Debug.Log("Start");
         yield return new WaitForSeconds(StaminaGainingStartDelay);
         isGaining = true;
         while(isGaining && Stamina < MaxStamina)

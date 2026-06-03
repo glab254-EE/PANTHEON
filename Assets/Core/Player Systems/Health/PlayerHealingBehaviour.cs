@@ -45,20 +45,20 @@ public class PlayerHealingBehaviour : MonoBehaviour
     void OnHealAction(InputAction.CallbackContext context)
     {
         if (Time.timeScale == 0 || this == null || gameObject == null) return;
-        if (!Player_MovementController.IsActing && !onCooldown && context.ReadValueAsButton() && (PlayerHealingOrbStatReference == null || PlayerHealingOrbStatReference.CurrentValue > 0))
+        if (!Player_MovementController.IsActing && !onCooldown && (PlayerHealingOrbStatReference == null || PlayerHealingOrbStatReference.CurrentValue > 0))
         {
             Player_MovementController.IsActing = true;
             onCooldown = true;
             double ammount = HealingPower;
             if (PlayerHealingOrbStatReference != null)
             {
-                double MaxHP = Player_Health.MaxHealth;
                 double Needed = Player_Health.MaxHealth - Player_Health.Health;
                 double Taken = System.Math.Min(PlayerHealingOrbStatReference.CurrentValue, Needed/HealthPerOrbAddition);
                 if (Taken == 0) 
                 {
                     Player_MovementController.OverrideTargetSpeed = null;
                     Player_MovementController.IsActing = false;
+                    onCooldown = false;
                     return;
                 }
                 ammount = Taken*HealthPerOrbAddition;

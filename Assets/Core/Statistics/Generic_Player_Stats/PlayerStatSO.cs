@@ -12,12 +12,13 @@ public class PlayerStatSO : ScriptableObject
     public event Action<double> OnUpdate;
     internal void InvokeEvent()
     {
+        if (OnUpdate == null) return;
         OnUpdate?.Invoke(CurrentValue);
     }
     private void OnEnable()
     {
-        InvokeEvent();
         CurrentValue = StartingValue;
+        InvokeEvent();
     }
 #if UNITY_EDITOR
     private void OnValidate()

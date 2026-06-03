@@ -39,6 +39,10 @@ public class SettingsHandler : MonoBehaviour
             });
         }
     }
+    void OnDestroy()
+    {
+        playerInputListener.DisableAction(OnPausePerss);
+    }
     void OnPausePerss(InputAction.CallbackContext _)
     {
         IsOpen = !IsOpen;
